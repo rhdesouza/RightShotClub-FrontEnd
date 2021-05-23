@@ -1,0 +1,266 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+<!--
+    Cabeçalho nota fiscal
+-->
+<form [formGroup]="notaFiscalForm" [class.error]="!notaFiscalForm.valid && notaFiscalForm.touched" class="fullSizeInput"
+    (ngSubmit)="saveNotaFiscal()">
+    <div class="row">
+        <div class="col-2">
+            <!-- <mat-form-field class="fullSizeInput" formGroupName="cabecalho"> -->
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cabecalho">
+                <mat-label>Número</mat-label>
+                <input matInput class="inputField" type="text" formControlName="numero" required pattern="[0-9]+$"
+                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+
+                <mat-error>
+                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['numero']">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-5">
+            <!-- <mat-form-field class="fullSizeInput" formGroupName="cabecalho"> -->
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cabecalho">
+                <mat-label> Fornecedor </mat-label>
+                <input matInput class="inputField" type="text" formControlName="fornecedor" [ngClass]="'fornecedor'"
+                    [hidden]="true">
+                <input matInput class="inputField" type="text" [ngClass]="'fornecedor'"
+                    placeholder="Clique na lupa para selecionar o Fornecedor" value="{{fornecedorRazaoSocial}}"
+                    readonly>
+
+
+                <mat-icon matSuffix style="font-weight: bold; color: darkgreen; cursor: pointer;;"
+                    matTooltip="Pesquisar Fornecedores" [matTooltipPosition]="'above'"
+                    (click)="openSearchFornecedores()">
+                    search
+                </mat-icon>
+
+
+                <!--                 <mat-icon matSuffix style="padding-right: 42px" (click)="clearFornecedor()"
+                    [ngClass]="{'esconderExcluirFornecedor': !getFornecedor()}">
+
+                    <button mat-mini-fab color="warn" matTooltip="Excluir Fornecedor" [matTooltipPosition]="'above'"
+                        mat-raised-button>
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                </mat-icon>
+                <mat-icon matSuffix style="padding-right: 42px; " (click)="openSearchFornecedores()">
+                    <button mat-mini-fab color="warn" matTooltip="Pesquisar Fornecedores"
+                        style="background-color: darkgreen" [matTooltipPosition]="'above'" mat-raised-button>
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-icon> -->
+
+
+                <mat-error>
+                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['fornecedor']">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+            <!-- <mat-form-field class="fullSizeInput" formGroupName="cabecalho"> -->
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cabecalho">
+                <mat-label>Valor</mat-label>
+                <input matInput class="inputField" type="text" currencyMask formControlName="valorTotal"
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+
+                <mat-error>
+                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['valorTotal']">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-1">
+            <!-- <mat-form-field class="fullSizeInput" formGroupName="cabecalho"> -->
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cabecalho">
+                <mat-label>Forma de Pagamento</mat-label>
+                <mat-select formControlName="formaPagamento" required (selectionChange)="changeFormaPagamento()">
+                    <mat-option *ngFor="let cat of formaPagamento" [value]="cat.option">
+                        {{cat.desc}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['formaPagamento']">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-1">
+            <!-- <mat-form-field class="fullSizeInput" formGroupName="cabecalho"> -->
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cabecalho">
+                <mat-label>Parcelas</mat-label>
+                <input matInput class="inputField" type="text" formControlName="parcelas" readonly>
+
+                <mat-icon matSuffix style="color: darkgreen;font-weight: bold; cursor: pointer;;"
+                    matTooltip="Informar pagamentos" [matTooltipPosition]="'above'" (click)="openDatasPagamentos()">
+                    <span>event_available</span>
+                </mat-icon>
+                <!--                 <mat-icon matSuffix style="padding-right: 42px; ">
+                    <button mat-mini-fab color="warn" matTooltip="Informar pagamentos" type="button"
+                        style="background-color: darkgreen" [matTooltipPosition]="'above'" mat-raised-button
+                        (click)="openDatasPagamentos()">
+                        <mat-icon>event_available</mat-icon>
+                    </button>
+                </mat-icon> -->
+
+                <mat-error>
+                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['parcelas']">
+                    </mat-error-message>
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+        <div class="col-1">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cabecalho">
+                <!-- <mat-form-field class="fullSizeInput" formGroupName="cabecalho"> -->
+                <mat-label>Situação</mat-label>
+                <input matInput class="inputField" type="text" formControlName="situacao" readonly>
+            </mat-form-field>
+            <mat-error>
+                <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['situacao']">
+                </mat-error-message>
+            </mat-error>
+        </div>
+    </div>
+
+    <div style="background-color: black; color: whitesmoke; min-height: 3em; display: flex;
+    flex-wrap: wrap;">
+        <!-- <div class="col-1 verticalAlignCenter">ID</div> -->
+        <!-- <div class="col-1 verticalAlignCenter">Cod. Produto</div> -->
+        <div class="col-2 verticalAlignCenter">Cod - Produto</div>
+        <div class="col-1 verticalAlignCenter">NCM/SH</div>
+        <div class="col-1 verticalAlignCenter">CST</div>
+        <div class="col-1 verticalAlignCenter ">CFOP</div>
+        <div class="col-1 verticalAlignCenter">UN</div>
+        <div class="col-1 verticalAlignCenter">QTD</div>
+        <div class="col-1 verticalAlignCenter">V. Unit</div>
+        <div class="col-1 verticalAlignCenter">V. Total</div>
+        <div class="col-1 verticalAlignCenter">ICMS</div>
+        <div class="col-1 verticalAlignCenter">IPI</div>
+        <div class="col-1 verticalAlignCenter"></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap;" *ngFor="let item of itens.controls; let i = index;">
+        <!-- <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="id">
+            </mat-form-field>
+        </div> -->
+        <!--         <div [formGroup]="item" class="col-1">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="codigoProduto" readonly>
+            </mat-form-field>
+        </div> -->
+        <div [formGroup]="item" class="col-2">
+            <mat-form-field class="">
+                <input matInput class="inputField" type="text" formControlName="descricaoProduto" readonly>
+
+                <mat-icon matSuffix style="color: darkgreen;font-weight: bold; cursor: pointer;;"
+                    matTooltip="Pesquisar Produtos" [matTooltipPosition]="'above'" (click)="openSearchProduto(i)">
+                    <span>search</span>
+                </mat-icon>
+
+
+                <!-- <mat-icon matSuffix style="padding-right: 42px" (click)="clearProduto(i)"
+                    *ngIf="isButtonClearProduto(i)">
+                    <button mat-mini-fab color="warn" matTooltip="Excluir Produto" [matTooltipPosition]="'above'"
+                        mat-raised-button>
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                </mat-icon>
+                <mat-icon matSuffix style="padding-right: 42px; " (click)="openSearchProduto(i)"
+                    *ngIf="!isButtonClearProduto(i)">
+                    <button mat-mini-fab color="warn" matTooltip="Pesquisar Produtos" type="button"
+                        style="background-color: darkgreen" [matTooltipPosition]="'above'" mat-raised-button>
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-icon> -->
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="ncmSh" readonly>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="cst">
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="cfop">
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="un" readonly>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="qtd" (change)="valorTotalRow(i)"
+                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="valorUnit" [change]="valorTotalRow(i)"
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="valorTotal" readonly
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="aliquitaIcms">
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="aliquitaIpi">
+            </mat-form-field>
+        </div>
+        <div class="col-1 ">
+            <button mat-mini-fab color="warn" type="button" matTooltip="Excluir Item" [matTooltipPosition]="'above'"
+                mat-raised-button style="margin-right: 2px;" (click)="removeItemNota(i)">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" matTooltip="Adicionar Item" [matTooltipPosition]="'above'"
+                mat-raised-button (click)="addItemNota()" [disabled]="this.itens.length != (i+1)" type="button">
+                <mat-icon>playlist_add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap;">
+        <div class="col-8" style="text-align: right; font-weight: bold;">
+            Valor total:
+        </div>
+        <div class="col-1 " style="text-align: center; font-weight: bold;">
+            {{somaValorTotalNota() | currency:"BRL":"symbol" }}
+        </div>
+        <div class="col-3 "></div>
+    </div>
+
+    <br>
+    <mat-progress-bar mode="determinate" value="{{progressoNota}}"
+        [color]="this.progressoNota == 100 ? 'primary' : 'warn'" style="top: 15px;">
+    </mat-progress-bar>
+    <br>
+    <div class="row">
+        <div class="col form-group">
+            <!--             <button mat-raised-button color="primary" type="submit" (click)="saveNotaFiscal()">Salvar</button>
+            <button mat-raised-button style="float: right" (click)="fechar()">Fechar</button> -->
+
+            <button mat-raised-button type="submit" color="primary" style="float: left;"
+                [disabled]="isNotaFecahda()">
+                Salvar
+            </button>
+            <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,29 @@
+.fullSizeInput{
+    width: 100%;
+}
+
+.customWidthClass{
+    flex: 0 0 75px;
+}
+
+.situacaoAtivo{
+    color: green;
+}
+.situacaoInativo{
+    color: red;
+}
+.situacaoVendido{
+    color:silver;
+}
+.table td, .table th {
+    padding:0.2rem;
+}
+
+mat-row:hover {
+  cursor:pointer;
+  background: whitesmoke;
+}
+
+h2.mat-dialog-title{
+    border-bottom: 1px whitesmoke solid;
+}

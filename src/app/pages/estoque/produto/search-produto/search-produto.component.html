@@ -1,0 +1,50 @@
+<app-form-title-breadcrumbs title="Produtos"></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro de Produtos">
+    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. M4A16">
+    </mat-form-field>
+</app-tag-filter>
+<table mat-table [dataSource]="produtosList" matSort class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear style="width: 100%;">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 7%"> ID </th>
+        <td mat-cell *matCellDef="let element" style="flex: 0 0 7%"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="codProduto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 10%"> Código Produto </th>
+        <td mat-cell *matCellDef="let element" style="flex: 0 0 10%"> {{element.codProduto }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 53%"> Descrição </th>
+        <td mat-cell *matCellDef="let element" style="flex: 0 0 53%"> {{element.descricao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoProduto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 10%"> Tipo Produto </th>
+        <td mat-cell *matCellDef="let element" style="flex: 0 0 10%"> {{element.tipoProduto.tipo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unidCompra">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 10%"> Unid. Compra </th>
+        <td mat-cell *matCellDef="let element" style="flex: 0 0 10%"> {{element.tipoProduto.unidCompra}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unidVenda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0 0 10%"> Unid. Venda</th>
+        <td mat-cell *matCellDef="let element" style="flex: 0 0 10%"> {{element.tipoProduto.unidVenda}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;" (click)="selecionar(row)" [ngClass]="{'highlightTableColor': linhaSelecionada == row.codProduto}"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+<br>
+<div class="row">
+    <div class="col ">
+        <button mat-raised-button type="button" color="primary" (click)="salvar()"style="float: left;">Salvar</button>
+        <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
+    </div>
+</div>

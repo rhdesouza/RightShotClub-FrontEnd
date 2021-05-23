@@ -1,0 +1,117 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Fornecedor">
+    <form [formGroup]="filterForm" (ngSubmit)="filtrar()">
+        <div class="row">
+            <div class="col-5">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Razão Social</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="razao_social">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['razao_social']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Nome Fantasia</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="nome_fantasia">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['nome_fantasia']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>CPF/CNPJ</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="cpf_cnpj" mask="000.000.000-00||00.000.000/0000-00">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['cpf_cnpj']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button mat-raised-button type="button" style="float:right" (click)="limparFiltro()">Limpar
+                    Filtro</button>
+                <button mat-raised-button type="submit" color="primary" style="float: left;">
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
+</app-tag-filter>
+
+<table mat-table [dataSource]="fornecedorDtoList" matSort class="mat-elevation-z8" matSort matSortActive="razao_social"
+    matSortDirection="asc" matSortDisableClear style="width: 100%;">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 5%;"> ID </th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="razao_social">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30%;"> Razão Social </th>
+        <td mat-cell *matCellDef="let element" style="width: 30%;"> {{element.razao_social}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nome_fantasia">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 30%;"> Nome Fantasia </th>
+        <td mat-cell *matCellDef="let element" style="width: 30%;"> {{element.nome_fantasia}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cpf_cnpj">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;"> CPF / CNPJ </th>
+        <td mat-cell *matCellDef="let element" style="width: 15%;"> {{element.cpf_cnpj | cPFCNPJ }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;"> Telefone</th>
+        <td mat-cell *matCellDef="let element" style="width: 10%;"> {{element.telefone | telefone }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="situacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'colunaSituacao'" style="width: 10%;"> Situação </th>
+        <td mat-cell *matCellDef="let element"
+            [ngClass]="{'situacaoAtivo': element.situacao=='Ativo','situacaoVendido': element.situacao=='Vendido','situacaoInativo': element.situacao=='Inativo'}"
+            style="width: 10%;">
+            {{element.situacao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"></th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <div [ngSwitch]="element.situacao">
+                    <button mat-menu-item ifDisableRoles
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_FORNECEDOR_EDIT']" (click)="editarFornecedor(element)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                </div>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">Nenhum registro encontrado.</td>
+    </tr>
+
+    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5,10,15]" [length]="resultsLength" showFirstLastButtons></mat-paginator>
+
+<div>
+    <button mat-raised-button color="primary" (click)="adicionarFornecedor()"
+        ifDisableRoles [roles]="['ROLE_ADMIN_ADMIN']">Incluir Fornecedor</button>
+</div>

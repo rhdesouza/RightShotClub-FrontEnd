@@ -1,0 +1,143 @@
+<!-- <app-form-title-breadcrumbs title="{{tituloModal}}"></app-form-title-breadcrumbs> -->
+<app-title-page-modal tituloModal="{{tituloModal}}" [formsDirty]="this.clienteForms.dirty"></app-title-page-modal>
+
+<form [formGroup]="clienteForms" class="fullSizeInput" (ngSubmit)="salvar()">
+    <div class="row">
+        <div class="col-8 ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Nome</mat-label>
+                <input matInput class="inputField" type="text" formControlName="nome" required>
+                <mat-error>
+                    <mat-error-message [control]="clienteForms.controls['nome']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-4 ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>CPF</mat-label>
+                <input matInput class="inputField" type="text" mask="000.000.000-99" formControlName="cpf">
+
+                <mat-error>
+                    <mat-error-message [control]="clienteForms.controls['cpf']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>E-mail</mat-label>
+                <input matInput class="inputField" type="text" formControlName="email">
+
+                <mat-error>
+                    <mat-error-message [control]="clienteForms.controls['email']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-4 ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Data Nascimento</mat-label>
+                <input matInput class="inputField" [dropSpecialCharacters]="false" mask="00/00/0000" formControlName="dataNascimento">
+
+                <mat-error>
+                    <mat-error-message [control]="clienteForms.controls['dataNascimento']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Telefone</mat-label>
+                <input matInput class="inputField" type="text" mask="(00) 00000 0000" formControlName="telefone">
+
+                <mat-error>
+                    <mat-error-message [control]="clienteForms.controls['telefone']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Telefone (2)</mat-label>
+                <input matInput class="inputField" type="text" mask="(00) 00000 0000" formControlName="telefone2">
+
+                <mat-error>
+                    <mat-error-message [control]="clienteForms.controls['telefone2']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>CEP</mat-label>
+                <input matInput class="inputField" mask="00.000-000" (change)="pesquisaCEP()" type="text"
+                    formControlName="cep">
+
+                <mat-error>
+                    <mat-error-message [control]="clienteForms.controls['cep']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Logradouro</mat-label>
+                <input matInput class="inputField" type="text" formControlName="logradouro">
+            </mat-form-field>
+        </div>
+        <div class="col-4 ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Número</mat-label>
+                <input matInput class="inputField" type="text" formControlName="numero">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Cidade</mat-label>
+                <input matInput class="inputField" type="text" formControlName="cidade">
+            </mat-form-field>
+        </div>
+        <div class="col ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Estado</mat-label>
+                <input matInput class="inputField" type="text" formControlName="estado">
+            </mat-form-field>
+        </div>
+        <div class="col ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>País</mat-label>
+                <input matInput class="inputField" type="text" formControlName="pais">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 ">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Situação</mat-label>
+                <mat-select formControlName="situacao">
+                    <mat-option *ngFor="let sit of situacaoCliente" [value]="sit.situacao">
+                        {{sit.situacao}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-4 ">
+            <button type="button" mat-mini-fab style="background-color: darkgreen;" (click)="uploadArquivo()"
+                matTooltip="Adicionar imagens" *ngIf="!!clienteForms.controls.id">
+                <mat-icon style='position: relative;top: -3px;'>add_a_photo</mat-icon>
+            </button>
+            <button  type="button" mat-mini-fab (click)="visualizarImagem()" color="primary" style="left:8px;"
+                matTooltip="Visualizar imagens" *ngIf="!!clienteForms.controls.id">
+                <mat-icon style='position: relative;top: -3px;'>image</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ">
+            <button mat-raised-button type="submit" color="primary" style="float: left;">Salvar</button>
+            <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
+        </div>
+    </div>
+</form>

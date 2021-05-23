@@ -1,0 +1,138 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white; font-family: Azonix, Arial, Tahoma, Sans-serif;">{{tituloAplicacao}} -
+        Carregando ...</p>
+</ngx-spinner>
+
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="example-toolbar rightShotColor" *ngIf="usuarioLogado">
+        <mat-toolbar-row>
+            <button mat-mini-fab style="background-color: #1d3448" (click)="fecharNavToogle()">
+                <mat-icon [@rotatedState]="isExpanded">menu</mat-icon>
+            </button>
+            <h1 class="example-app-name" style="font-family: Azonix, Arial, Tahoma, Sans-serif;">{{tituloAplicacao}}
+                <span class="versionRSC">{{versao}}</span>
+            </h1>
+<!--             <div style="font-family: Azonix, Arial, Tahoma, Sans-serif; left: 7px; position: relative;">
+                <breadcrumb #parent *ngIf="usuarioLogado">
+                    <ol class="breadcrumbs">
+                        <mat-icon style="zoom: 0.6; padding-top: 15px;"> pin_drop</mat-icon> &nbsp;
+                        <ng-template ngFor let-route [ngForOf]="parent.breadcrumbs">
+                            <li *ngIf="!route.terminal" class="breadcrumb-item">
+                                <a href="" [routerLink]="[route.url]">{{ route.displayName }}</a>
+                            </li>
+                            <li *ngIf="route.terminal" class="breadcrumb-item active" aria-current="page">{{
+                                route.displayName }}</li>
+                        </ng-template>
+                    </ol>
+                </breadcrumb>
+            </div> -->
+
+            <span class="example-spacer"></span>
+            
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <i class="fa fa-user fa-2x"></i>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="adm" *ifRoles="['ROLE_ADMIN_ADMIN','ROLE_PRECIFICACAO']">
+                    <mat-icon>supervisor_account</mat-icon>
+                    <span>Administração</span>
+                </button>
+                <button mat-menu-item (click)="userSettings();">
+                    <mat-icon>settings</mat-icon>
+                    <span>Perfil</span>
+                </button>
+                <button mat-menu-item id="buttonLogout" (click)="logout();" style="color: red;">
+                    <mat-icon style="color: red;">logout</mat-icon>
+                    <span>Logout</span>
+                </button>
+            </mat-menu>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+        autosize>
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56" opened="true" class="styleMatSideNav " [@onSideNavChange]="isExpanded"
+            *ngIf="usuarioLogado">
+            <mat-card class="cardInfoUser">
+                <mat-card-header>
+                    <img mat-card-avatar [src]="imageSRC" class="avatar" *ngIf="!!imageSRC" alt="">
+                    <img mat-card-avatar class="imgUserDefault avatar" *ngIf="!imageSRC" alt="">
+                    <mat-card-title [@animateCard]="linkText">{{user}}</mat-card-title>
+                    <mat-card-subtitle [@animateCard]="linkText">{{nomeCompleto}}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-nav-list *ngFor="let item of listaMenu;">
+                <a mat-list-item [routerLink]="[item.routerLink]" [routerLinkActive]="['active']" href=""
+                    matTooltipShowDelay="1000" class="styleMatSideNavList">
+                    <mat-icon matListIcon matTooltip="{{!linkText?item.descricao:null}}" matTooltipPosition="after">
+                        {{item.icon}}
+                    </mat-icon>
+                    <span matLine [@animateText]="linkText" href="">{{item.menu}}</span>
+                </a>
+            </mat-nav-list>
+
+            <!-- <mat-nav-list>
+                <span *ngFor="let item of menu">
+                    <span *ngIf="item.children && item.children.length > 0">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header style="height: 56px;">
+                                    <mat-panel-title>
+                                        <div fxLayout="row" fxLayoutAlign="space-between center"
+                                            [routerLinkActive]="['active']">
+                                            <mat-icon mat-list-icon class="icon-container" style="padding: 4px"
+                                                matTooltip="{{!linkText?item.displayName:null}}"
+                                                matTooltipPosition="after">
+                                                {{item.iconName}}</mat-icon>
+                                            <span style="top: -6px; position: relative; left: 10px;" class="itensMenu"
+                                                [@animateText]="linkText">{{item.displayName}}</span>
+                                        </div>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <span *ngFor="let child of item.children">
+                                    <mat-list-item [routerLink]="[child.route]" [routerLinkActive]="['active']">
+                                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                                            <mat-icon class="icon-container"
+                                                matTooltip="{{!linkText?child.displayName:null}}"
+                                                matTooltipPosition="after">{{child.iconName}}</mat-icon>
+                                            <span style="top: -6px; position: relative; left: 10px;" class="itensMenu"
+                                                [@animateText]="linkText">{{child.displayName}}</span>
+                                        </div>
+                                    </mat-list-item>
+                                </span>
+                            </mat-expansion-panel>
+                            <div class="dividerMenu"></div>
+                        </mat-accordion>
+                    </span>
+                    <span *ngIf="!item.children || item.children.length === 0">
+                        <mat-list-item [routerLink]="[item.route]" [routerLinkActive]="['active']">
+                            <div fxLayout="row" fxLayoutAlign="space-between center">
+                                <mat-icon mat-list-icon class="icon-container"
+                                    matTooltip="{{!linkText?item.displayName:null}}" matTooltipPosition="after">
+                                    {{item.iconName}}
+                                </mat-icon>
+                                <span style="top: -6px; position: relative; left: 10px;" class="itensMenu"
+                                    [@animateText]="linkText">
+                                    {{item.displayName}}
+                                </span>
+                            </div>
+                        </mat-list-item>
+                        <div class="dividerMenu"></div>
+                    </span>
+                </span>
+            </mat-nav-list> -->
+        </mat-sidenav>
+
+        <mat-sidenav-content class="example-sidenav-content" [@onMainContentChange]="usuarioLogado? isExpanded: null"
+        [@flyInOut]="prepareRoute(outlet)">
+            <router-outlet #outlet="outlet"></router-outlet>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+    <mat-toolbar class="example-footer rodapeAplicacao">
+        Av. Juiz Marco Túlio Isaac, 11307-11521 - Parque das Industrias, Betim - MG, 32671-072 | (31) 92002-6551 |
+        rightshotclub@gmail.com
+    </mat-toolbar>
+</div>

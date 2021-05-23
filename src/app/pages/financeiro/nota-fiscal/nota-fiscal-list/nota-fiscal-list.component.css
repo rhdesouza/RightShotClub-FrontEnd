@@ -1,0 +1,19 @@
+.customWidthClass{
+    flex: 0 0 75px;
+}
+
+
+.situacaoAberta{
+    color: orange;
+    font-weight: bold;
+}
+
+.situacaoFechada{
+    color: green;
+    font-weight: bold;
+}
+
+.situacaoParcial{
+    color: black;
+    font-weight: bold;
+}

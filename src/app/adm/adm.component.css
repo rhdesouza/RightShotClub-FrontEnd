@@ -1,0 +1,38 @@
+.fullSizeInput{
+    width: 100%;
+}
+
+.customWidthClass{
+    flex: 0 0 75px;
+}
+
+.colunaSituacao{
+    flex: 0 0 100px;
+}
+
+.situacaoAtivo{
+    color: green;
+}
+.situacaoInativo{
+    color: red;
+}
+.situacaoVendido{
+    color:silver;
+}
+.table td, .table th {
+    padding:0.2rem;
+}
+
+
+h2.mat-dialog-title{
+    border-bottom: 1px whitesmoke solid;
+}
+
+.fornecedor{
+    color: currentColor;
+}
+
+.esconderExcluirFornecedor{
+    visibility: hidden;
+}
+

@@ -1,0 +1,98 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Estoque">
+    <form [formGroup]="filterForm" (ngSubmit)="filtrar()">
+        <div class="row">
+            <div class="col-12">
+                <!-- <mat-form-field class="fullSizeInput" formGroupName="cabecalho"> -->
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Descrição Produto</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="descricao">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['descricao']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button mat-raised-button type="button" style="float:right" (click)="limparFiltro()">Limpar
+                    Filtro</button>
+                <button mat-raised-button type="submit" color="primary" style="float: left;">
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
+</app-tag-filter>
+
+<!-- <div style="max-height: 400px; overflow: auto;" class="mat-elevation-z8"> -->
+<table mat-table [dataSource]="estoqueSinteticoList" matSort class="mat-elevation-z8" matSort matSortActive="descricao"
+    matSortDirection="asc" matSortDisableClear style="width: 100%;">
+
+    <ng-container matColumnDef="id_produto" style="justify-content:center">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 5%"> ID </th>
+        <td mat-cell *matCellDef="let element" style="width:5%"> {{element.id_produto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:45%"> Descrição </th>
+        <td mat-cell *matCellDef="let element" style="width:45%"> {{element.descricao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="qtd_nota">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%; justify-content:center;"> QTD Nota
+        </th>
+        <td mat-cell *matCellDef="let element" style="width:10%; justify-content:center;">{{element.qtd_nota}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="qtd_estoque">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%;  justify-content:center;"> QTD
+            Estoque
+        </th>
+        <td mat-cell *matCellDef="let element" style="width:10%;  justify-content:center;">
+            <span [ngClass]="{'abaixoMinimo': isAbaixoMinimo(element.qtd_estoque,element.estoque_minimo),
+                              'acimaMinimo': !isAbaixoMinimo(element.qtd_estoque,element.estoque_minimo)}"
+                [matTooltip]="isAbaixoMinimo(element.qtd_estoque,element.estoque_minimo)?
+                                            'Estoque abaixo do mínimo indicado':''">
+                {{element.qtd_estoque}}
+            </span>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estoque_minimo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%;  justify-content:center;"> Estoque
+            Mínimo </th>
+        <td mat-cell *matCellDef="let element" style="width:10%;  justify-content:center;">
+            {{element.estoque_minimo}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%"> Tipo Produto </th>
+        <td mat-cell *matCellDef="let element" style="width:10%"> {{element.tipo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unid_compra">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:5%"> Unid. Compra</th>
+        <td mat-cell *matCellDef="let element" style="width:5%"> {{element.unid_compra}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unid_venda" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:5%"> Unid. Venda</th>
+        <td mat-cell *matCellDef="let element" style="width:5%"> {{element.unid_venda}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">Nenhum registro encontrado.</td>
+    </tr>
+</table>
+<!-- <mat-paginator [pageSizeOptions]="[5,20,30]" showFirstLastButtons></mat-paginator> -->
+<mat-paginator [pageSizeOptions]="[5,20,30]" [length]="resultsLength"></mat-paginator>
+<!-- </div> -->

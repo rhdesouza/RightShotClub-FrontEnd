@@ -1,0 +1,20 @@
+<div class="componentFormTitleCrumbs">
+    <breadcrumb #parent>
+        <ol [ngClass]="{'breadcrumbs': title == null, 'breadcrumbsModalTitle': title != null}">
+            <!-- <mat-icon style="zoom: 0.6;"> pin_drop</mat-icon> &nbsp; -->
+            <ng-template ngFor let-route [ngForOf]="parent.breadcrumbs" *ngIf="title == null else titulo">
+                <li *ngIf="!route.terminal" class="breadcrumb-item">
+                    <a [routerLink]="[route.url]" class="rotaAnterior">{{ route.displayName }}</a>
+                </li>
+                <li *ngIf="route.terminal" class="breadcrumb-item active" aria-current="page">
+                    {{route.displayName }}
+                </li>
+            </ng-template>
+            <ng-template #titulo>
+                <li class="modalTitle" aria-current="page">
+                    {{title}}
+                </li>
+            </ng-template>
+        </ol>
+    </breadcrumb>
+</div>

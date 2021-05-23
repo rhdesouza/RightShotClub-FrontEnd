@@ -1,0 +1,109 @@
+<app-title-page-modal tituloModal="Venda Produto" [formsDirty]="this.vendaForm.dirty"></app-title-page-modal>
+
+<form [formGroup]="vendaForm" [class.error]="!vendaForm.valid && vendaForm.touched" class="fullSizeInput"
+    (ngSubmit)="saveVenda()">
+    <div class="row">
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>CPF - Cliente</mat-label>
+                <input matInput class="inputField" type="text" mask="000.000.000-00">
+
+<!--                 <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.cliente">
+                    </mat-error-message>
+                </mat-error>
+ -->            </mat-form-field>
+        </div>
+        <div class="col-5">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Cliente</mat-label>
+                <input matInput class="inputField" type="text" formControlName="cliente" required>
+
+                <mat-icon matSuffix style="font-weight: bold; color: darkgreen; cursor: pointer;;"
+                    matTooltip="Pesquisar Clientes" [matTooltipPosition]="'above'" (click)="openSearchClientes()">
+                    search
+                </mat-icon>
+
+                <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.cliente">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>E-mail</mat-label>
+                <input matInput class="inputField" type="text"  required>
+
+<!--                 <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.cliente">
+                    </mat-error-message>
+                </mat-error>
+ -->            </mat-form-field>
+        </div>
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Forma de Pagamento</mat-label>
+                <mat-select formControlName="formaPagamento" required>
+                    <mat-option *ngFor="let cat of formaPagamento" [value]="cat.option">
+                        {{cat.desc}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.formaPagamento">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Data / Hora Venda</mat-label>
+                <input matInput class="inputField" type="text" formControlName="dataHoraVenda" required>
+
+                <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.dataHoraVenda">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Valor Total Itens</mat-label>
+                <input matInput class="inputField" type="text" currencyMask formControlName="valorTotalItens"
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+
+                <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.valorTotalItens">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Valor Desconto</mat-label>
+                <input matInput class="inputField" type="text" currencyMask formControlName="valorDescontoNota"
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+
+                <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.valorDescontoNota">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Valor Total Venda</mat-label>
+                <input matInput class="inputField" type="text" currencyMask formControlName="valorTotalVenda"
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+
+                <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.valorTotalVenda">
+                    </mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</form>

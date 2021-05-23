@@ -1,0 +1,47 @@
+<app-form-title-breadcrumbs  title="{{tituloModal}}"></app-form-title-breadcrumbs>
+
+<form [formGroup]="userForms" [class.error]="!userForms.valid && userForms.touched" class="fullSizeInput">
+    <div class="row">
+        <div class="col-8 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>Nome Completo</mat-label>
+                <input matInput class="inputField" type="text" formControlName="nomeCompleto">
+            </mat-form-field>
+        </div>
+        <div class="col-4 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>User</mat-label>
+                <input matInput class="inputField" type="text" formControlName="user">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>E-mail</mat-label>
+                <input matInput class="inputField" type="text" formControlName="email">
+            </mat-form-field>
+        </div>
+        <div class="col-4 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>Situação</mat-label>
+                <input matInput class="inputField" type="text" formControlName="situacao" readonly>
+            </mat-form-field>
+            <!-- <mat-form-field class="fullSizeInput">
+                <mat-label>Situação</mat-label>
+                <mat-select formControlName="situacao" required>
+                    <mat-option *ngFor="let sit of situacaoList" [value]="sit == 'AGUARDANDO_ATIVACAO'">
+                        {{sit}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            <button mat-raised-button (click)="salvar()" color="primary" style="float: left;"
+                [disabled]="!userForms.valid">Salvar</button>
+            <button mat-raised-button style="float: right" (click)="fechar()">Fechar</button>
+        </div>
+    </div>
+</form>

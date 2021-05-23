@@ -1,0 +1,43 @@
+.fullSizeInput{
+    width: 100%;
+}
+
+.avatar {
+    /* background-image: url('http://i.pravatar.cc/300'); */
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    border: 1px dimgray solid;
+    border-color: dimgray;
+}
+
+.frente{
+    opacity:0;
+    width:100%;
+    height:100%;
+    background:#d65050;
+    color:#fff;
+    transition: all .2s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    transform: scale(0.9);
+    font-family:verdana;
+  
+}
+  
+img.avatar:hover{
+    opacity:0.5;
+    transform: scale(1.1);
+    border: 1px dimgray solid;
+}
+
+.imgUserDefault{
+    /* text-align: center;  */
+    background-image: url('src/assets/img/user.png');
+    background-repeat: no-repeat;
+    background-size: cover; 
+    /* background-color: rgba(255,255,255,0.6); */
+    background-blend-mode: lighten; 
+}

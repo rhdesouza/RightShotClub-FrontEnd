@@ -1,0 +1,70 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<div class="row">
+    <div class="col-6 form-group">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon>local_library</mat-icon>
+                </div>
+                <mat-card-title>Clientes</mat-card-title>
+                <mat-card-subtitle>Quantitativo</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block">
+                    <canvas baseChart [data]="grafClientesData" [labels]="grafClientesLabels"
+                        [chartType]="grafClientesType"></canvas>
+                </div>
+                <div style="float: right; font-weight: bold;">
+                    Total: ({{totalGrafClientes}})
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="irParaClientes()">Ir para Clientes</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col-6 form-group">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon>business</mat-icon>
+                </div>
+                <mat-card-title>Fornecedores</mat-card-title>
+                <mat-card-subtitle>Quantitativo</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block">
+                    <canvas baseChart [data]="grafFornecedoresData" [labels]="grafFornecedoresLabels"
+                        [chartType]="grafFornecedoresType"></canvas>
+                </div>
+                <div style="float: right; font-weight: bold;">
+                    Total: ({{totalGrafFornecedores}})
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="irParaFornecedores()">Ir para Fornecedores</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 form-group">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon> attach_money</mat-icon>
+                </div>
+                <mat-card-title>Vendas</mat-card-title>
+                <mat-card-subtitle>Quantitativo</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Total</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

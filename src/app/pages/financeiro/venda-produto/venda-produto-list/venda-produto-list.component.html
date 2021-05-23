@@ -1,0 +1,45 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Precificação">
+    <form [formGroup]="filterForm" (ngSubmit)="filtrar()">
+        <div class="row">
+            <div class="col-10">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Nome Cliente</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="cliente">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['cliente']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Número Nota</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="numeroNota">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['numeroNota']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button mat-raised-button type="button" style="float:right" (click)="limparFiltro()">Limpar
+                    Filtro</button>
+                <button mat-raised-button type="submit" color="primary" style="float: left;">
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
+</app-tag-filter>
+
+
+<button mat-raised-button color="primary" (click)="adicionarVenda()"
+    *ifRoles="['ROLE_ADMIN_ADMIN','ROLE_VENDA_NEW']">
+    Incluir Venda
+</button>

@@ -1,0 +1,90 @@
+<app-template-modal titleModal="{{tituloModal}}"></app-template-modal>
+
+<div class="row">
+    <div class="col-3 form-group">
+        <mat-card-header>
+            <img mat-card-avatar [src]="imageSRC" class='avatar' (click)="uploadArquivo()" *ngIf="!!imageSRC" matTooltip="Alterar Imagem">
+            <img mat-card-avatar class="imgUserDefault avatar" *ngIf="!imageSRC" (click)="uploadArquivo()" matTooltip="Incluir Imagem">
+        </mat-card-header>
+    </div>
+    <div class="col-9 form-group">
+        <div class="row">
+            <div class="col-2 form-group">
+                <mat-form-field class="fullSizeInput">
+                    <mat-label>id</mat-label>
+                    <input matInput class="inputField" type="text" value="{{dataUser?.id}}" disabled>
+                </mat-form-field>
+            </div>
+            <div class="col-5 form-group">
+                <mat-form-field class="fullSizeInput">
+                    <mat-label>name</mat-label>
+                    <input matInput class="inputField" type="text" value="{{dataUser?.name}}" disabled>
+                </mat-form-field>
+            </div>
+            <div class="col-5 form-group">
+                <mat-form-field class="fullSizeInput">
+                    <mat-label>username</mat-label>
+                    <input matInput class="inputField" type="text" value="{{dataUser?.username}}" disabled>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7 form-group">
+                <mat-form-field class="fullSizeInput">
+                    <mat-label>email</mat-label>
+                    <input matInput class="inputField" type="text" value="{{dataUser?.email}}" disabled>
+                </mat-form-field>
+            </div>
+            <div class="col-5 form-group">
+                <mat-form-field class="fullSizeInput">
+                    <mat-label>enabled</mat-label>
+                    <input matInput class="inputField" type="text" value="{{dataUser?.enabled}}" disabled>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col form-group">
+        <mat-form-field class="fullSizeInput">
+            <mat-label>accountNonLocked</mat-label>
+            <input matInput class="inputField" type="text" value="{{dataUser?.accountNonLocked}}" disabled>
+        </mat-form-field>
+    </div>
+    <div class="col form-group">
+        <mat-form-field class="fullSizeInput">
+            <mat-label>accountNonExpired</mat-label>
+            <input matInput class="inputField" type="text" value="{{dataUser?.accountNonExpired}}" disabled>
+        </mat-form-field>
+    </div>
+    <div class="col form-group">
+        <mat-form-field class="fullSizeInput">
+            <mat-label>credentialsNonExpired</mat-label>
+            <input matInput class="inputField" type="text" value="{{dataUser?.credentialsNonExpired}}" disabled>
+        </mat-form-field>
+    </div>
+</div>
+<div class="row">
+    <div class="col form-group">
+        <mat-form-field class="fullSizeInput">
+            <mat-label>authorities</mat-label>
+            <input matInput class="inputField" type="text"
+                value="{{parseArrayToStringAuthority(dataUser?.authorities)}}" disabled>
+        </mat-form-field>
+    </div>
+</div>
+<div class="row">
+    <div class="col form-group">
+        <mat-form-field class="fullSizeInput">
+            <mat-label>roles</mat-label>
+            <input matInput class="inputField" type="text" value="{{parseArrayToStringRoles(dataUser?.roles)}}"
+                disabled>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col form-group" >
+        <button mat-raised-button style="float: right" (click)="fechar()">Fechar</button>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="snack-container">
+    <div class="snack-container-message">
+        <div>
+            <span *ngIf="data.snackType == 'success'" style='color: green; top: 5px; position: relative;'>
+                <mat-icon matListIcon>check</mat-icon>
+            </span>
+            <span *ngIf="data.snackType == 'error'" style='color: red; top: 5px; position: relative;'>
+                <mat-icon matListIcon>error_outline</mat-icon>
+            </span>
+            <span *ngIf="data.snackType == 'warn'" style='color: orangered; top: 5px; position: relative;'>
+                <mat-icon matListIcon>warning</mat-icon>
+            </span>
+            <span *ngIf="data.snackType == 'info'" style='color: blue; top: 5px; position: relative;'>
+                <mat-icon matListIcon>info</mat-icon>
+            </span>
+            &nbsp;
+            <span class="msgText">{{data.message}}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-button color="primary" (click)="closeSnackbar()" class="buttonFechar">Fechar</button>
+        </div>
+    </div>
+    <div class="snack-container-icon">
+        <i class="fas close" (click)="closeSnackbar()"></i>
+    </div>
+</div>

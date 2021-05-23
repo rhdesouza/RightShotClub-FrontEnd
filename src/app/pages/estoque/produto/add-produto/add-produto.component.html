@@ -1,0 +1,76 @@
+<!-- <app-form-title-breadcrumbs title="{{tituloModal}}"></app-form-title-breadcrumbs> -->
+<app-title-page-modal tituloModal="{{tituloModal}}" [formsDirty]="this.produtoForm.dirty"></app-title-page-modal>
+
+<form [formGroup]="produtoForm" [class.error]="!produtoForm.valid && produtoForm.touched" class="fullSizeInput" 
+    (ngSubmit)="salvar()">
+    <div class="row">
+        <div class="col-4">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Código Produto</mat-label>
+                <input matInput class="inputField" type="text" formControlName="codProduto" required pattern="[0-9]+$">
+                <mat-error>
+                    <mat-error-message [control]="produtoForm.controls['codProduto']"></mat-error-message>
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+        <div class="col-8">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Descrição</mat-label>
+                <input matInput class="inputField" type="text" formControlName="descricao" required>
+
+                <mat-error>
+                    <mat-error-message [control]="produtoForm.controls['descricao']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Tipo Produto (Tipo - Unid. Compra - Unid. Venda)</mat-label>
+                <mat-select formControlName="tipoProduto" required>
+                    <mat-option *ngFor="let item of tipoProdutoList" [value]="item.id">
+                        {{item.tipo}} - {{item.unidCompra}} - {{item.unidVenda}}
+                    </mat-option>
+                </mat-select>
+
+                <mat-error>
+                    <mat-error-message [control]="produtoForm.controls['tipoProduto']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Estoque Mínimo</mat-label>
+                <input matInput class="inputField" type="number" formControlName="estoqueMinimo" pattern="[0-9]+$">
+
+                <mat-error>
+                    <mat-error-message [control]="produtoForm.controls['estoqueMinimo']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-5">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Código NCM</mat-label>
+                <input type="text" placeholder="NCM" aria-label="Number" matInput formControlName="ncm"
+                    [matAutocomplete]="auto" required>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.ncm">
+                        <span style="font-size: 12px;">{{option.ncm}} - {{option.categoria}}</span>
+                    </mat-option>
+                </mat-autocomplete>
+
+                <mat-error>
+                    <mat-error-message [control]="produtoForm.controls['ncm']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button mat-raised-button type="submit" color="primary" style="float: left;">Salvar</button>
+            <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
+        </div>
+    </div>
+</form>

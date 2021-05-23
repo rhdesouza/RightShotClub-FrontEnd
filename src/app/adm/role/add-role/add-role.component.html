@@ -1,0 +1,52 @@
+<app-form-title-breadcrumbs title="{{tituloModal}}"></app-form-title-breadcrumbs>
+
+<form [formGroup]="roleForms" [class.error]="!roleForms.valid && roleForms.touched" class="fullSizeInput" (change)="createNameRole()">
+    <div class="row">
+        <div class="col-4 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>Módulo</mat-label>
+                <mat-select formControlName="modulo" required (selectionChange)="createNameRole()">
+                    <mat-option *ngFor="let modulo of moduloList" [value]="modulo">
+                        {{modulo}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-4 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>Sub-Módulo</mat-label>
+                <mat-select formControlName="subModulo" required (selectionChange)="createNameRole()">
+                    <mat-option *ngFor="let subModulo of subModuloList" [value]="subModulo">
+                        {{subModulo}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-4 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>Ação</mat-label>
+                <mat-select formControlName="acao" required (selectionChange)="createNameRole()">
+                    <mat-option *ngFor="let acao of moduloAcaoList" [value]="acao">
+                        {{acao}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class='row'>
+        <div class="col form-group ">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>ROLE</mat-label>
+                <input matInput class="inputField" type="text" formControlName="name" required
+                    onkeyup="this.value = this.value.toUpperCase();" readonly>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            <button mat-raised-button (click)="salvar()" color="primary" style="float: left;"
+                [disabled]="!roleForms.valid">Salvar</button>
+            <button mat-raised-button style="float: right" (click)="fechar()">Fechar</button>
+        </div>
+    </div>
+</form>

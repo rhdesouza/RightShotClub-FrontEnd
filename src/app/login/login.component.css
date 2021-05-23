@@ -1,0 +1,76 @@
+  :host {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+  }
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .bg-img{
+    /* background-image: "D:/_DESENVOLVIMENTO/_WORKSPACE/RightShotClub/Docs/imagesAirsoft.png";  */
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+  }
+
+  .imgLogin{
+    text-align: center; 
+    background-image: url('/assets/img/RightShot.png');
+    /* background-image: url('src/assets/img/RightShot2.png'); */
+    /* background-image: url('src/assets/img/RightShot3.png'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-color: rgba(255,255,255,0.6); */
+    background-blend-mode: lighten;
+    
+    width: 100%;
+    height: 20em
+  }
+
+  @font-face {
+    font-family: Azonix;
+    src: url('src/assets/fonts/Azonix.otf');
+  }
+  
+  .tituloLogin{
+    font:36px Azonix, Arial, Tahoma, Sans-serif;
+    color: rgba(22.0, 22.5, 30.6);
+  }
+
+  .versionRSC{
+    font-family: Azonix, Arial, Tahoma, Sans-serif;
+    color: rgba(22.0, 22.5, 30.6);
+    position: relative; 
+    top: -0.7em; 
+    font-size: 40%;
+    /* border: 1px  rgba(22.0, 22.5, 30.6) solid; */
+    border-radius: 10px;
+    padding: 5px 5px 0px 5px;
+  }

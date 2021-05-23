@@ -1,0 +1,283 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+  
+h1.example-app-name {
+  margin-left: 8px;
+  margin-top: 3px;
+  /* color:#04A9C4;
+  background-color: whitesmoke;
+  border-radius: 4%;
+  position: static; */
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+  
+table {
+  width: 100%;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.crm-navigation-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+}
+
+.mat-sidenav-content{
+  padding: 0px 15px 0px 15px;
+}
+
+.rightShotColor{
+  background-color: rgba(22.0, 22.5, 30.6);
+}
+
+.rodapeAplicacao {
+  
+  display: inline;
+  text-align: center;
+  font-size: 12px;
+  text-align: center; 
+  border-top: 1px solid;
+  border-color: rgba(22, 23, 31, 0.164);
+  background: rgba(175, 177, 179, 0.4);
+  height: 2.5em;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* .mat-list-item.active{
+  font-family: Roboto;
+  color: #04A9C4 !important;
+} */
+
+/* .mat-list-item.active a{
+  font-family: Roboto;
+  color: #04A9C4;
+} 
+ */
+
+.mat-list-item.active{
+  font-weight: bold;
+  /* color: rgba(22.0, 22.5, 30.6); */
+  color: rgb(132, 18, 18);
+  background-color: whitesmoke;
+  /* font-family: Junction-bold; */
+}
+
+.mat-list-item.active a{
+  font-weight: bold;
+  color: rgb(132, 18, 18);
+  /* color: rgba(22.0, 22.5, 30.6); */
+  background-color: whitesmoke;
+  /* font-family: Junction-bold; */
+}
+
+.mat-list-item.active div{
+/*   font-weight: bold;
+  color: rgb(132, 18, 18);
+  background-color: whitesmoke; */
+
+  font-family: Roboto;
+  color: #04A9C4;
+  border-left: 3px #04A9C4 solid;
+  border-radius: 2px;
+}
+.mat-list-item div{
+/*   font-weight: bold;
+  color: rgb(132, 18, 18);
+  background-color: whitesmoke; */
+
+  font-family: Roboto;
+  
+  border-left: 3px whitesmoke solid;
+  border-radius: 2px;
+}
+.logo-image{
+    width: 35px !important;
+    height: 35px !important;
+}
+
+.mat-drawer-inner-container{
+  background-color: rgba(22.0, 22.5, 30.6);
+}
+
+
+.mat-expansion-panel-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: inherit;
+  transition: height 225ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-container {
+  margin: 0 5px;
+}
+.dividerMenu{
+  width: 100%;
+  border:1px rgba(175, 177, 179, 0.4) solid;
+}
+
+.mat-expansion-panel-body {
+    /* padding: 0 24px 16px; */
+    padding: 0 0 0 !important;
+}
+.mat-expansion-panel-spacing {
+  /* margin: 16px 0; */
+  margin: 0 0 0 0 !important;
+}
+
+.teste{
+  box-shadow: none !important;
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+  box-shadow: none;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+.itensMenu{
+  font-family: Roboto;
+  font-size: 16px;
+}
+
+/* .styleMatSideNav{
+    -webkit-box-shadow: 5px 0px 8px rgba(50, 50, 50, 0.77);
+    -moz-box-shadow:    5px 0px 8px rgba(50, 50, 50, 0.77);
+    box-shadow:         5px 0px 8px rgba(50, 50, 50, 0.77);
+    
+} */
+
+.styleMatSideNav{
+  /* background-color: rgba(175, 177, 179, 0.4);  */
+  background-color:#1d3448;
+  max-width: 205px;
+
+  box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2), 
+              0px 1px 1px 2px rgba(0, 0, 0, 0.14), 
+              0px 1px 3px 3px rgba(0, 0, 0, 0.12);
+}
+
+.styleMatSideNavList{
+  color: whitesmoke;
+}
+
+.barraToolbar{
+  border: #04A9C4 solid 1px;  
+  border-radius: 10px 10px 10px 10px; 
+  width: 100%;
+  background-color: whitesmoke;
+  color:black;
+  left: 15px;
+  position:relative;
+  padding: 8px !important;
+}
+
+
+.imageLogo{
+  height: auto;
+    position: absolute;
+    width: 100px
+}
+
+.cardInfoUser{
+  height: 5em; 
+  /* background-color:rgb(175, 177, 179) */
+}
+
+.avatar {
+  background-size: cover;
+  left: -2px;
+  position: relative;
+}
+
+.rodapeAplicacao {
+  display: inline;
+  text-align: center;
+  font-size: 12px;
+  text-align: center; 
+  border-top: 1px solid;
+  border-color: rgba(22, 23, 31, 0.164);
+  /* background: rgba(175, 177, 179, 0.4); */
+  background-color:#1d3448;
+  height: 2.5em;
+  color: whitesmoke;
+}
+
+.breadcrumbs{
+  display: flex;
+  flex-wrap: wrap;
+  /* padding: .75rem 1rem; */
+  /* margin-bottom: 1rem; */
+  list-style: none;
+  /* background-color: #e9ecef;  */
+  border-radius: .25rem;
+  font-size: 10px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.versionRSC{
+  font-family: Azonix, Arial, Tahoma, Sans-serif;
+  color: rgba(245, 245, 245, 0.534);
+  position: relative; 
+  top: -0.7em; 
+  font-size: 60%;
+  border: 1px rgba(245, 245, 245, 0.534) solid;
+  border-radius: 10px;
+  padding: 2px 5px 2px 5px;
+}
+.imgUserDefault{
+  /* text-align: center;  */
+  background-image: url('src/assets/img/user.png');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-color: rgba(255,255,255,0.6);
+  background-blend-mode: lighten; 
+}

@@ -1,0 +1,10 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="true" style="margin-bottom: 15px">
+        <mat-expansion-panel-header class="painelTitle">
+            <span class="filtroTitle">{{titulo}}</span>
+        </mat-expansion-panel-header>
+        <div class="contentPainel">
+            <ng-content></ng-content>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

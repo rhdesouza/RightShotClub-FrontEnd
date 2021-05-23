@@ -1,0 +1,63 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<div class="row">
+    <div class="col-3 form-group">
+        <mat-card class="example-card" style="min-height: 10.4em; ">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon style="zoom: 1.5; color: #1d3448">list_alt</mat-icon>
+                </div>
+                <mat-card-title>Cadastro Nota Fiscal</mat-card-title>
+                <mat-card-subtitle>Entrada de Produtos</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block; min-height: 6.4em;">
+                    Para entrada de produtos é necessério o cadastro da nota fiscal de compra.
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="cadastroNotaFiscal()">Ir para Nota Fiscal</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col-3 form-group">
+        <mat-card class="example-card" style="min-height: 10.4em">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon style="zoom: 1.5; color: #1d3448">money</mat-icon>
+                </div>
+                <mat-card-title>Precificação</mat-card-title>
+                <mat-card-subtitle>Precificação de Produtos</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block; min-height: 6.4em;">
+                    Precificação de produtos em estoque. O cálculo levará em conta o percentual de Markup predefinido.
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="precificacaoProduto()">Ir para Precificação</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col-3 form-group">
+        <mat-card class="example-card" style="min-height: 10.4em">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon style="zoom: 1.5; color: #1d3448">attach_money</mat-icon>
+                </div>
+                <mat-card-title>Venda</mat-card-title>
+                <mat-card-subtitle>Venda de Produtos</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block; min-height: 6.4em;">
+                    Venda de produtos disponíveis em estoque e precificados.
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="vendaProduto()">Ir para Vendas</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col-3 form-group">
+    </div>
+</div>

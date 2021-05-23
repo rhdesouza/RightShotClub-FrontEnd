@@ -1,0 +1,27 @@
+.mat-snack-bar-container {
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    margin: 24px;
+    max-width: 500px !important;
+    min-width: 344px;
+    padding: 14px 16px;
+    min-height: 48px;
+    transform-origin: center;
+    }
+
+
+.msgText{
+    font-size: 18px; 
+    /* position: absolute;  */
+    /* padding-top: 3px;  */
+    /* white-space: nowrap;  */
+    /* text-align: center;  */
+    position: relative; 
+    /* top: -3px; */
+    color:whitesmoke;
+}
+
+.buttonFechar{
+    color:whitesmoke;
+}

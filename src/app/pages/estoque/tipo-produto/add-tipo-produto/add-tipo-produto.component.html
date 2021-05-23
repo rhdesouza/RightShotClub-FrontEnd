@@ -1,0 +1,50 @@
+<!-- <app-form-title-breadcrumbs title="{{tituloModal}}"></app-form-title-breadcrumbs> -->
+<app-title-page-modal tituloModal="{{tituloModal}}" [formsDirty]="this.tipoProdutoForms.dirty"></app-title-page-modal>
+
+<form [formGroup]="tipoProdutoForms" [class.error]="!tipoProdutoForms.valid && tipoProdutoForms.touched"
+    class="fullSizeInput" (ngSubmit)="salvar()">
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Tipo</mat-label>
+                <input matInput class="inputField" type="text" formControlName="tipo" required>
+
+                <mat-error>
+                    <mat-error-message [control]="tipoProdutoForms.controls['tipo']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Unidade de Compra</mat-label>
+                <mat-select formControlName="unidCompra" required>
+                    <mat-option *ngFor="let cat of unidCompraEnum" [value]="cat">
+                        {{cat}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <mat-error-message [control]="tipoProdutoForms.controls['unidCompra']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Unidade de Venda</mat-label>
+                <mat-select formControlName="unidVenda" required>
+                    <mat-option *ngFor="let cat of unidCompraEnum" [value]="cat">
+                        {{cat}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <mat-error-message [control]="tipoProdutoForms.controls['unidVenda']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button mat-raised-button type="submit" color="primary" style="float: left;">Salvar</button>
+            <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
+        </div>
+    </div>
+</form>

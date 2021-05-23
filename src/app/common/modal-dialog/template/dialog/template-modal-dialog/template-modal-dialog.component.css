@@ -1,0 +1,15 @@
+.col.titulo{
+    /* font-family: Roboto-Medium; */
+    color: #1d3448;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.col.mensagem{
+    /* font-family: Roboto-Medium; */
+    color: #1d3448;
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}

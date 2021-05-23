@@ -1,0 +1,213 @@
+<!-- <app-form-title-breadcrumbs title="{{tituloModal}}"></app-form-title-breadcrumbs> -->
+<app-title-page-modal tituloModal="{{tituloModal}}" [formsDirty]="this.fornecedorForms.dirty"></app-title-page-modal>
+
+<form [formGroup]="fornecedorForms" [class.error]="!fornecedorForms.valid && fornecedorForms.touched" class="fullSizeInput" (ngSubmit)="salvar()">
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Razão Social</mat-label>
+                <input matInput class="inputField" type="text" formControlName="razaoSocial" required>
+                <mat-error>
+                    <mat-error-message [control]="fornecedorForms.controls['razaoSocial']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Nome Fantasia</mat-label>
+                <input matInput class="inputField" type="text" formControlName="nomeFantasia" required>
+                <mat-error>
+                    <mat-error-message [control]="fornecedorForms.controls['nomeFantasia']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>CEP</mat-label>
+                <input matInput class="inputField" mask="00.000-000" (change)="pesquisaCEP()" type="text" formControlName="cep">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Logradouro</mat-label>
+                <input matInput class="inputField" type="text" formControlName="logradouro">
+            </mat-form-field>
+        </div>
+        <div class="col-1">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Número</mat-label>
+                <input matInput class="inputField" type="text" formControlName="numero">
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Cidade</mat-label>
+                <input matInput class="inputField" type="text" formControlName="cidade">
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Estado</mat-label>
+                <input matInput class="inputField" type="text" formControlName="estado">
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>País</mat-label>
+                <input matInput class="inputField" type="text" formControlName="pais" required>
+                <mat-error>
+                    <mat-error-message [control]="fornecedorForms.controls['pais']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>CPF / CNPJ</mat-label>
+                <input matInput class="inputField" type="text" formControlName="cpfCnpj" required mask="000.000.000-00||00.000.000/0000-00">
+                <mat-error>
+                    <mat-error-message [control]="fornecedorForms.controls['cpfCnpj']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Inscrição Municipal</mat-label>
+                <input matInput class="inputField" type="text" formControlName="inscricaoMunicipal">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Inscrição Estadual</mat-label>
+                <input matInput class="inputField" type="text" formControlName="inscricaoEstadual">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>ISS</mat-label>
+                <input matInput class="inputField" type="text" formControlName="iss">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>E-mail</mat-label>
+                <input matInput class="inputField" type="text" formControlName="email">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Telefone</mat-label>
+                <input matInput class="inputField" type="text" formControlName="telefone" mask="(00) 0000-0000||(00) 00000-0000">
+                <mat-error>
+                    <mat-error-message [control]="fornecedorForms.controls['telefone']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Telefone 2</mat-label>
+                <input matInput class="inputField" type="text" formControlName="telefone2" mask="(00) 0000-0000||(00) 00000-0000">
+                <mat-error>
+                    <mat-error-message [control]="fornecedorForms.controls['telefone2']"></mat-error-message>
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Telefone 3</mat-label>
+                <input matInput class="inputField" type="text" formControlName="telefone3" mask="(00) 0000-0000||(00) 00000-0000">
+                <mat-error>
+                    <mat-error-message [control]="fornecedorForms.controls['telefone3']"></mat-error-message>
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Cod. Banco</mat-label>
+                <input matInput class="inputField" type="text" formControlName="codBanco">
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Agência</mat-label>
+                <input matInput class="inputField" type="text" formControlName="agencia">
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Conta</mat-label>
+                <input matInput class="inputField" type="text" formControlName="conta">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Contato - Nome</mat-label>
+                <input matInput class="inputField" type="text" formControlName="contatoNome">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Contato - Cargo</mat-label>
+                <input matInput class="inputField" type="text" formControlName="contatoCargo">
+            </mat-form-field>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Contato - E-mail</mat-label>
+                <input matInput class="inputField" type="text" formControlName="contatoEmail">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Contato - Telefone</mat-label>
+                <input matInput class="inputField" type="text" formControlName="contatoTelefone" mask="(00) 00000 0000">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Contato - Telefone 2</mat-label>
+                <input matInput class="inputField" type="text" formControlName="contatoTelefone2" mask="(00) 00000 0000">
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Contato - Telefone 3</mat-label>
+                <input matInput class="inputField" type="text" formControlName="contatoTelefone3" mask="(00) 00000 0000">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Situação</mat-label>
+                <mat-select formControlName="situacao" required>
+                    <mat-option *ngFor="let sit of situacaoFornecedor" [value]="sit.situacao">
+                        {{sit.situacao}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <mat-error-message [control]="fornecedorForms.controls['situacao']"></mat-error-message>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button mat-raised-button type="submit" color="primary" style="float: left;">Salvar</button>
+            <button mat-raised-button type="button" style="float: right" (click)="fechar()">Fechar</button>
+        </div>
+    </div>
+</form>

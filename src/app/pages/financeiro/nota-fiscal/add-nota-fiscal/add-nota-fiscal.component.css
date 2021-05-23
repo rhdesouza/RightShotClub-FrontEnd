@@ -1,0 +1,33 @@
+.fornecedor{
+    color: currentColor;
+}
+
+.esconderExcluirFornecedor{
+    visibility: hidden;
+}
+
+.verticalAlignCenter{
+    margin: auto;
+    /*width: 50%; */
+    padding: 10px;
+    text-align: center;
+}
+
+.fullSizeInput{
+    width: 100%;
+  }
+  
+.sizeImput10{
+  width: 10%;
+}
+
+
+.fullSizeInput{
+  width: 100%;
+}
+
+mat-label.ng-star-inserted{
+  /* text-transform: uppercase !important; */
+  font-weight: bold !important;
+  color: #1d3448 !important;
+}

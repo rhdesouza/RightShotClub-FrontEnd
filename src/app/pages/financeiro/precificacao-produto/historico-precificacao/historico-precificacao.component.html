@@ -1,0 +1,69 @@
+<app-title-page-modal tituloModal="Histórico de Precificação do Produto"></app-title-page-modal>
+<form [formGroup]="produto">
+    <div class="row">
+        <div class="col-2">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Código Produto</mat-label>
+                <input matInput class="inputField" type="text" formControlName="cod_produto" readonly>
+            </mat-form-field>
+        </div>
+        <div class="col-10">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                <mat-label>Produto</mat-label>
+                <input matInput class="inputField" type="text" formControlName="descricao" readonly>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
+
+<div class="mat-elevation-z8" style="width: 100%; height: 400px; overflow: auto;">
+    <ng-scrollbar #scrollable shown="native">
+        <table mat-table [dataSource]="dataSource" matSort style="width: 100%;" matSort matSortActive="lastModifiedDate"
+        matSortDirection="desc" matSortDisableClear>
+
+            <ng-container matColumnDef="lastModifiedBy">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastModifiedBy}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastModifiedDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastModifiedDate | date:'short'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="markupReferncia">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Markup Referência </th>
+                <td mat-cell *matCellDef="let element"> {{element.markupReferncia}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="valorMedioNF">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Médio </th>
+                <td mat-cell *matCellDef="let element"> {{element.valorMedioNF |currency:"BRL":"symbol"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="valorProdutoSugerido">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Sugerido </th>
+                <td mat-cell *matCellDef="let element"> {{element.valorProdutoSugerido |currency:"BRL":"symbol"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="valorProduto">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Produto </th>
+                <td mat-cell *matCellDef="let element"> {{element.valorProduto |currency:"BRL":"symbol"}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </ng-scrollbar>
+</div>
+<div class="row" style="padding-top: 15px;">
+    <div class="col">
+        <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
+    </div>
+</div>

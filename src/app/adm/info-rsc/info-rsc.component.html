@@ -1,0 +1,226 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<form [formGroup]="infoSRCForm" [class.error]="!infoSRCForm.valid && infoSRCForm.touched" class="fullSizeInput"
+    (ngSubmit)="saveInfo()">
+    <app-tag-filter titulo="Empresa">
+        <div class="row">
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>CNPJ</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="cnpj" mask="00.000.000/0000-00" required>
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['cnpj']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Nome Empresa</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="nomeEmpresa" required>
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['nomeEmpresa']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Nome Fantasia</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="nomeFantasia" required>
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['nomeFantasia']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Telefone </mat-label>
+                    <input matInput class="inputField" type="text" formControlName="telefone1" mask="(00) 00000 0000||(00) 0000 0000" required>
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['telefone1']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Telefone 2</mat-label>
+                    <input matInput class="inputField" type="text" mask="(00) 0000 0000||(00) 00000 0000" formControlName="telefone2">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['telefone2']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput class="inputField" type="email" formControlName="emailEmpresa">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['emailEmpresa']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>CEP </mat-label>
+                    <input matInput class="inputField" type="text" formControlName="cep" mask="00.000-000" (change)="pesquisaCEP()">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['cep']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-3">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Logradouro </mat-label>
+                    <input matInput class="inputField" type="text" formControlName="logradouro">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['logradouro']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-1">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Numero </mat-label>
+                    <input matInput class="inputField" type="text" formControlName="numero">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['numero']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-1">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Complemento </mat-label>
+                    <input matInput class="inputField" type="text" formControlName="complemento">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['complemento']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Bairro </mat-label>
+                    <input matInput class="inputField" type="text" formControlName="bairro">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['bairro']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Município </mat-label>
+                    <input matInput class="inputField" type="text" formControlName="municipio">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['municipio']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-1">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>UF </mat-label>
+                    <input matInput class="inputField" type="text" formControlName="uf">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['uf']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Sócio 1</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="socio1" required>
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['socio1']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-3">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>E-Mail Sócio 1</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="emailSocio1" required>
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['emailSocio1']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-3">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>Sócio 2</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="socio2">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['socio2']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-3">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="empresa">
+                    <mat-label>E-Mail Sócio 2</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="emailSocio2">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.empresa['controls']['emailSocio2']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </app-tag-filter>
+    <app-tag-filter titulo="Financeiro">
+        <div class="row" >
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always"
+                    formGroupName="financeiro">
+                    <mat-label>% de Markup</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="markup"
+                     mask="percent" suffix="%" [dropSpecialCharacters]="false">
+
+                    <mat-error>
+                        <mat-error-message [control]="infoSRCForm.controls.financeiro['controls']['markup']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-10" style="padding-top: 17px;">
+                <span style="font-style: italic;">O valor de markup será adicionado ao valor de compora do produto gerando o valor mínimo para venda.</span>
+            </div>
+        </div>
+    </app-tag-filter>
+
+    <button mat-raised-button type="submit" color="primary" style="float: left;">
+        Salvar
+    </button>
+</form>

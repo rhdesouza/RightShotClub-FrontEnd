@@ -1,0 +1,63 @@
+<app-form-title-breadcrumbs title="Datas de Pagamento"></app-form-title-breadcrumbs>
+
+<form [formGroup]="pagamentoForm" [class.error]="!pagamentoForm.valid && pagamentoForm.touched">
+    <div style="background-color: black; color: whitesmoke; min-height: 3em; display: flex;
+    flex-wrap: wrap;">
+        <div class="col-3 verticalAlignCenter">Parcela</div>
+        <div class="col-3 verticalAlignCenter">Valor</div>
+        <div class="col-3 verticalAlignCenter">Data de Pagamento</div>
+        <div class="col-3 verticalAlignCenter"></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap;" *ngFor="let item of pagamentos.controls; let i = index;">
+
+        <div [formGroup]="item" class="col-3 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" style="text-align: center;" type="text" formControlName="parcela" readonly>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-3 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="valorTotal"
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="item" class="col-3 ">
+            <mat-form-field class="fullSizeInput">
+                <!-- <input matInput class="inputField" type="text" mask="00/00/0000" formControlName="dataPagamento"> -->
+
+                <input matInput [matDatepicker]="picker" formControlName="dataPagamento" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+        </div>
+        <div class="col-3 " style="text-align: center;">
+            <button mat-mini-fab color="warn" matTooltip="Excluir Item" [matTooltipPosition]="'above'" mat-raised-button
+                style="margin-right: 2px;" (click)="removeItemPagamentos(i)">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" matTooltip="Adicionar Item" [matTooltipPosition]="'above'"
+                mat-raised-button (click)="addPagamentos()" [disabled]="this.pagamentos.length != (i+1)">
+                <mat-icon>playlist_add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap;">
+        <div class="col-6 " style="text-align: right; font-weight: bold;">
+            Valor total:
+        </div>
+        <div class="col-3 " style="text-align: center; font-weight: bold;">
+            {{somaValorTotalNota() | currency:"BRL":"symbol" }}
+        </div>
+        <div class="col-3 " >
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            <button mat-raised-button (click)="salvar()" color="primary" style="float: left;"
+                [disabled]="!pagamentoForm.valid">Salvar</button>
+            <button mat-raised-button style="float: right" (click)="dialogRef.close()">Fechar</button>
+        </div>
+    </div>
+</form>

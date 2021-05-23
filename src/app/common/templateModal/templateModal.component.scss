@@ -1,0 +1,20 @@
+.componentFormTitle{
+    padding-bottom:5px;
+    font-size: 20px;
+    width: 100%;
+    font-weight: bold;
+    color:#1d3448;
+
+    background: /* gradient can be an image */
+    linear-gradient(
+      to left, 
+      rgba(92,7,52,1) 0%,
+      rgb(88, 99, 161) 12%,
+      rgba(42, 56, 136, 0.637) 47%,
+      rgb(9, 10, 58) 100%
+    )
+    left 
+    bottom
+    no-repeat; 
+  background-size:100% 2px ;
+}

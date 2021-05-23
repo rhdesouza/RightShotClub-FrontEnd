@@ -1,0 +1,103 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Clientes">
+    <form [formGroup]="filterForm" (ngSubmit)="filtrar()">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Nome Cliente</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="nome">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['nome']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>E-mail Cliente</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="email">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['email']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button mat-raised-button type="button" style="float:right" (click)="limparFiltro()">Limpar
+                    Filtro</button>
+                <button mat-raised-button type="submit" color="primary" style="float: left;">
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
+</app-tag-filter>
+
+
+<table mat-table [dataSource]="clientesList" matSort class="mat-elevation-z8" matSort matSortActive="nome"
+    matSortDirection="desc" matSortDisableClear style="width: 100%;">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> ID </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
+        <td mat-cell *matCellDef="let element"> {{element.telefone | telefone}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="situacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Situação </th>
+        <td mat-cell *matCellDef="let element"> {{element.situacao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created_date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Cadastro </th>
+        <td mat-cell *matCellDef="let element"> {{element.created_date | date:'short'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"></th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <div [ngSwitch]="element.situacao">
+                    <button mat-menu-item ifDisableRoles
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_CLIENTE_EDIT', 'ROLE_CLIENTE_NEW']" (click)="editar(element)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                </div>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">Nenhum registro encontrado.</td>
+    </tr>
+
+    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5,10,15]" [length]="resultsLength" showFirstLastButtons></mat-paginator>
+
+<div *ifRoles="['ROLE_ADMIN_ADMIN']">
+    <button mat-raised-button color="primary" (click)="adicionarCliente()">Incluir Cliente</button>
+</div>

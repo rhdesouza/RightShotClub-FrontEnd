@@ -1,0 +1,48 @@
+.customWidthClass{
+    flex: 0 0 75px;
+}
+
+.mat-column-star {
+    width: 20px;
+    padding-right: 8px;
+  }
+
+
+/*   :host ::ng-deep .mat-sort-header-container { 
+    display: flex;  
+    justify-content: center; 
+} */
+
+/* th.mat-header-cell { 
+    text-align: center; 
+} */
+
+/* .centerHeader{
+    display: flex;  
+    justify-content: center; 
+} */
+
+/* :host ::ng-deep .mat-sort-header-container { 
+    display: flex;  
+    justify-content: center; 
+} */
+
+/* th.cdk-column-tipoProduto{
+    text-align: center !important;
+} */
+
+/* .mat-column-tipoProduto{
+    text-align: center;
+} */
+/* 
+th.mat-header-cell {
+    text-align: center !important;
+  } */
+
+
+/*   .header-align-right{
+    display: flex;
+    padding: 21px 0;
+    justify-content: flex-end;
+  } */
+

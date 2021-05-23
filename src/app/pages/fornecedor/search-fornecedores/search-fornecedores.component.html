@@ -1,0 +1,42 @@
+<app-form-title-breadcrumbs title="Fornecedores"></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Fornecedores">
+    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Razão Social">
+    </mat-form-field>
+</app-tag-filter>
+<table mat-table [dataSource]="fornecedoresList" matSort class="mat-elevation-z8" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear style="width: 100%;">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> ID </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cpfCnpj">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClassCpfCnpj'"> Cpf / Cnpj </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="'customWidthClassCpfCnpj'"> {{element.cpfCnpj | cPFCNPJ }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="razaoSocial">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Razão Social </th>
+        <td mat-cell *matCellDef="let element"> {{element.razaoSocial}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="situacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'colunaSituacao'"> Situação </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="{'situacaoAtivo': element.situacao=='Ativo','situacaoVendido': element.situacao=='Vendido','situacaoInativo': element.situacao=='Inativo', 'colunaSituacao': true}"> 
+            {{element.situacao}} 
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;" (click)="selecionar(row)" [ngClass]="{'highlightTableColor': linhaSelecionada == row.id}"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+<br>
+<div class="row">
+    <div class="col ">
+        <button mat-raised-button type="button" color="primary" (click)="salvar()"style="float: left;">Salvar</button>
+        <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
+    </div>
+</div>

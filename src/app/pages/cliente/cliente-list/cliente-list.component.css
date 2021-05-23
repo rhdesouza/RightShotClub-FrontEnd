@@ -1,0 +1,8 @@
+mat-row:hover {
+    cursor:pointer;
+    background: whitesmoke;
+  }
+
+  .customWidthClass{
+    flex: 0 0 75px;
+}

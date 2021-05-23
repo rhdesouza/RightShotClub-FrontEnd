@@ -1,0 +1,20 @@
+.customWidthClass{
+    flex: 0 0 75px;
+}
+
+.colunaSituacao{
+    flex: 0 0 100px;
+}
+
+mat-row:hover {
+    cursor:pointer;
+    /* background: whitesmoke; */
+  }
+
+.highlightTableColor{
+    background-color: royalblue;
+}
+
+.customWidthClassCpfCnpj{
+    flex: 0 0 130px;
+}

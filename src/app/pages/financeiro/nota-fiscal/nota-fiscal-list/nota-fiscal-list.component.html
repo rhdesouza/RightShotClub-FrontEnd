@@ -1,0 +1,91 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Nota Fiscal">
+    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Número">
+    </mat-form-field>
+</app-tag-filter>
+
+<table mat-table [dataSource]="notaFiscalList" matSort class="mat-elevation-z8" matSort matSortActive="id"
+    matSortDirection="desc" matSortDisableClear style="width: 100%;">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 5%;"> ID </th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numero">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;"> Número </th>
+        <td mat-cell *matCellDef="let element" style="width: 10%;"> {{element.numero}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cpnjFornecedor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;"> CNPJ/CPF Fornecedor </th>
+        <td mat-cell *matCellDef="let element" style="width: 15%;"> {{element.fornecedor.cpfCnpj | cPFCNPJ}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fornecedor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 45%;">Fornecedor </th>
+        <td mat-cell *matCellDef="let element" style="width: 45%;"> {{element.fornecedor.nomeFantasia}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="valorTotal">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Valor Nota </th>
+        <td mat-cell *matCellDef="let element" style="width: 10%;"> {{element.valorTotal |currency:"BRL":"symbol"}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="situacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10%;">Situação </th>
+        <td mat-cell *matCellDef="let element" style="width: 10%;"
+            [ngClass]="{'situacaoAberta': element.situacao=='Aberta','situacaoFechada': element.situacao=='Estoque'}"
+            [matTooltip]="element.situacao=='Aberta' ? 
+                            'Não disponivel em estoque.': 
+                            element.situacao=='Estoque'? 
+                                'Disponivel em estoque.':null" [matTooltipPosition]="'above'">
+            {{element.situacao}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Ações</th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <div [ngSwitch]="element.situacao">
+                    <button mat-menu-item *ngSwitchCase="'Aberta'" ifDisableRoles
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_NOTAFISCAL_EDIT']" (click)="editarNotaFiscal(element.id)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar Nota Fiscal</span>
+                    </button>
+                    <button mat-menu-item *ngSwitchCase="'Aberta'" ifDisableRoles
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_ESTOQUE_NEW']" (click)="gerarEstoque(element.id)">
+                        <mat-icon>block</mat-icon>
+                        <span>Gerar Estoque</span>
+                    </button>
+                    <button mat-menu-item *ngSwitchCase="'Estoque'" ifDisableRoles
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_NOTAFISCAL_EDIT']" (click)="editarNotaFiscal(element.id)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar Nota Fiscal</span>
+                    </button>
+                    <button mat-menu-item *ngSwitchCase="'Estoque'" [disabled]="true">
+                        <mat-icon>block</mat-icon>
+                        <span>Gerar Estoque</span>
+                    </button>
+                </div>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+
+<button mat-raised-button color="primary" (click)="adicionarNotaFiscal()"
+    *ifRoles="['ROLE_ADMIN_ADMIN','ROLE_NOTAFISCAL_NEW']">
+    Incluir Nota Fiscal
+</button>

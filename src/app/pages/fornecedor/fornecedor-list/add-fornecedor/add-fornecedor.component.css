@@ -1,0 +1,9 @@
+.fullSizeInput{
+    width: 100%;
+}
+
+mat-label.ng-star-inserted{
+    /* text-transform: uppercase !important; */
+    font-weight: bold !important;
+    color: #1d3448 !important;
+}

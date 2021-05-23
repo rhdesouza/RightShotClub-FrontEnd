@@ -1,0 +1,116 @@
+<app-form-title-breadcrumbs title="Vincular Role ao Usuário"></app-form-title-breadcrumbs>
+
+<form [formGroup]="roleUserForms" [class.error]="!roleUserForms.valid && roleUserForms.touched" class="fullSizeInput">
+    <div class="row">
+        <div class="col-1 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>ID</mat-label>
+                <input matInput class="inputField" type="text" formControlName="id" readonly>
+            </mat-form-field>
+        </div>
+        <div class="col-4 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>Nome Completo</mat-label>
+                <input matInput class="inputField" type="text" formControlName="nomeCompleto" readonly>
+            </mat-form-field>
+        </div>
+        <div class="col-2 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>User</mat-label>
+                <input matInput class="inputField" type="text" formControlName="user" readonly>
+            </mat-form-field>
+        </div>
+        <div class="col-3 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>E-mail</mat-label>
+                <input matInput class="inputField" type="text" formControlName="email" readonly>
+            </mat-form-field>
+        </div>
+        <div class="col-2 form-group">
+            <mat-form-field class="fullSizeInput">
+                <mat-label>Situação</mat-label>
+                <input matInput class="inputField" type="text" formControlName="situacao" readonly>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5">
+            <div class="mat-elevation-z8">
+                <div style="width: 100%; text-align: center; padding: 10px; font-size: 18px; ">Roles:</div>
+<!--                 <div style="padding-left: 15px; width: 100%;">
+                    <mat-form-field style="width: 100%; padding-right: 15px;">
+                        <mat-label>Filtrar</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input style="width: 100%;">
+                    </mat-form-field>
+                </div> -->
+                <div style="width: 100%; height: 350px; overflow: auto; ">
+                    <ng-scrollbar #scrollable shown="native">
+                        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="roleList"
+                            [cdkDropListConnectedTo]="[doneList]" class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+   <!--                          <div *ngIf="roleListFiltrada?.length > 0">
+                                <div class="example-box" *ngFor="let item of roleListFiltrada" cdkDrag
+                                    (click)="selectT1(item)" [ngClass]="{'roleSelecionada': isSelectT1(item)}">
+                                    {{item.authority}}
+                                </div>
+                            </div> -->
+                            <!-- <div *ngIf="roleListFiltrada?.length == 0"> -->
+                                <div class="example-box" *ngFor="let item of roleList" cdkDrag (click)="selectT1(item)"
+                                    [ngClass]="{'roleSelecionada': isSelectT1(item)}">
+                                    {{item.authority}}
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    </ng-scrollbar>
+                </div>
+            </div>
+        </div>
+        <div class="col-2" style="padding-top: 15px; text-align: center;">
+            <button mat-raised-button (click)="transferSelectT1pT2()" [disabled]="controleSelecaoT1pT2?.length == 0"
+                matTooltip="Autorizar Roles">
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+            <br><br>
+            <button mat-raised-button (click)="transferSelectT2pT1()" [disabled]="controleSelecaoT2pT1?.length == 0"
+                matTooltip="Desautorizar Roles">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <br><br>
+            <button mat-raised-button (click)="setAllRoles()" [disabled]="roleList.length == 0"
+                matTooltip="Autorizar todos Recursos">Inserir
+                Todos</button>
+            <br><br>
+
+            <button mat-raised-button (click)="removeAllRolesSelected()" [disabled]="rolesSelected.length == 0"
+                matTooltip="Desautorizar todos Recursos">
+                Remover Todos
+            </button>
+        </div>
+        <div class="col-5">
+            <div class="mat-elevation-z8">
+                <div style="width: 100%; text-align: center; padding: 10px; font-size: 18px;">Roles Autorizadas:
+                </div>
+
+                <div style="width: 100%; height: 350px; overflow: auto;">
+                    <ng-scrollbar #scrollable shown="native">
+                        <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="rolesSelected"
+                            [cdkDropListConnectedTo]="[todoList]" class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+                            <div class="example-box" *ngFor="let item of rolesSelected" cdkDrag (click)="selectT2(item)"
+                                [ngClass]="{'roleSelecionada': isSelectT2(item)}">
+                                {{item.authority}}
+                            </div>
+                        </div>
+                    </ng-scrollbar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col form-group">
+            <button mat-raised-button (click)="salvar()" color="primary" style="float: left;"
+                [disabled]="!roleUserForms.valid || rolesSelected.length === 0">Salvar</button>
+            <button mat-raised-button style="float: right" (click)="fechar()">Fechar</button>
+        </div>
+    </div>
+</form>

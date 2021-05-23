@@ -1,0 +1,19 @@
+.mat-expansion-indicator::after {
+    color:#1d3448 !important;
+}
+
+.painelTitle{
+    border-bottom: 1px whitesmoke solid; 
+    height: 40px;
+}
+
+.filtroTitle{
+    font-family: Rotobo-Regular,Azonix, Arial, Tahoma, Sans-serif;
+    color: #1d3448;
+}
+
+.contentPainel{
+    margin-top: 15px;
+}
+
+

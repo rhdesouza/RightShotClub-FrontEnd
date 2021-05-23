@@ -1,0 +1,46 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro de ROLES">
+    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex.: Admin">
+    </mat-form-field>
+</app-tag-filter>
+
+
+<table mat-table [dataSource]="roleList" #TableTwoSort="matSort" matSort class="mat-elevation-z8" matSort
+    matSortActive="id" matSortDirection="asc" matSortDisableClear style="width: 100%;">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 5%;"> ID
+        </th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="modulo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;"> Módulo </th>
+        <td mat-cell *matCellDef="let element" style="width: 20%;"> {{element.modulo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subModulo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 20%;"> Sub-Módulo
+        </th>
+        <td mat-cell *matCellDef="let element" style="width: 20%;"> {{element.subModulo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%;"> Ação </th>
+        <td mat-cell *matCellDef="let element" style="width: 15%;"> {{element.acao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 40%;"> ROLE </th>
+        <td mat-cell *matCellDef="let element" style="width: 40%;"> {{element.name}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunasRoles"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunasRoles;"></tr>
+</table>
+<mat-paginator #TableTwoPaginator="matPaginator" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+</mat-paginator>
+
+<button mat-raised-button color="primary" (click)="addRole()">Incluir Roles</button>

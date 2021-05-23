@@ -1,0 +1,113 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Precificação">
+    <form [formGroup]="filterForm" (ngSubmit)="filtrar()">
+        <div class="row">
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Código Produto</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="cod_produto">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['cod_produto']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-10">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Produto</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="descricao">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['descricao']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button mat-raised-button type="button" style="float:right" (click)="limparFiltro()">Limpar
+                    Filtro</button>
+                <button mat-raised-button type="submit" color="primary" style="float: left;">
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
+</app-tag-filter>
+
+<table mat-table [dataSource]="precificacaoList" matSort class="mat-elevation-z8" matSort matSortActive="descricao"
+    matSortDirection="asc" matSortDisableClear style="width: 100%;">
+
+    <ng-container matColumnDef="cod_produto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%"> Código do Produto </th>
+        <td mat-cell *matCellDef="let element" style="width:15%"> {{element.cod_produto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:40%"> Descrição </th>
+        <td mat-cell *matCellDef="let element" style="width:40%"> {{element.descricao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%; justify-content:center;"> Tipo Produto
+        </th>
+        <td mat-cell *matCellDef="let element" style="width:10%; justify-content:center;">{{element.tipo}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unid_compra">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%;  justify-content:center;"> Unidade Compra </th>
+        <td mat-cell *matCellDef="let element" style="width:10%;  justify-content:center;">
+            {{element.unid_compra}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unid_venda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%"> Unidade Venda </th>
+        <td mat-cell *matCellDef="let element" style="width:10%"> {{element.unid_venda}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="valor_produto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%"> Valor Produto</th>
+        <td mat-cell *matCellDef="let element" style="width:10%"> {{element.valor_produto |currency:"BRL":"symbol"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"></th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <div>
+                    <button mat-menu-item ifDisableRoles
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_PRECIFICACAO_NEW', 'ROLE_PRECIFICACAO_EDIT']" (click)="abrirModalPrecificar(element.idProduto)">
+                        <mat-icon>attach_money</mat-icon>
+                        <span>Precificar</span>
+                    </button>
+                    <button mat-menu-item ifDisableRoles *ngIf="!!element.valor_produto"
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_PRECIFICACAO_DELETE']" (click)="removerPrecificacao(element)">
+                        <mat-icon>money_off</mat-icon>
+                        <span>Remover Precificação</span>
+                    </button>
+                    <button mat-menu-item ifDisableRoles 
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_PRECIFICACAO_HISTORICO']" (click)="historico(element)">
+                        <mat-icon>history</mat-icon>
+                        <span>Histórico Precificação</span>
+                    </button>
+                </div>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">Nenhum registro encontrado.</td>
+    </tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5,20,30]" [length]="resultsLength"></mat-paginator>

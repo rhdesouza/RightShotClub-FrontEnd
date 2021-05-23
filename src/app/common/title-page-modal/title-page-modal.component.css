@@ -1,0 +1,22 @@
+
+/* .titleModal{
+    font-size: 16px;
+    font-family: Rotobo-Regular,Azonix, Arial, Tahoma, Sans-serif; 
+    border-radius: 5px;
+    background-color: #1d3448;
+    padding: 16px 16px 16px 0px;
+} */
+.titleModal{
+    background-color: #1d3448; 
+    color: whitesmoke; 
+    width: 100%; 
+    border-radius: 4px; 
+    margin-bottom: 15px;
+}
+.title{
+    font-size: 16px;
+    margin: 0px;
+    color:whitesmoke;
+    text-transform: uppercase !important;
+    font-family: Rotobo-Regular,Azonix, Arial, Tahoma, Sans-serif; 
+}

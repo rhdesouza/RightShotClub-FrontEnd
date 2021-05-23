@@ -1,0 +1,88 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Produto">
+    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. UN">
+    </mat-form-field>
+</app-tag-filter>
+
+
+<table mat-table [dataSource]="produtoList" matSort class="mat-elevation-z8" matSortActive="id" matSortDirection="asc"
+    matSortDisableClear style="width: 100%;">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:  5%"> ID </th>
+        <td mat-cell *matCellDef="let element" style="width:  5%"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="codProduto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:  10%;"> Código do Produto
+        </th>
+        <td mat-cell *matCellDef="let element" style="width:  10%;"> {{element.codProduto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:  40%"> Descrição </th>
+        <td mat-cell *matCellDef="let element" style="width:  40%"> {{element.descricao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoProduto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:  10%"> Tipo Produto </th>
+        <td mat-cell *matCellDef="let element" style="width:  10%"> {{element.tipoProduto.tipo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ncm">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:  10%"> NCM - Descrição</th>
+        <td mat-cell *matCellDef="let element" style="width:  10%;  ">
+            <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-wrap: hyphenate; display: block">
+                {{element.ncm.ncm | ncm}} - {{element.ncm.categoria}}
+            </span>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dataCadastro">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:  10%; text-align: center;">
+            Data Cadastro
+        </th>
+        <td mat-cell *matCellDef="let element" style="width: 10%"> {{element.createdDate |
+            date:'short'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dataDesativacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:  10%;   text-align: right;
+        justify-content: flex-end;"> Data Desativação </th>
+        <td mat-cell *matCellDef="let element" style="width: 10%"> {{element.dataDesativacao |
+            date:'short'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef style="width:  2%"></th>
+        <td mat-cell *matCellDef="let element" style="width:  2%">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item [disabled]="element.dataDesativacao" ifDisableRoles
+                    [roles]="['ROLE_ADMIN_ADMIN', 'ROLE_PRODUTO_EDIT']" (click)="editar(element.id)">
+                    <mat-icon>edit</mat-icon>
+                    <span>Editar Produto</span>
+                </button>
+                <button mat-menu-item [disabled]="element.dataDesativacao" ifDisableRoles
+                    [roles]="['ROLE_ADMIN_ADMIN', 'ROLE_PRODUTO_DISABLED']" (click)="desativarProduto(element.id)">
+                    <mat-icon>block</mat-icon>
+                    <span>Desativar Produto</span>
+                </button>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+<button mat-raised-button color="primary" (click)="adicionarProduto()" ifDisableRoles
+    [roles]="['ROLE_ADMIN_ADMIN', 'ROLE_PRODUTO_NEW']">
+    Incluir Produto
+</button>

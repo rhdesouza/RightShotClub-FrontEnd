@@ -1,0 +1,79 @@
+<app-form-title-breadcrumbs></app-form-title-breadcrumbs>
+<div class="row">
+    <div class="col-3 form-group">
+        <mat-card class="example-card" style="min-height: 10.4em; ">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon style="zoom: 1.5; color: #1d3448">widgets</mat-icon>
+                </div>
+                <mat-card-title>Estoque</mat-card-title>
+                <mat-card-subtitle>Estoque disponível</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block; min-height: 6.4em;">
+                    Listagem de estoque dosponivel e indisponivel.
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary"  (click)="abrirEstoque()">Ir para Estoque</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col-3 form-group">
+        <mat-card class="example-card" style="min-height: 10.4em; color: #1d3448 ">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon style="zoom: 1.5;">category</mat-icon>
+                </div>
+                <mat-card-title>Cadastro de Produto</mat-card-title>
+                <mat-card-subtitle>Cadastro de Produto</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block; min-height: 6.4em;">
+                    Cadastro de produto para preenchumento uniforme da Nota Fiscal
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button  color="primary"  (click)="cadastroProduto()">Ir para Produto</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col-3 form-group">
+        <mat-card class="example-card" style="min-height: 10.4em; color: #1d3448 ">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon style="zoom: 1.5;">border_color</mat-icon>
+                </div>
+                <mat-card-title>Cadastro Tipo Produto</mat-card-title>
+                <mat-card-subtitle>Cadastro Tipo de Produto</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block; min-height: 6.4em;">
+                    Tipo de produto para vinculação ao produto.
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary"  (click)="cadastroTipoProduto()">Ir para Tipo de Produto</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col-3 form-group">
+        <mat-card class="example-card" style="min-height: 10.4em; ">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <mat-icon matListIcon style="zoom: 1.5; color: #1d3448">view_comfy</mat-icon>
+                </div>
+                <mat-card-title>NCM</mat-card-title>
+                <mat-card-subtitle>Nomenclatura Comum Mercosul</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div style="display: block; min-height: 6.4em;">
+                    Importação do arquivo contendo NCM.
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="uploadNcm()">Ir para Importação NCM</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
