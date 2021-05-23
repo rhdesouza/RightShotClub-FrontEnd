@@ -5,10 +5,10 @@ const path = require("path");
 const app = express();
 
 // Serve os arquivos estáticos da pasta dist (gerada pelo ng build)
-app.use(express.static(__dirname + "/dist/rightShot"));
+app.use(express.static(__dirname + "/dist/right-shot"));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname + "/dist/rightShot/index.html"));
+  res.sendFile(path.join(__dirname + "/dist/right-shot/index.html"));
 });
 
 // Inicia a aplicação pela porta configurada
