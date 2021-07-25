@@ -23,7 +23,7 @@ export class EstoqueSinteticoListComponent implements OnInit {
     'id_produto',
     'descricao',
     'qtd_nota',
-    'qtd_estoque',
+    'qtd_est_real',
     'estoque_minimo',
     'tipo',
     'unid_compra',

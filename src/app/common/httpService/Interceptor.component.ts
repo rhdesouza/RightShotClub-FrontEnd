@@ -47,7 +47,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             retry(0),
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    /* console.log('event--->>>', event.status); */
+                    //console.log('event--->>>', event.status);
                     this.spinner.hide();
                 }
                 return event;
@@ -68,7 +68,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 } else if (error.status == 403) {
                     this.snakeBarService.openSnackBarError("Ação não permitida, acesso negado!");
                 } else if (data['status'] == 409) {
-                    this.snakeBarService.openSnackBarError("Registro duplicado ou em conflito.");
+                    let message: string = error?.error?.message ?? "Registro duplicado ou em conflito.";
+                    this.snakeBarService.openSnackBarError(message);
                 } else {
                     this.snakeBarService.openSnackBarError("Ocorreu um erro no sistema, entre em contato com o Administrador!")
                     .afterDismissed().subscribe(() => {

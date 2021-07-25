@@ -42,10 +42,14 @@ export class ClienteService {
   }
 
   public addCliente(Cliente: Cliente): Observable<any> {
-    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.PUT, 'clientes/add', undefined, Cliente);
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, 'clientes/add', undefined, Cliente);
   }
 
   public getFotoCliente(idFotoCliente: number): Observable<any> {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `clientes/getFotoCliente/${idFotoCliente}`, undefined, );
+  }
+
+  public buscarClientePorCpf(cpf: String): Observable<Cliente> {
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `clientes/getClientePorCpf/${cpf}`, undefined, );
   }
 }

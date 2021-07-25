@@ -275,7 +275,7 @@ table {
 }
 .imgUserDefault{
   /* text-align: center;  */
-  background-image: url('src/assets/img/user.png');
+  background-image: url('/assets/img/user.png');
   background-repeat: no-repeat;
   background-size: cover; 
   background-color: rgba(255,255,255,0.6);

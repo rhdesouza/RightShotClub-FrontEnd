@@ -1,0 +1,101 @@
+<app-title-page-modal tituloModal="Pesquisar Produto para venda"></app-title-page-modal>
+
+<app-tag-filter titulo="Filtro Produto">
+    <form [formGroup]="filterForm" (ngSubmit)="filtrar()">
+        <div class="row">
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Código Produto</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="cod_produto">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['cod_produto']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-10">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>Produto</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="descricao">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['descricao']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button mat-raised-button type="button" style="float:right" (click)="limparFiltro()">Limpar
+                    Filtro</button>
+                <button mat-raised-button type="submit" color="primary" style="float: left;">
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
+</app-tag-filter>
+
+<table mat-table [dataSource]="precificacaoList" matSort class="mat-elevation-z8" matSort matSortActive="descricao"
+    matSortDirection="asc" matSortDisableClear style="width: 100%;">
+
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox (change)="selecionar(element, $event.checked)" [checked]="setSelecao(element)"
+           [disabled]="!element.qtd_est_real > 0 || element.valor_produto == null" >
+          </mat-checkbox>
+          
+        </td>
+      </ng-container>
+
+    <ng-container matColumnDef="cod_produto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 15%"> Código do Produto </th>
+        <td mat-cell *matCellDef="let element" style="width:15%"> {{element.cod_produto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:40%"> Descrição </th>
+        <td mat-cell *matCellDef="let element" style="width:40%"> {{element.descricao}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%; justify-content:center;"> Tipo Produto
+        </th>
+        <td mat-cell *matCellDef="let element" style="width:10%; justify-content:center;">{{element.tipo}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unid_venda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%"> Unidade Venda </th>
+        <td mat-cell *matCellDef="let element" style="width:10%"> {{element.unid_venda}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="valor_produto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%"> Valor Produto</th>
+        <td mat-cell *matCellDef="let element" style="width:10%"> {{element.valor_produto |currency:"BRL":"symbol"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="qtd_est_real">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%"> Em Estoque</th>
+        <td mat-cell *matCellDef="let element" style="width:10%"> {{element.qtd_est_real }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">Nenhum registro encontrado.</td>
+    </tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5,20,30]" [length]="resultsLength"></mat-paginator>
+
+<div class="row">
+    <div class="col ">
+        <button mat-raised-button type="button" color="primary" (click)="confirmar()" style="float: left;"
+        [disabled]="selecionados.length == 0">Confirmar</button>
+        <button mat-raised-button type="button" style="float:right" (click)="cancelar()">Cancelar</button>
+    </div>
+</div>

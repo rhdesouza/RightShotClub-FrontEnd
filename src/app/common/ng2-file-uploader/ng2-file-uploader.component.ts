@@ -1,10 +1,9 @@
-import { Component, Optional, Inject, OnInit } from '@angular/core';
-import { FileUploader, FileItem } from 'ng2-file-upload';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { environment } from 'src/environments/environment';
-import { StorageComponent } from '../httpService/storage.component';
-import { RestService } from '../httpService/httpService.component';
+import { FileUploader } from 'ng2-file-upload';
 import { TipoRequisicaoRestEnum } from 'src/app/model/enum/tipo-requisicao-rest.enum';
+import { RestService } from '../httpService/httpService.component';
+import { StorageComponent } from '../httpService/storage.component';
 import { SnakeBarService } from '../snakebar/snakebar.service';
 import { ConfigFileUploader } from './ng2-file-uploader.service';
 
@@ -22,7 +21,7 @@ export class Ng2FileUploaderComponent implements OnInit {
   uploader: FileUploader;
   hasBaseDropZoneOver: boolean;
   hasAnotherDropZoneOver: boolean;
-  response: string;
+  response: any;
 
   public allowedMimeType: string[] | undefined = ['image/png', 'image/gif', 'video/mp4', 'image/jpeg'];
   public maxFileSize = 5 * 1024 * 1024;
@@ -35,10 +34,10 @@ export class Ng2FileUploaderComponent implements OnInit {
     private rest: RestService,
     private snakeBarService: SnakeBarService,
   ) {
-    this.allowedMimeType = this.parameter?.allowedMimeType!.length > 0 ? this.parameter!.allowedMimeType : this.allowedMimeType;
+    this.allowedMimeType = this.parameter?.allowedMimeType!?.length > 0 ? this.parameter?.allowedMimeType : this.allowedMimeType;
     this.uploader = new FileUploader({
       maxFileSize: this.maxFileSize,
-      queueLimit: !!this.parameter?.subtraiQueueLimit ? this.queueLimit - this.parameter?.subtraiQueueLimit : this.queueLimit,
+      queueLimit: !!this.parameter.subtraiQueueLimit ? this.queueLimit - this.parameter.subtraiQueueLimit : this.queueLimit,
       url: this.parameter.url,
       headers: [{ name: 'Authorization', value: this.storage.getToken() }],
       disableMultipart: false, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
@@ -49,14 +48,15 @@ export class Ng2FileUploaderComponent implements OnInit {
     this.hasAnotherDropZoneOver = false;
     this.response = '';
 
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; }
+
     this.uploader.response.subscribe(res => {
-      this.response = res;
-      if (this.response.indexOf("erro:1") != -1) {
-        this.snakeBarService.openSnackBarError(this.response.split("msg:")[1]);
-      }
+      this.response = JSON.parse(res);
+      if (!!this.response?.error)
+        this.snakeBarService.openSnackBarError(this.response.message);
     });
 
-    
+
     this.getArquivos();
   }
   ngOnInit(): void {

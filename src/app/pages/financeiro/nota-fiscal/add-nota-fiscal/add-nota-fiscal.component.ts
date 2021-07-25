@@ -22,7 +22,7 @@ export class AddNotaFiscalComponent implements OnInit {
   public fornecedorRazaoSocial: string = '';
   /* public formaPagamento = Object.keys(FormaPagamento).filter(f => isNaN(Number(f))); */
 
-  public formaPagamento = [{ option: 'A_Vista', desc: 'A Vista' }, { option: 'Parcelado', desc: 'Parcelado' }];
+  public formaPagamento = [{ option: 'A_VISTA', desc: 'A Vista' }, { option: 'PARCELADO', desc: 'Parcelado' }];
 
   public progressoNota: number = 0;
   public color: ThemePalette = this.progressoNota == 100 ? 'primary' : 'warn';
@@ -219,7 +219,7 @@ export class AddNotaFiscalComponent implements OnInit {
   }
 
   public changeFormaPagamento() {
-    if (this.notaFiscalForm.get('cabecalho')?.get('formaPagamento')?.value == "A_Vista")
+    if (this.notaFiscalForm.get('cabecalho')?.get('formaPagamento')?.value == "A_VISTA")
       this.notaFiscalForm.get('cabecalho')?.get('parcelas')?.setValue(null);
   }
 

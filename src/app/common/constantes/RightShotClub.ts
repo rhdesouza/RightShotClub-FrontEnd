@@ -1,7 +1,7 @@
 import { environment } from "src/environments/environment";
 export const rightshot = {
     tituloAplicacao: 'Right Shot Club',
-    versao: '0.0.1' + (environment.production || '-dev'),
+    versao: '0.2.0' + (!environment.production ? '-dev' : null),
 };
 
 /**

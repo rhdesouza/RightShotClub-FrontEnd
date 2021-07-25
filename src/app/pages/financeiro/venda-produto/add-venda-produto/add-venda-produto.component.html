@@ -1,45 +1,47 @@
-<app-title-page-modal tituloModal="Venda Produto" [formsDirty]="this.vendaForm.dirty"></app-title-page-modal>
+<app-title-page-modal [tituloModal]="this.tituloModal" [formsDirty]="this.vendaForm.dirty"></app-title-page-modal>
 
 <form [formGroup]="vendaForm" [class.error]="!vendaForm.valid && vendaForm.touched" class="fullSizeInput"
     (ngSubmit)="saveVenda()">
     <div class="row">
         <div class="col-2">
-            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cliente">
                 <mat-label>CPF - Cliente</mat-label>
-                <input matInput class="inputField" type="text" mask="000.000.000-00">
+                <input matInput class="inputField" type="text" mask="000.000.000-00" formControlName="cpf" required
+                    readonly>
 
-<!--                 <mat-error>
-                    <mat-error-message [control]="vendaForm.controls.cliente">
+                <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.cliente['controls']['cpf']">
                     </mat-error-message>
                 </mat-error>
- -->            </mat-form-field>
+            </mat-form-field>
         </div>
         <div class="col-5">
-            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cliente">
                 <mat-label>Cliente</mat-label>
-                <input matInput class="inputField" type="text" formControlName="cliente" required>
+                <input matInput class="inputField" type="text" formControlName="nome" required readonly>
 
                 <mat-icon matSuffix style="font-weight: bold; color: darkgreen; cursor: pointer;;"
-                    matTooltip="Pesquisar Clientes" [matTooltipPosition]="'above'" (click)="openSearchClientes()">
+                    matTooltip="Pesquisar Clientes" [matTooltipPosition]="'above'" (click)="openSearchCliente()">
                     search
                 </mat-icon>
 
                 <mat-error>
-                    <mat-error-message [control]="vendaForm.controls.cliente">
+                    <mat-error-message [control]="vendaForm.controls.cliente['controls']['nome']">
                     </mat-error-message>
                 </mat-error>
             </mat-form-field>
         </div>
         <div class="col-3">
-            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+            <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always" formGroupName="cliente">
                 <mat-label>E-mail</mat-label>
-                <input matInput class="inputField" type="text"  required>
+                <input matInput class="inputField" type="text" formControlName="email" required readonly>
 
-<!--                 <mat-error>
-                    <mat-error-message [control]="vendaForm.controls.cliente">
+                <mat-error>
+                    <mat-error-message [control]="vendaForm.controls.cliente['controls']['email']">
                     </mat-error-message>
                 </mat-error>
- -->            </mat-form-field>
+
+            </mat-form-field>
         </div>
         <div class="col-2">
             <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
@@ -61,7 +63,7 @@
         <div class="col">
             <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
                 <mat-label>Data / Hora Venda</mat-label>
-                <input matInput class="inputField" type="text" formControlName="dataHoraVenda" required>
+                <input matInput class="inputField" type="text" formControlName="dataHoraVenda" readonly>
 
                 <mat-error>
                     <mat-error-message [control]="vendaForm.controls.dataHoraVenda">
@@ -73,7 +75,7 @@
             <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
                 <mat-label>Valor Total Itens</mat-label>
                 <input matInput class="inputField" type="text" currencyMask formControlName="valorTotalItens"
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly>
 
                 <mat-error>
                     <mat-error-message [control]="vendaForm.controls.valorTotalItens">
@@ -85,7 +87,7 @@
             <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
                 <mat-label>Valor Desconto</mat-label>
                 <input matInput class="inputField" type="text" currencyMask formControlName="valorDescontoNota"
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly>
 
                 <mat-error>
                     <mat-error-message [control]="vendaForm.controls.valorDescontoNota">
@@ -97,13 +99,87 @@
             <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
                 <mat-label>Valor Total Venda</mat-label>
                 <input matInput class="inputField" type="text" currencyMask formControlName="valorTotalVenda"
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly>
 
                 <mat-error>
                     <mat-error-message [control]="vendaForm.controls.valorTotalVenda">
                     </mat-error-message>
                 </mat-error>
             </mat-form-field>
+        </div>
+    </div>
+    <div style="background-color: black; color: whitesmoke; min-height: 3em; display: flex; flex-wrap: wrap;">
+        <div class="col-1 verticalAlignCenter">Cod - Produto</div>
+        <div class="col-5 verticalAlignCenter">Produto</div>
+        <div class="col-1 verticalAlignCenter">Tipo Unidade</div>
+        <div class="col-1 verticalAlignCenter">Quantidade</div>
+        <div class="col-1 verticalAlignCenter">Valor Produto</div>
+        <div class="col-1 verticalAlignCenter">Valor Desconto</div>
+        <div class="col-1 verticalAlignCenter">Valor Venda</div>
+        <div class="col-1 verticalAlignCenter"></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap;" *ngFor="let vendaItens of itens.controls; let i = index;">
+        <div [formGroup]="vendaItens.get('produto')" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="codProduto">
+
+                <mat-icon matSuffix style="font-weight: bold; color: darkgreen; cursor: pointer;;"
+                    matTooltip="Pesquisar Produto" [matTooltipPosition]="'above'" (click)="openSearchProdutoPrecificado(i)">
+                    search
+                </mat-icon>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="vendaItens.get('produto')" class="col-5 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField" type="text" formControlName="descricao" readonly>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="vendaItens" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField text-input-center" type="text" formControlName="tipoUnidade" readonly>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="vendaItens" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField text-input-center" type="text" formControlName="qtd" (change)="valorTotalRow(i); validaQuantitadeVendaEstoque(vendaItens)">
+            </mat-form-field>
+        </div>
+        <div [formGroup]="vendaItens" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField text-input-center" type="text" formControlName="valorProduto" readonly
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask>
+            </mat-form-field>
+        </div>
+        <div [formGroup]="vendaItens" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField text-input-center" type="text" formControlName="valorDesconto"
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask [change]="valorTotalRow(i)">
+            </mat-form-field>
+        </div>
+        <div [formGroup]="vendaItens" class="col-1 ">
+            <mat-form-field class="fullSizeInput">
+                <input matInput class="inputField text-input-center" type="text" formControlName="valorVenda" readonly
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" currencyMask>
+            </mat-form-field>
+        </div>
+        <div class="col-1" style="text-align: right;">
+            <button mat-mini-fab color="warn" type="button" matTooltip="Excluir Item" [matTooltipPosition]="'above'"
+                mat-raised-button style="margin-right: 2px;" (click)="removeItemNota(i)">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" matTooltip="Adicionar Item" [matTooltipPosition]="'above'"
+                mat-raised-button (click)="addItemNota()" [disabled]="this.itens.length != (i+1)" type="button">
+                <mat-icon>playlist_add</mat-icon>
+            </button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            <button mat-raised-button type="submit" color="primary" style="float: left;">
+                Salvar
+            </button>
+            <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
         </div>
     </div>
 </form>

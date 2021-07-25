@@ -79,8 +79,9 @@
             </button>
             <mat-menu #menu="matMenu">
                 <div [ngSwitch]="element.situacao">
-                    <button mat-menu-item ifDisableRoles
-                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_CLIENTE_EDIT', 'ROLE_CLIENTE_NEW']" (click)="editar(element)">
+                    <button mat-menu-item 
+                        ifDisableRoles [roles]="['ROLE_ADMIN_ADMIN','ROLE_CLIENTE_EDIT', 'ROLE_CLIENTE_NEW']" 
+                        (click)="editar(element)">
                         <mat-icon>edit</mat-icon>
                         <span>Editar</span>
                     </button>

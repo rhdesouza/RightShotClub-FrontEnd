@@ -126,13 +126,13 @@ export class AddClienteComponent implements OnInit {
         url: `${environment.API}clientes/setFotoCliente/${this.clienteForms.controls.id.value}`,
         /* subtraiQueueLimit: 2 */
       }
-
-
       this.ng2File.open(config);
     }
   }
 
   public visualizarImagem() {
+    if (!this.clienteForms.controls.id.value)
+      return;
     let congif = {
       pathGetAll: `clientes/getAllFotosCliente/${this.clienteForms.controls.id.value}`,
       pathDelete: `clientes/deleteFotoCliente`,

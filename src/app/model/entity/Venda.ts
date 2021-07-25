@@ -1,4 +1,5 @@
 import { FormaPagamento } from "../enum/FormaPagamento.enum";
+import { SituacaoAirsoftEnum } from "../enum/SituacaoAirsoft.enum";
 import { Cliente } from "./Cliente";
 import { VendaItens } from "./VendaItens";
 
@@ -12,4 +13,5 @@ export interface Venda {
     valorTotalVenda: String;
     vendaItens: VendaItens[];
     emailEnviado: Boolean;
+    situacaoVenda: SituacaoAirsoftEnum
 }

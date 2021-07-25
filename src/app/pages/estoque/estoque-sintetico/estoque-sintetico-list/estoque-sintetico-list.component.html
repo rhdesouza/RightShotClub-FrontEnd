@@ -49,16 +49,16 @@
         </td>
     </ng-container>
 
-    <ng-container matColumnDef="qtd_estoque">
+    <ng-container matColumnDef="qtd_est_real">
         <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:10%;  justify-content:center;"> QTD
             Estoque
         </th>
         <td mat-cell *matCellDef="let element" style="width:10%;  justify-content:center;">
-            <span [ngClass]="{'abaixoMinimo': isAbaixoMinimo(element.qtd_estoque,element.estoque_minimo),
-                              'acimaMinimo': !isAbaixoMinimo(element.qtd_estoque,element.estoque_minimo)}"
-                [matTooltip]="isAbaixoMinimo(element.qtd_estoque,element.estoque_minimo)?
+            <span [ngClass]="{'abaixoMinimo': isAbaixoMinimo(element.qtd_est_real,element.estoque_minimo),
+                              'acimaMinimo': !isAbaixoMinimo(element.qtd_est_real,element.estoque_minimo)}"
+                [matTooltip]="isAbaixoMinimo(element.qtd_est_real,element.estoque_minimo)?
                                             'Estoque abaixo do mínimo indicado':''">
-                {{element.qtd_estoque}}
+                {{element.qtd_est_real}}
             </span>
         </td>
     </ng-container>

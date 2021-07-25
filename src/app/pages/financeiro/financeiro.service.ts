@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { RestService } from 'src/app/common/httpService/httpService.component';
 import { NotaFiscal } from 'src/app/model/entity/NotaFiscal';
 import { PrecificacaoProduto } from 'src/app/model/entity/PrecificacaoProduto';
+import { Venda } from 'src/app/model/entity/Venda';
 import { TipoRequisicaoRestEnum } from 'src/app/model/enum/tipo-requisicao-rest.enum';
 import { PageVO } from 'src/app/model/vo/pageVO';
 
@@ -69,5 +70,46 @@ export class FinanceiroService {
   public getHistoricoPrecificacaoProduto(idProduto: number): Observable<any> {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `precificacao/historicoPrecificacaoProduto/${idProduto}`);
   }
+
+  /**
+   * Venda
+   */
+
+  public validaQuantitadeVendaEstoque(idProduito: number, qtd: number): Observable<any> {
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `estoque/disponivel/${idProduito}/${qtd}`);
+  }
+
+  public saveVenda(venda: Venda): Observable<any> {
+    venda.dataHoraVenda = "";
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `venda/add/`, null, venda);
+  }
+
+  public getAllVendaPageable(sort: string, sortDirection: string, pageIndex: number,
+    pageSize: number, changedQuery: Boolean, filterForm?: any): Observable<any> {
+
+    let PageVO: PageVO = {
+      sort: sort,
+      sortDirection: sortDirection,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+      changedQuery: changedQuery,
+      filterForm: filterForm
+    }
+
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `venda/getAllClientePageable`, null, PageVO);
+  }
+
+  public enviaEmailVendaCliente(idVenda: Number): Observable<Boolean> {
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `venda/sendEmailVenda/${idVenda}`);
+  }
+
+  public cancelaNotaVenda(idVenda: Number): Observable<Number> {
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `venda/cancelarVenda/${idVenda}`);
+  }
+
+  public buscaVendaPorId(idVenda: Number): Observable<Venda> {
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `venda/one/${idVenda}`);
+  }
+
 
 }

@@ -44,7 +44,7 @@ export class FornecedorService {
   }
 
   public addFornecedor(fornecedor: Fornecedor): Observable<any> {
-    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.PUT, 'fornecedores/add', undefined, fornecedor);
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, 'fornecedores/add', undefined, fornecedor);
   }
   
 }

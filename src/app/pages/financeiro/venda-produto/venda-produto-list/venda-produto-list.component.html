@@ -1,26 +1,38 @@
 <app-form-title-breadcrumbs></app-form-title-breadcrumbs>
 
-<app-tag-filter titulo="Filtro Precificação">
+<app-tag-filter titulo="Filtro de Vendas">
     <form [formGroup]="filterForm" (ngSubmit)="filtrar()">
         <div class="row">
-            <div class="col-10">
+            <div class="col-2">
                 <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
-                    <mat-label>Nome Cliente</mat-label>
-                    <input matInput class="inputField" type="text" formControlName="cliente">
+                    <mat-label>Número Nota</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="idVenda">
 
                     <mat-error>
-                        <mat-error-message [control]="filterForm.controls['cliente']">
+                        <mat-error-message [control]="filterForm.controls['idVenda']">
                         </mat-error-message>
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-2">
+            <div class="col-8">
                 <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
-                    <mat-label>Número Nota</mat-label>
-                    <input matInput class="inputField" type="text" formControlName="numeroNota">
+                    <mat-label>Nome Cliente</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="nome">
 
                     <mat-error>
-                        <mat-error-message [control]="filterForm.controls['numeroNota']">
+                        <mat-error-message [control]="filterForm.controls['nome']">
+                        </mat-error-message>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-2">
+                <mat-form-field appearance="outline" class="fullSizeInput" floatLabel="always">
+                    <mat-label>CPF Cliente</mat-label>
+                    <input matInput class="inputField" type="text" formControlName="cpf" mask="000.000.000-99">
+
+                    <mat-error>
+                        <mat-error-message [control]="filterForm.controls['cpf']">
                         </mat-error-message>
                     </mat-error>
                 </mat-form-field>
@@ -38,8 +50,75 @@
     </form>
 </app-tag-filter>
 
+<table mat-table [dataSource]="vendaList" matSort class="mat-elevation-z8" matSort matSortActive="dataHoraVenda"
+    matSortDirection="desc" matSortDisableClear style="width: 100%;">
+    <ng-container matColumnDef="idVenda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> ID </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.idVenda}}
+            <mat-icon matTooltip="Venda cancelada, produtos novamente em estoque." *ngIf="element.situacaoVenda==1"
+                style="color: red; cursor: help;"> cancel_presentation</mat-icon>
+        </td>
+    </ng-container>
 
-<button mat-raised-button color="primary" (click)="adicionarVenda()"
-    *ifRoles="['ROLE_ADMIN_ADMIN','ROLE_VENDA_NEW']">
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}}
+            <mat-icon matTooltip="Ocorreu um erro na última tentativa de envio." *ngIf="!element.emailEnviado"
+                style="color: orange; cursor: help;">warning</mat-icon>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dataHoraVenda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Venda </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataHoraVenda | date:'short'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"></th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item ifDisableRoles [roles]="['ROLE_ADMIN_ADMIN', 'ROLE_VENDA']" (click)="visualizar(element.idVenda)">
+                    <mat-icon>pageview</mat-icon>
+                    <span>Visualizar Venda</span>
+                </button>
+                <div [ngSwitch]="element.situacaoVenda">
+                    <button mat-menu-item *ngSwitchCase="0" ifDisableRoles [roles]="['ROLE_ADMIN_ADMIN','ROLE_VENDA_CANCEL']"
+                        (click)="cancelarNotaCliente(element.idVenda)">
+                        <mat-icon>cancel_presentation</mat-icon>
+                        <span>Cancelar Venda</span>
+                    </button>
+                    <button mat-menu-item *ngSwitchCase="1" [disabled]="true">
+                        <mat-icon>cancel_presentation</mat-icon>
+                        <span>Cancelar Venda</span>
+                    </button>
+                </div>
+                <button mat-menu-item ifDisableRoles [roles]="['ROLE_ADMIN_ADMIN','ROLE_VENDA_SEND']"
+                    (click)="enviarEmailVendaCliente(element.idVenda)">
+                    <mat-icon>send</mat-icon>
+                    <span>Reenviar Email</span>
+                </button>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">Nenhum registro encontrado.</td>
+    </tr>
+
+    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5,10,15]" [length]="resultsLength" showFirstLastButtons></mat-paginator>
+
+
+<button mat-raised-button color="primary" (click)="adicionarVenda()" *ifRoles="['ROLE_ADMIN_ADMIN','ROLE_VENDA_NEW']">
     Incluir Venda
 </button>

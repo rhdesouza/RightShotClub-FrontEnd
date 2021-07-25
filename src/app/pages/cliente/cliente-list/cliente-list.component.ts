@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap, take } from 'rxjs/operators';
 import { ModalService } from 'src/app/common/services/modal.service';

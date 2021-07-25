@@ -5,3 +5,14 @@
 .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline::after {
     color: rgba(0,0,0,.15) !important;
 }
+
+.verticalAlignCenter{
+    margin: auto;
+    /*width: 50%; */
+    padding: 10px;
+    text-align: center;
+}
+
+.text-input-center{
+    text-align: center; 
+}

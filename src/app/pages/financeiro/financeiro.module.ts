@@ -28,6 +28,7 @@ import { HistoricoPrecificacaoComponent } from './precificacao-produto/historico
 import { PrecificacaoProdutoListComponent } from './precificacao-produto/precificacao-produto-list/precificacao-produto-list.component';
 import { VendaProdutoListComponent } from './venda-produto/venda-produto-list/venda-produto-list.component';
 import { AddVendaProdutoComponent } from './venda-produto/add-venda-produto/add-venda-produto.component';
+import { SearchProdutoPrecificadoComponent } from './venda-produto/search-produto-precificado/search-produto-precificado.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
       roles: [
         securityRoles.ROLE_ADMIN_ADMIN,
         securityRoles.ROLE_NOTAFISCAL,
-        securityRoles.ROLE_PRECIFICACAO
+        securityRoles.ROLE_PRECIFICACAO,
+        securityRoles.ROLE_VENDA
       ]
     }
   },
@@ -121,6 +123,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     HistoricoPrecificacaoComponent,
     VendaProdutoListComponent,
     AddVendaProdutoComponent,
+    SearchProdutoPrecificadoComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

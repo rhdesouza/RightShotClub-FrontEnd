@@ -1,5 +1,5 @@
 export interface PrecificacaoProdutoListDTO {
-    idProduto: number;
+    idProduto: number ;
     cod_produto: String;
     descricao: String;
     tipo: String;
@@ -7,5 +7,6 @@ export interface PrecificacaoProdutoListDTO {
     unid_venda: String;
     id: number;
     valor_produto: String;
-
+    selecionado: boolean; //Para seleção
+    qtd_est_real: Number;
 }

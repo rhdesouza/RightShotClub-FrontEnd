@@ -16,6 +16,7 @@ import { Ng2FileModule } from '../../common/ng2-file-uploader/ng2-file-uploader.
 import { templateModalModule } from '../../common/templateModal/templateModal.module';
 import { AddClienteComponent } from './cliente-list/add-cliente/add-cliente.component';
 import { ClienteListComponent } from './cliente-list/cliente-list.component';
+import { SearchClientesComponent } from './search-clientes/search-clientes.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -26,7 +27,8 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
 @NgModule({
   declarations: [
     ClienteListComponent,
-    AddClienteComponent
+    AddClienteComponent,
+    SearchClientesComponent
   ],
   imports: [
     CommonModule,

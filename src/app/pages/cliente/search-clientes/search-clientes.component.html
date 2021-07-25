@@ -1,0 +1,69 @@
+<app-form-title-breadcrumbs title="Clientes"></app-form-title-breadcrumbs>
+
+<app-tag-filter titulo="Filtro Cliente">
+    <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Nome">
+    </mat-form-field>
+</app-tag-filter>
+<table mat-table [dataSource]="clienteList" matSort class="mat-elevation-z8" matSort matSortActive="id"
+    matSortDirection="asc" matSortDisableClear style="width: 100%;">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClass'"> ID </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customWidthClassCpfCnpj'"> Nome </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="'customWidthClassCpfCnpj'"> {{element.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CPF </th>
+        <td mat-cell *matCellDef="let element"> {{element.cpf | cPFCNPJ }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> E-Mail </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef style="width: 5%;"></th>
+        <td mat-cell *matCellDef="let element" style="width: 5%;">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <div [ngSwitch]="element.situacao">
+                    <button mat-menu-item ifDisableRoles
+                        [roles]="['ROLE_ADMIN_ADMIN','ROLE_CLIENTE_EDIT']"
+                        (click)="editar(element)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                </div>
+            </mat-menu>
+        </td>
+    </ng-container>
+
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">
+            <span>Nenhum registro encontrado.</span>
+            <button mat-raised-button type="button" color="primary" (click)="adicionarCliente()" ifDisableRoles
+                [roles]="['ROLE_ADMIN_ADMIN','ROLE_CLIENTE_NEW']">Clique aqui para inserir um Cliente.</button>
+        </td>
+    </tr>
+
+    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunas;" (click)="selecionar(row)"
+        [ngClass]="{'highlightTableColor': linhaSelecionada == row.id}"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+<br>
+<div class="row">
+    <div class="col ">
+        <button mat-raised-button type="button" color="primary" (click)="salvar()" style="float: left;">Salvar</button>
+        <button mat-raised-button type="button" style="float:right" (click)="fechar()">Fechar</button>
+    </div>
+</div>
