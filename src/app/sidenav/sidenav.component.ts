@@ -120,8 +120,8 @@ export class SidenavComponent implements OnInit {
   public tituloAplicacao = rightshot.tituloAplicacao;
   public versao = rightshot.versao;
 
-  public isExpanded: boolean = true;
-  public linkText: boolean = true;
+  public isExpanded: boolean = false;
+  public linkText: boolean = false;
   public inicialUser!: string;
 
   public listaMenu!: Array<Menu>;
