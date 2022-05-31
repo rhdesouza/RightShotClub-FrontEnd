@@ -59,4 +59,8 @@ export class AdmService {
         return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `infoRSC/getInfoRSC`)
     }
 
+    public enviaEmailAlterarSenha(idUser: number): Observable<any> {
+        return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `user/enviaEmail/trocaSenha/${idUser}`);
+    }
+
 }

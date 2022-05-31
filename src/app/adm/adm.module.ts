@@ -100,6 +100,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     CustomPipeModule,
     MatDialogModule,
     MaterialModule,
+    MatErrorMessageModule,
     FormTitleBreadcrumbsModule,
     TagFilterModule,
     MatErrorMessageModule,

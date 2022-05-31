@@ -8,7 +8,7 @@ const ID_TOKEN_CLAINS_OBJ = 'id_token_claims_obj';
     providedIn: 'root'
 })
 export class StorageService {
-    sessionStorage: WindowSessionStorage;
+    sessionStorage!: WindowSessionStorage;
 
     constructor() {
     }
@@ -17,7 +17,7 @@ export class StorageService {
         sessionStorage.setItem(TOKEN_WSO2, token);
     }
 
-    public getTokenWSO2(): string {
+    public getTokenWSO2(): string | null {
         return sessionStorage.getItem(TOKEN_WSO2);
     }
 
@@ -31,7 +31,7 @@ export class StorageService {
 
     public getIdTokenClainsObj(): any {
         let obj = sessionStorage.getItem(ID_TOKEN_CLAINS_OBJ);
-        return JSON.parse(obj);
+        return JSON.parse(obj!);
     }
 
     public removeSession() {

@@ -6,6 +6,11 @@ export const environment = {
   /**
    * Authorization para o back-end para função de login
    */
-  Authorization: 'Basic YWlyc29mdDphaXJzb2Z0'
+  Authorization: 'Basic YWlyc29mdDphaXJzb2Z0',
+
+  /**
+   * Secret key CriptoJs
+   */
+   keyCriptoJs: 'RightShotClubEncryptKey'
 
 };

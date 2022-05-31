@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit {
   private createUserForms() {
     this.userForms = this.formBuilder.group({
       nomeCompleto: new FormControl('', [Validators.required]),
-      user: new FormControl('', [Validators.required, Validators.min(5)]),
+      user: new FormControl('', [Validators.required, Validators.minLength(5)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       situacao: new FormControl('', Validators.required),
     });

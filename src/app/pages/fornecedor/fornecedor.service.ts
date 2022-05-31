@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FornecedorDTO } from 'src/app/model/dto/FornecedorDTO';
 import { Fornecedor } from 'src/app/model/entity/Fornecedor';
 import { PageVO } from 'src/app/model/vo/pageVO';
 import { RestService } from '../../common/httpService/httpService.component';
 import { TipoRequisicaoRestEnum } from '../../model/enum/tipo-requisicao-rest.enum';
+import { PageableVO } from 'src/app/model/vo/pageableVO';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -19,23 +20,31 @@ export class FornecedorService {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, 'fornecedores/all');
   }
 
-  
-  public getAllFornecedorDTOPageable(sort: string, sortDirection: string, pageIndex: number, 
-    pageSize: number, changedQuery: Boolean, filterForm?: any): Observable<PageVO>{
-      
-      let PageVO: PageVO = {
-        sort: sort,
-        sortDirection: sortDirection,
-        pageIndex: pageIndex, 
-        pageSize: pageSize,
-        changedQuery: changedQuery,
-        filterForm: filterForm
-      }
+
+  public getAllFornecedorDTOPageable(sort: string, sortDirection: string, pageIndex: number,
+    pageSize: number, changedQuery: Boolean, filterForm?: any): Observable<PageVO> {
+
+    let PageVO: PageVO = {
+      sort: sort,
+      sortDirection: sortDirection,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+      changedQuery: changedQuery,
+      filterForm: filterForm
+    }
 
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `fornecedores/getAllFornecedorPageable`, null, PageVO);
   }
 
-  public getFornecedorPorId(idFornecedor: number): Observable<any>{
+  public getFornecedorPageable(sortActive, sortDirection, pageIndex, pageSize, filter: Fornecedor): Observable<PageableVO> {
+    const httpParams: HttpParams = new HttpParams()
+      .set('page', pageIndex)
+      .set('size', pageSize)
+      .set('sort', `${sortActive},${sortDirection}`)
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `fornecedores/getFornecedorPageable`, httpParams, filter);
+  }
+
+  public getFornecedorPorId(idFornecedor: number): Observable<any> {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `fornecedores/one/${idFornecedor}`);
   }
 
@@ -46,5 +55,5 @@ export class FornecedorService {
   public addFornecedor(fornecedor: Fornecedor): Observable<any> {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, 'fornecedores/add', undefined, fornecedor);
   }
-  
+
 }

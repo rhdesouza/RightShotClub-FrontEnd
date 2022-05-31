@@ -50,6 +50,10 @@
                     <mat-icon> block </mat-icon>
                     <span>Desativar Usuário</span>
                 </button>
+                <button mat-menu-item [disabled]="element.situacao == 'INATIVO'" (click)="enviarEmailTrocaSenha(element.id)">
+                    <mat-icon> email </mat-icon>
+                    <span>Alterar senha</span>
+                </button>
             </mat-menu>
         </td>
     </ng-container>

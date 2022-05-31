@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './common/AuthGuard/AuthGuard.component';
 import { securityRoles } from './common/constantes/security-roles';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { TrocaSenhaComponent } from './externo/troca-senha/troca-senha.component';
 import { LoginComponent } from './login/login.component';
 import { ClienteListComponent } from './pages/cliente/cliente-list/cliente-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -17,11 +18,11 @@ export const routes: Routes = [
     path: '',
     component: LoginComponent
   },
-  /* {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  }, */
+  {
+    path: 'acesso-externo',
+    loadChildren: () => import('./externo/troca-senha/troca-senha.module').then(m => m.TrocaSenhaModule),
+    component: TrocaSenhaComponent,
+  },
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
@@ -34,7 +35,7 @@ export const routes: Routes = [
     loadChildren: () => import('./adm/adm.module').then(m => m.AdmModule),
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    data: { 
+    data: {
       breadcrumb: 'Administração Right Shot Club',
       roles: [
         securityRoles.ROLE_ADMIN_ADMIN,
@@ -97,59 +98,6 @@ export const routes: Routes = [
       ]
     }
   },
-  /*     {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-      }, */
-  /* {
-    path: 'employees', 
-    loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule),
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    data: { roles: [
-      RoleName.ROLE_LIST_ALL_EMPLOYEES, 
-      RoleName.ROLE_REGISTER_NEW_EMPLOYEE, 
-      RoleName.ROLE_VIEW_EMPLOYEE_DETAILS, 
-      RoleName.ROLE_UPDATE_EMPLOYEE_DATA, 
-      RoleName.ROLE_DELETE_EMPLOYEE
-    ] }
-  },
-  {
-    path: 'staffs', 
-    loadChildren: () => import('./staffs/staffs.module').then(m => m.StaffsModule),
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    data: { roles: [
-      RoleName.ROLE_LIST_ALL_STAFFS, 
-      RoleName.ROLE_REGISTER_NEW_STAFF, 
-      RoleName.ROLE_VIEW_STAFF_DETAILS, 
-      RoleName.ROLE_UPDATE_STAFF_DATA, 
-      RoleName.ROLE_DELETE_STAFF
-    ] }
-  },
-  {
-    path: 'vacations', 
-    loadChildren: () => import('./vacations/vacations.module').then(m => m.VacationsModule),
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    data: { roles: [
-      RoleName.ROLE_LIST_ALL_VACATIONS, 
-      RoleName.ROLE_REGISTER_NEW_VACATION, 
-      RoleName.ROLE_VIEW_VACATION_DETAILS, 
-      RoleName.ROLE_UPDATE_VACATION_DATA, 
-      RoleName.ROLE_DELETE_VACATION
-    ] }
-  },
-  {
-    path: 'invalid-access', 
-    component: InvalidAccessComponent
-  },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },*/
   {
     path: '**',
     component: PageNotFoundComponent

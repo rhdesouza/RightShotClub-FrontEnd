@@ -1,6 +1,8 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from 'src/app/model/entity/Cliente';
+import { PageableVO } from 'src/app/model/vo/pageableVO';
 import { PageVO } from 'src/app/model/vo/pageVO';
 import { RestService } from '../../common/httpService/httpService.component';
 import { TipoRequisicaoRestEnum } from '../../model/enum/tipo-requisicao-rest.enum';
@@ -18,7 +20,7 @@ export class ClienteService {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, 'clientes/all');
   }
 
-  public getAllClienteDTOPageable(sort: string, sortDirection: string, pageIndex: number, 
+/*   public getAllClienteDTOPageable(sort: string, sortDirection: string, pageIndex: number, 
     pageSize: number, changedQuery: Boolean, filterForm?: any,): Observable<any>{
 
       let PageVO: PageVO = {
@@ -31,6 +33,14 @@ export class ClienteService {
       }
 
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `clientes/getAllClientePageable`, null, PageVO);
+  } */
+
+  public getClientePageable(sortActive, sortDirection, pageIndex, pageSize, filter: Cliente): Observable<PageableVO> {
+    const httpParams: HttpParams = new HttpParams()
+      .set('page', pageIndex)
+      .set('size', pageSize)
+      .set('sort', `${sortActive},${sortDirection}`)
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `clientes/getAllClientePageable`, httpParams, filter);
   }
 
   public getClientePorId(idCliente: number): Observable<any>{

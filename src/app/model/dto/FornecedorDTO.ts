@@ -1,9 +1,9 @@
 export interface FornecedorDTO {
 
     id: number;
-    razao_social: String;
-    nome_fantasia: String;
-    cpf_cnpj: String;
+    razaoSocial: String;
+    nomeFantasia: String;
+    cpfCnpj: String;
     telefone: String;
     situacao: String;
 

@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     private sessionStorage: StorageComponent,
     private router: Router,
   ) {
-    this.form = this./*  */formBuilder.group({
+    this.form = this.formBuilder.group({
       username: new FormControl('admin', [Validators.required, Validators.minLength(5)]),
       password: new FormControl('admin', [Validators.required, Validators.minLength(5)]),
     })

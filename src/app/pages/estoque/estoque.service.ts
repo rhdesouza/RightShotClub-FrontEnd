@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NotaFiscal } from 'src/app/model/entity/NotaFiscal';
 import { Produto } from 'src/app/model/entity/Produto';
 import { TipoProduto } from 'src/app/model/entity/TipoProduto';
 import { PageVO } from 'src/app/model/vo/pageVO';

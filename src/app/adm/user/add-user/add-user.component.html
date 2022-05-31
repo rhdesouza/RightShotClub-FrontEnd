@@ -6,12 +6,22 @@
             <mat-form-field class="fullSizeInput">
                 <mat-label>Nome Completo</mat-label>
                 <input matInput class="inputField" type="text" formControlName="nomeCompleto">
+                
+                <mat-error>
+                    <mat-error-message [control]="userForms.controls['nomeCompleto']">
+                    </mat-error-message>
+                </mat-error>
             </mat-form-field>
         </div>
         <div class="col-4 form-group">
             <mat-form-field class="fullSizeInput">
                 <mat-label>User</mat-label>
                 <input matInput class="inputField" type="text" formControlName="user">
+
+                <mat-error>
+                    <mat-error-message [control]="userForms.controls['user']">
+                    </mat-error-message>
+                </mat-error>
             </mat-form-field>
         </div>
     </div>
@@ -20,12 +30,22 @@
             <mat-form-field class="fullSizeInput">
                 <mat-label>E-mail</mat-label>
                 <input matInput class="inputField" type="text" formControlName="email">
+
+                <mat-error>
+                    <mat-error-message [control]="userForms.controls['email']">
+                    </mat-error-message>
+                </mat-error>
             </mat-form-field>
         </div>
         <div class="col-4 form-group">
             <mat-form-field class="fullSizeInput">
                 <mat-label>Situação</mat-label>
                 <input matInput class="inputField" type="text" formControlName="situacao" readonly>
+
+                <mat-error>
+                    <mat-error-message [control]="userForms.controls['situacao']">
+                    </mat-error-message>
+                </mat-error>
             </mat-form-field>
             <!-- <mat-form-field class="fullSizeInput">
                 <mat-label>Situação</mat-label>

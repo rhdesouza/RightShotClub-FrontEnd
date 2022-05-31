@@ -4,17 +4,17 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { merge, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap, take } from 'rxjs/operators';
 import { ModalService } from 'src/app/common/services/modal.service';
 import { SnakeBarService } from 'src/app/common/snakebar/snakebar.service';
+import { GenericValidator } from 'src/app/common/validatorsForm/genericValitadors';
 import { FornecedorDTO } from 'src/app/model/dto/FornecedorDTO';
 import { Fornecedor } from 'src/app/model/entity/Fornecedor';
+import { PageableVO } from 'src/app/model/vo/pageableVO';
 import { FornecedorService } from '../fornecedor.service';
 import { AddFornecedorComponent } from './add-fornecedor/add-fornecedor.component';
 
-import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap, take } from 'rxjs/operators';
-import { PageVO } from 'src/app/model/vo/pageVO';
-import { GenericValidator } from 'src/app/common/validatorsForm/genericValitadors';
 
 @Component({
   selector: 'app-fornecedor-list',
@@ -28,9 +28,9 @@ export class FornecedorListComponent implements OnInit {
 
   colunas: string[] = [
     'id',
-    'razao_social',
-    'nome_fantasia',
-    'cpf_cnpj',
+    'razaoSocial',
+    'nomeFantasia',
+    'cpfCnpj',
     'telefone',
     'situacao',
     'acoes'
@@ -38,9 +38,7 @@ export class FornecedorListComponent implements OnInit {
 
   public fornecedorDtoList: FornecedorDTO[] = [];
   public resultsLength = 0;
-  private changedQuery: Boolean = false;
   public filterForm!: FormGroup;
-
 
   public fornecedoresList!: MatTableDataSource<Fornecedor>;
 
@@ -53,9 +51,9 @@ export class FornecedorListComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterForm = this.formBuilder.group({
-      razao_social: new FormControl(null, [Validators.minLength(5)]),
-      nome_fantasia: new FormControl(null, [Validators.minLength(5)]),
-      cpf_cnpj: new FormControl(null, [GenericValidator.validaCpfCnpj]),
+      razaoSocial: new FormControl(null, [Validators.minLength(5)]),
+      nomeFantasia: new FormControl(null, [Validators.minLength(5)]),
+      cpfCnpj: new FormControl(null, [GenericValidator.validaCpfCnpj]),
     })
   }
 
@@ -65,18 +63,15 @@ export class FornecedorListComponent implements OnInit {
         startWith({}),
         switchMap(() => {
 
-          this.changedQuery = this.resultsLength == 0 ? true : false;
-
-          return this.fornecedoresService.getAllFornecedorDTOPageable(
+          return this.fornecedoresService.getFornecedorPageable(
             this.sort.active, this.sort.direction, this.paginator.pageIndex,
-            this.paginator.pageSize, this.changedQuery, this.filterForm.value
+            this.paginator.pageSize, this.filterForm.value
           );
         }),
-        map((pageVO: PageVO) => {
-          if (this.changedQuery)
-            this.resultsLength = pageVO.totalElements || 0;
+        map((pageableVO: PageableVO) => {
+            this.resultsLength = pageableVO.totalElements || 0;
 
-          return pageVO.content;
+          return pageableVO.content;
         }),
         catchError(() => {
           return observableOf([]);
@@ -95,17 +90,15 @@ export class FornecedorListComponent implements OnInit {
         take(0),
         startWith({}),
         switchMap(() => {
-          this.changedQuery = true;
-
-          return this.fornecedoresService.getAllFornecedorDTOPageable(
+          return this.fornecedoresService.getFornecedorPageable(
             this.sort.active, this.sort.direction, this.paginator.pageIndex,
-            this.paginator.pageSize, this.changedQuery, this.filterForm.value
+            this.paginator.pageSize, this.filterForm.value
           );
         }),
-        map((pageVO: PageVO) => {
-          this.resultsLength = pageVO.totalElements || 0;
+        map((pageableVO: PageableVO) => {
+          this.resultsLength = pageableVO.totalElements || 0;
 
-          return pageVO.content;
+          return pageableVO.content;
         }),
         catchError(() => {
           return observableOf([]);
@@ -116,9 +109,9 @@ export class FornecedorListComponent implements OnInit {
   }
 
   public limparFiltro() {
-    this.filterForm.controls.razao_social.setValue(null);
-    this.filterForm.controls.nome_fantasia.setValue(null);
-    this.filterForm.controls.cpf_cnpj.setValue(null);
+    this.filterForm.controls.razaoSocial.setValue(null);
+    this.filterForm.controls.nomeFantasia.setValue(null);
+    this.filterForm.controls.cpfCnpj.setValue(null);
     this.filtrar();
   }
 

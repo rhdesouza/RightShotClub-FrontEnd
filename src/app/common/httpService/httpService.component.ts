@@ -49,7 +49,7 @@ export class RestService {
         solicitacao$ = this.get(path, params!, url, headers);
         break;
       } case TipoRequisicaoRestEnum.POST: {
-        solicitacao$ = this.post(path, body, url, headers);
+        solicitacao$ = this.post(path, body, url, headers, params!);
         break;
       } case TipoRequisicaoRestEnum.PUT: {
         solicitacao$ = this.put(path, body, url, headers);
@@ -73,7 +73,11 @@ export class RestService {
    * @param url
    */
   private get(path: string, params?: HttpParams, url?: string, headers?: any) {
-    return this.http.get(url ? url : API + path, { headers }).pipe(take(1));
+    //return this.http.get(url ? url : API + path, { headers }).pipe(take(1));
+    return this.http.get(
+      url ? url : API + path,
+      { headers, params}
+      ).pipe(take(1));
     /* return this.http.get(url ? url : API + path, {
       headers: headers,
       params: params,
@@ -88,9 +92,12 @@ export class RestService {
    * @param body
    * @param url
    */
-  private post(path: string, body?: any, url?: string, headers?: any) {
+  private post(path: string, body?: any, url?: string, headers?: any, params?: HttpParams) {
     let bodyJson = body ? JSON.stringify(body) : undefined;
-    return this.http.post(url ? url : API + path, bodyJson, { headers }).pipe(take(1));
+
+    return this.http.post(url ? url : API + path, bodyJson, { headers, params }).pipe(take(1));
+
+    //return this.http.post(url ? url : API + path, bodyJson, { headers }).pipe(take(1));
   }
 
   /**

@@ -28,6 +28,7 @@ import { TitlePageModalModule } from './common/title-page-modal/title-page-modal
 import { translatePaginator } from './common/translator/TranslatePaginator.component';
 import { AlertModule } from './common/_alert/alert.module';
 import { ModalModule } from './common/_modal/modal.module';
+import { TrocaSenhaModule } from './externo/troca-senha/troca-senha.module';
 import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { UserSettingsComponent } from './userSettings/user-settings.component';
@@ -40,7 +41,7 @@ registerLocaleData(localePt, 'pt-BR');
     SidenavComponent,
     LoginComponent,
     UserSettingsComponent,
-    GaleriaFotosComponent,
+    GaleriaFotosComponent
   ],
   imports: [
     TooltipModule.forRoot(),
@@ -65,7 +66,8 @@ registerLocaleData(localePt, 'pt-BR');
     DirectivesModule,
     MatErrorMessageModule,
     TitlePageModalModule,
-    ModalDialogModule
+    ModalDialogModule,
+    TrocaSenhaModule
   ],
   providers: [
     NgbActiveModal,

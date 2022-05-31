@@ -8,7 +8,7 @@ import { catchError, map, startWith, switchMap, take } from 'rxjs/operators';
 import { ModalService } from 'src/app/common/services/modal.service';
 import { SnakeBarService } from 'src/app/common/snakebar/snakebar.service';
 import { Cliente } from 'src/app/model/entity/Cliente';
-import { PageVO } from 'src/app/model/vo/pageVO';
+import { PageableVO } from 'src/app/model/vo/pageableVO';
 import { ClienteService } from '../cliente.service';
 import { AddClienteComponent } from './add-cliente/add-cliente.component';
 
@@ -32,7 +32,6 @@ export class ClienteListComponent implements OnInit {
     'acoes'
   ];
 
-  private changedQuery: Boolean = false;
   public clientesList: Cliente[] = [];
   public resultsLength = 0;
   public filterForm!: FormGroup;
@@ -56,19 +55,15 @@ export class ClienteListComponent implements OnInit {
       .pipe(
         startWith({}),
         switchMap(() => {
-
-          this.changedQuery = this.resultsLength == 0 ? true : false;
-
-          return this.clienteService.getAllClienteDTOPageable(
+          return this.clienteService.getClientePageable(
             this.sort.active, this.sort.direction, this.paginator.pageIndex,
-            this.paginator.pageSize, this.changedQuery, this.filterForm.value
+            this.paginator.pageSize, this.filterForm.value
           );
         }),
-        map((pageVO: PageVO) => {
-          if (this.changedQuery)
-            this.resultsLength = pageVO.totalElements || 0;
+        map((pageableVO: PageableVO) => {
+          this.resultsLength = pageableVO.totalElements || 0;
 
-          return pageVO.content;
+          return pageableVO.content;
         }),
         catchError(() => {
           return observableOf([]);
@@ -87,17 +82,15 @@ export class ClienteListComponent implements OnInit {
         take(0),
         startWith({}),
         switchMap(() => {
-          this.changedQuery = true;
-
-          return this.clienteService.getAllClienteDTOPageable(
+          return this.clienteService.getClientePageable(
             this.sort.active, this.sort.direction, this.paginator.pageIndex,
-            this.paginator.pageSize, this.changedQuery, this.filterForm.value
+            this.paginator.pageSize, this.filterForm.value
           );
         }),
-        map((pageVO: PageVO) => {
-          this.resultsLength = pageVO.totalElements || 0;
+        map((pageableVO: PageableVO) => {
+          this.resultsLength = pageableVO.totalElements || 0;
 
-          return pageVO.content;
+          return pageableVO.content;
         }),
         catchError(() => {
           return observableOf([]);

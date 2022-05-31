@@ -1,4 +1,4 @@
-import { FormControl, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, ValidatorFn, Validators } from "@angular/forms";
 import { ignoreElements } from "rxjs/operators";
 
 export class GenericValidator {
@@ -214,7 +214,6 @@ export class GenericValidator {
   }
 
 
-
   static valMinFinanceiro(prms): any {
     return (control: FormControl): { [key: string]: any } | any => {
       if (Validators.required(control)) {
@@ -231,5 +230,28 @@ export class GenericValidator {
       return null;
     }
   };
+
+  static validOldPassword(control: AbstractControl) {
+    return new Promise((resolve) => {
+      if (control.value !== '1234')
+        resolve({ invalidOldPassword: true });
+      else
+        resolve(null);
+    });
+  }
+
+  static passwordsShouldMatch(control: AbstractControl) {
+    let newPassword = control.get('newPassword');
+    let confirmPassword = control.get('confirmPassword');
+
+    if (newPassword!.value == null || confirmPassword?.value) {
+      return null;
+    }
+
+    if (newPassword?.value !== confirmPassword?.value)
+      return { passwordsShouldMatch: true };
+
+    return null;
+  }
 
 }

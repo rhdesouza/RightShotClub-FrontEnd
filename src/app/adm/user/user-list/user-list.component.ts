@@ -94,14 +94,24 @@ export class UserListComponent implements OnInit {
     const modal = this.dialog.open(AddRoleUserComponent, dialogConfig)
       .afterClosed().subscribe(rs => {
         if (rs != 'error' && !!rs) {
-          /* const datas = this.userList.data;
-          datas.push(rs);
-          this.roleList.data = datas; */
           this.snakeBarService.openSnackBarSuccess("Registro salvo com sucesso!");
         } else if (rs == 'error') {
           this.snakeBarService.openSnackBarError('Erro ao salvar registro.');
         }
       })
+  }
+
+  public enviarEmailTrocaSenha(idUser: number) {
+    this.admService.enviaEmailAlterarSenha(idUser)
+      .subscribe(
+        (user: User) => {
+          this.snakeBarService.openSnackBarSuccess(`E-mail de troca de senha enviado para ${user.email}`)
+        },
+        err => {
+          console.log(err);
+        },
+        () => console.log("E-mail enviado para troca de senha.")
+      )
   }
 
 }
