@@ -36,49 +36,46 @@ import { UserSettingsComponent } from './userSettings/user-settings.component';
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidenavComponent,
-    LoginComponent,
-    UserSettingsComponent,
-    GaleriaFotosComponent
-  ],
-  imports: [
-    TooltipModule.forRoot(),
-    BrowserModule,
-    RouterModule,
-    FormsModule,
-    MaterialModule,
-    AppRoutingModule,
-    NgbModule,
-    AlertModule,
-    ModalModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    CurrencyMaskModule,
-    templateModalModule,
-    LayoutModule,
-    SnakeBarModule,
-    NgxSpinnerModule,
-    NgxMaskModule.forRoot(),
-    Ng2FileModule,
-    DirectivesModule,
-    MatErrorMessageModule,
-    TitlePageModalModule,
-    ModalDialogModule,
-    TrocaSenhaModule
-  ],
-  providers: [
-    NgbActiveModal,
-    /* { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }, */
-    { provide: LOCALE_ID, useValue: 'pt-BR' },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
-    { provide: MatPaginatorIntl, useClass: translatePaginator }
-  ],
-  bootstrap: [ AppComponent ],
-  entryComponents: [
-    AppComponent
-  ],
+    declarations: [
+        AppComponent,
+        SidenavComponent,
+        LoginComponent,
+        UserSettingsComponent,
+        GaleriaFotosComponent
+    ],
+    imports: [
+        TooltipModule.forRoot(),
+        BrowserModule,
+        RouterModule,
+        FormsModule,
+        MaterialModule,
+        AppRoutingModule,
+        NgbModule,
+        AlertModule,
+        ModalModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        CurrencyMaskModule,
+        templateModalModule,
+        LayoutModule,
+        SnakeBarModule,
+        NgxSpinnerModule,
+        NgxMaskModule.forRoot(),
+        Ng2FileModule,
+        DirectivesModule,
+        MatErrorMessageModule,
+        TitlePageModalModule,
+        ModalDialogModule,
+        TrocaSenhaModule
+    ],
+    providers: [
+        NgbActiveModal,
+        /* { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }, */
+        { provide: LOCALE_ID, useValue: 'pt-BR' },
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+        { provide: MatPaginatorIntl, useClass: translatePaginator }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

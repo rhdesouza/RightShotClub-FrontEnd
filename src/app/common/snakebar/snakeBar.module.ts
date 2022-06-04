@@ -7,14 +7,13 @@ import { SnackbarComponent } from './snakebar.component';
 
 
 @NgModule({
-  imports: [
-    BrowserModule, 
-    FormsModule,
-    MaterialModule
-  ],
-  declarations: [SnackbarComponent],
-  exports: [SnackbarComponent],
-  bootstrap: [SnackbarComponent],
-  entryComponents: []
+    imports: [
+        BrowserModule,
+        FormsModule,
+        MaterialModule
+    ],
+    declarations: [SnackbarComponent],
+    exports: [SnackbarComponent],
+    bootstrap: [SnackbarComponent]
 })
 export class SnakeBarModule { }
