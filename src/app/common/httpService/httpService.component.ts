@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { TipoRequisicaoRestEnum } from 'src/app/model/enum/tipo-requisicao-rest.enum';
 import { environment } from 'src/environments/environment';
 import { take } from 'rxjs/operators';
@@ -58,7 +58,7 @@ export class RestService {
         solicitacao$ = this.delete(path, body, url, headers);
         break;
       } default: {
-        solicitacao$ = Observable.throw('Somente é permitido um dos seguintes tipos de requisição: GET, POST, PUT ou DELETE');
+        solicitacao$ = throwError(() => 'Somente é permitido um dos seguintes tipos de requisição: GET, POST, PUT ou DELETE');
         break;
       }
     }
@@ -76,8 +76,8 @@ export class RestService {
     //return this.http.get(url ? url : API + path, { headers }).pipe(take(1));
     return this.http.get(
       url ? url : API + path,
-      { headers, params}
-      ).pipe(take(1));
+      { headers, params }
+    ).pipe(take(1));
     /* return this.http.get(url ? url : API + path, {
       headers: headers,
       params: params,
@@ -128,7 +128,7 @@ export class RestService {
    * @param password 
    * TODO: Criptografar para o back-end o usuário e senha
    */
-  public login(login, password): Observable<any> {
+  public login(login: string, password: string): Observable<any> {
     const headers = { 'Authorization': environment.Authorization }
     var formdata = new FormData();
 

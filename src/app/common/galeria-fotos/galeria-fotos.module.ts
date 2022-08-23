@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { FileUploadModule } from 'ng2-file-upload';
-import { MaterialModule } from '../../nav/material.module'
-import { FormTitleModule } from '../form-title/form-title.module';
-import {GaleriaFotosComponent} from '../galeria-fotos/galeria-fotos.component'
+import { GaleriaFotosComponent } from '../galeria-fotos/galeria-fotos.component';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,6 @@ import {GaleriaFotosComponent} from '../galeria-fotos/galeria-fotos.component'
   imports: [
     CommonModule,
     FileUploadModule,
-    FormTitleModule,
     MaterialModule,
   ],
   exports: [

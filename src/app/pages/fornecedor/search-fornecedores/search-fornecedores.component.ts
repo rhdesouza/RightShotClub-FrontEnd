@@ -20,9 +20,9 @@ export class SearchFornecedoresComponent implements OnInit {
     'situacao'
   ];
 
-  public fornecedoresList;
-  public linhaSelecionada;
-  public fornecedorSelecionado;
+  public fornecedoresList: any;
+  public linhaSelecionada: any;
+  public fornecedorSelecionado: any;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;

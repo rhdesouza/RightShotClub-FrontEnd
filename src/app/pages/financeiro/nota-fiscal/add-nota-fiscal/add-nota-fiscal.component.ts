@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -45,8 +45,8 @@ export class AddNotaFiscalComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
-      if (!!params.idNotaFiscal)
-        this.setNotaFiscal(params.idNotaFiscal);
+      if (!!params['idNotaFiscal'])
+        this.setNotaFiscal(params['idNotaFiscal']);
     });
   }
 
@@ -65,19 +65,19 @@ export class AddNotaFiscalComponent implements OnInit {
       this.itens.removeAt(0);
       rs.itens.forEach((x: NotaFiscalItens, i: number) => {
         let itensNota = this.createFormItens();
-        itensNota.controls.id.setValue(x.id);
-        itensNota.controls.produto.setValue(x.produto.id);
-        itensNota.controls.codigoProduto.setValue(x.codigoProduto);
-        itensNota.controls.descricaoProduto.setValue(x?.descricaoProduto);
-        itensNota.controls.ncmSh.setValue(x.ncmSh);
-        itensNota.controls.cst.setValue(x.cst);
-        itensNota.controls.cfop.setValue(x.cfop);
-        itensNota.controls.un.setValue(x.un);
-        itensNota.controls.qtd.setValue(x.qtd);
-        itensNota.controls.valorUnit.setValue(x.valorUnit);
-        itensNota.controls.valorTotal.setValue(x.valorTotal);
-        itensNota.controls.aliquitaIcms.setValue(x.aliquitaIcms);
-        itensNota.controls.aliquitaIpi.setValue(x.aliquitaIpi);
+        itensNota.controls['id'].setValue(x.id);
+        itensNota.controls['produto'].setValue(x.produto.id);
+        itensNota.controls['codigoProduto'].setValue(x.codigoProduto);
+        itensNota.controls['descricaoProduto'].setValue(x?.descricaoProduto);
+        itensNota.controls['ncmSh'].setValue(x.ncmSh);
+        itensNota.controls['cst'].setValue(x.cst);
+        itensNota.controls['cfop'].setValue(x.cfop);
+        itensNota.controls['un'].setValue(x.un);
+        itensNota.controls['qtd'].setValue(x.qtd);
+        itensNota.controls['valorUnit'].setValue(x.valorUnit);
+        itensNota.controls['valorTotal'].setValue(x.valorTotal);
+        itensNota.controls['aliquitaIcms'].setValue(x.aliquitaIcms);
+        itensNota.controls['aliquitaIpi'].setValue(x.aliquitaIpi);
 
         this.itens.push(itensNota);
 
@@ -100,7 +100,7 @@ export class AddNotaFiscalComponent implements OnInit {
       if (this.notaFiscalForm.get('cabecalho')?.get('formaPagamento')?.valid)
         valorNota += 20;
 
-      if (!this.notaFiscalForm.controls.itens.invalid)
+      if (!this.notaFiscalForm.controls['itens'].invalid)
         valorNota += 20;
 
       this.progressoNota = valorNota;
@@ -210,7 +210,7 @@ export class AddNotaFiscalComponent implements OnInit {
   }
 
   public getFornecedor() {
-    let cabecalho: any = this.notaFiscalForm.controls.cabecalho;
+    let cabecalho: any = this.notaFiscalForm.controls['cabecalho'];
     return !!cabecalho['controls'].fornecedor.value;
   }
 
@@ -330,4 +330,11 @@ export class AddNotaFiscalComponent implements OnInit {
   public isNotaFecahda(): boolean {
     return this.notaFiscalForm.get('cabecalho')?.get('situacao')?.value == 'Estoque';
   }
+
+  //notaFiscalForm.controls['cabecalho']['controls']['numero']"
+  public getCabecalho(campo: string): AbstractControl | any {
+    return !!this.notaFiscalForm.get('cabecalho') ?? this.notaFiscalForm.get('cabecalho')?.get(campo)
+  }
+
+
 }

@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalService } from 'src/app/common/services/modal.service';
 import { SnakeBarService } from 'src/app/common/snakebar/snakebar.service';
-import { AlertService } from 'src/app/common/_alert';
 import { TipoProduto } from 'src/app/model/entity/TipoProduto';
 
 import { EstoqueService } from '../../estoque.service';
@@ -33,10 +32,8 @@ export class TipoProdutoListComponent implements OnInit {
   constructor(
     private estoqueService: EstoqueService,
     public dialog: MatDialog,
-    public alertService: AlertService,
     private snakeBarService: SnakeBarService,
     private modalService: ModalService,
-
   ) {
     this.getAllTipoProduto();
   }

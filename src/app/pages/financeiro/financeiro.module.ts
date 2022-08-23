@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -137,7 +137,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     NgxMaskModule.forRoot(maskConfigFunction),
     CustomPipeModule,
     MaterialModule,
-    ChartsModule,
+    NgChartsModule,
     MatRippleModule,
     MatDialogModule,
     Ng2FileModule,

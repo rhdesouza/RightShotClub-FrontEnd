@@ -65,20 +65,20 @@ export class AddClienteComponent implements OnInit {
   private getCliente() {
     this.clienteService.getClientePorId(this.idCliente)
       .subscribe((rs: Cliente) => {
-        this.clienteForms.controls.id.setValue(rs.id);
-        this.clienteForms.controls.nome.setValue(rs.nome);
-        this.clienteForms.controls.cpf.setValue(rs.cpf);
-        this.clienteForms.controls.email.setValue(rs.email);
-        this.clienteForms.controls.dataNascimento.setValue(rs.dataNascimento);
-        this.clienteForms.controls.telefone.setValue(rs.telefone);
-        this.clienteForms.controls.telefone2.setValue(rs.telefone2);
-        this.clienteForms.controls.cep.setValue(rs.cep);
-        this.clienteForms.controls.logradouro.setValue(rs.logradouro);
-        this.clienteForms.controls.numero.setValue(rs.numero);
-        this.clienteForms.controls.cidade.setValue(rs.cidade);
-        this.clienteForms.controls.estado.setValue(rs.estado);
-        this.clienteForms.controls.pais.setValue(rs.pais);
-        this.clienteForms.controls.situacao.setValue(rs.situacao);
+        this.clienteForms.controls?.['id'].setValue(rs.id);
+        this.clienteForms.controls?.['nome'].setValue(rs.nome);
+        this.clienteForms.controls?.['cpf'].setValue(rs.cpf);
+        this.clienteForms.controls?.['email'].setValue(rs.email);
+        this.clienteForms.controls?.['dataNascimento'].setValue(rs.dataNascimento);
+        this.clienteForms.controls?.['telefone'].setValue(rs.telefone);
+        this.clienteForms.controls?.['telefone2'].setValue(rs.telefone2);
+        this.clienteForms.controls?.['cep'].setValue(rs.cep);
+        this.clienteForms.controls?.['logradouro'].setValue(rs.logradouro);
+        this.clienteForms.controls?.['numero'].setValue(rs.numero);
+        this.clienteForms.controls?.['cidade'].setValue(rs.cidade);
+        this.clienteForms.controls?.['estado'].setValue(rs.estado);
+        this.clienteForms.controls?.['pais'].setValue(rs.pais);
+        this.clienteForms.controls?.['situacao'].setValue(rs.situacao);
 
       })
 
@@ -102,14 +102,15 @@ export class AddClienteComponent implements OnInit {
   }
 
   public pesquisaCEP() {
-    if ((this.clienteForms.controls.cep.value).length == 8)
-      this.clienteService.getEnderecoPorCep(this.clienteForms.controls.cep.value).subscribe(retorno => {
-        if (!!retorno) {
-          this.clienteForms.controls.logradouro.setValue(retorno['logradouro']);
-          this.clienteForms.controls.cidade.setValue(retorno['localidade']);
-          this.clienteForms.controls.estado.setValue(retorno['uf']);
-        }
-      })
+    if ((this.clienteForms.controls?.['cep'].value).length == 8)
+      this.clienteService.getEnderecoPorCep(this.clienteForms.controls?.['cep'].value).subscribe(
+        (retorno: any) => {
+          if (!!retorno) {
+            this.clienteForms.controls?.['logradouro'].setValue(retorno['logradouro']);
+            this.clienteForms.controls?.['cidade'].setValue(retorno['localidade']);
+            this.clienteForms.controls?.['estado'].setValue(retorno['uf']);
+          }
+        })
   }
 
   public isEditar(): boolean {
@@ -121,9 +122,9 @@ export class AddClienteComponent implements OnInit {
   }
 
   public uploadArquivo() {
-    if (!!this.clienteForms.controls?.id?.value) {
+    if (!!this.clienteForms.controls?.['id'].value) {
       let config: ConfigFileUploader = {
-        url: `${environment.API}clientes/setFotoCliente/${this.clienteForms.controls.id.value}`,
+        url: `${environment.API}clientes/setFotoCliente/${this.clienteForms.controls?.['id'].value}`,
         /* subtraiQueueLimit: 2 */
       }
       this.ng2File.open(config);
@@ -131,10 +132,10 @@ export class AddClienteComponent implements OnInit {
   }
 
   public visualizarImagem() {
-    if (!this.clienteForms.controls.id.value)
+    if (!this.clienteForms.controls?.['id'].value)
       return;
     let congif = {
-      pathGetAll: `clientes/getAllFotosCliente/${this.clienteForms.controls.id.value}`,
+      pathGetAll: `clientes/getAllFotosCliente/${this.clienteForms.controls?.['id'].value}`,
       pathDelete: `clientes/deleteFotoCliente`,
       pathDownload: ``
     }

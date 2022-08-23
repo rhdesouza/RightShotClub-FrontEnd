@@ -5,8 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap, take } from 'rxjs/operators';
-import { ModalService } from 'src/app/common/services/modal.service';
-import { SnakeBarService } from 'src/app/common/snakebar/snakebar.service';
 import { PrecificacaoProdutoListDTO } from 'src/app/model/dto/PrecificacaoProdutoListDTO';
 import { PageVO } from 'src/app/model/vo/pageVO';
 import { FinanceiroService } from '../../financeiro.service';
@@ -101,7 +99,7 @@ export class SearchProdutoPrecificadoComponent implements OnInit {
     if (!this.filterForm.valid)
       return;
 
-    merge(this.filterForm.controls.descricao.value)
+    merge(this.filterForm.controls['descricao'].value)
       .pipe(
         take(0),
         startWith({}),

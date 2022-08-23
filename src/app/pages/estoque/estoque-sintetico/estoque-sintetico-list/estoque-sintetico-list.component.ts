@@ -76,7 +76,7 @@ export class EstoqueSinteticoListComponent implements OnInit {
     if (!this.filterForm.valid)
       return;
 
-    merge(this.filterForm.controls.descricao.value)
+    merge(observableOf(this.filterForm.controls['descricao'].value))
       .pipe(
         take(0),
         startWith({}),
@@ -102,7 +102,7 @@ export class EstoqueSinteticoListComponent implements OnInit {
   }
 
   public limparFiltro() {
-    this.filterForm.controls.descricao.setValue(null);
+    this.filterForm.controls['descricao'].setValue(null);
     this.filtrar();
   }
 

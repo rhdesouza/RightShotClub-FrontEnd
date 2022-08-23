@@ -89,7 +89,7 @@ export class AddRoleUserComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  public selecionar(row) {
+  public selecionar(row: any) {
     if (!this.isRoleSelecionada(row)) {
       this.rolesSelected.push(row)
     } else {

@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 import { ModalService } from 'src/app/common/services/modal.service';
 import { UtilService } from 'src/app/common/services/util.service';
 import { SnakeBarService } from 'src/app/common/snakebar/snakebar.service';
@@ -67,41 +67,41 @@ export class AddVendaProdutoComponent implements OnInit {
   }
 
   public getVenda() {
-    this.vendaForm.controls.id.setValue(this.venda.id);
-    this.vendaForm.controls.cliente.get('id')?.setValue(this.venda.cliente.id);
-    this.vendaForm.controls.cliente.get('cpf')?.setValue(this.venda.cliente.cpf);
-    this.vendaForm.controls.cliente.get('nome')?.setValue(this.venda.cliente.nome);
-    this.vendaForm.controls.cliente.get('email')?.setValue(this.venda.cliente.email);
-    this.vendaForm.controls.formaPagamento.setValue(this.venda.formaPagamento);
+    this.vendaForm.controls['id'].setValue(this.venda.id);
+    this.vendaForm.controls['cliente'].get('id')?.setValue(this.venda.cliente.id);
+    this.vendaForm.controls['cliente'].get('cpf')?.setValue(this.venda.cliente.cpf);
+    this.vendaForm.controls['cliente'].get('nome')?.setValue(this.venda.cliente.nome);
+    this.vendaForm.controls['cliente'].get('email')?.setValue(this.venda.cliente.email);
+    this.vendaForm.controls['formaPagamento'].setValue(this.venda.formaPagamento);
 
-    this.vendaForm.controls.dataHoraVenda.setValue(moment("" + this.venda.dataHoraVenda).format('DD/MM/YYYY HH:mm'));
-    this.vendaForm.controls.valorTotalItens.setValue(this.venda.valorTotalItens);
-    this.vendaForm.controls.valorDescontoNota.setValue(this.venda.valorDescontoNota);
-    this.vendaForm.controls.valorTotalVenda.setValue(this.venda.valorTotalVenda);
-    
+    this.vendaForm.controls['dataHoraVenda'].setValue('moment("" + this.venda.dataHoraVenda).format("DD/MM/YYYY HH:mm")');
+    this.vendaForm.controls['valorTotalItens'].setValue(this.venda.valorTotalItens);
+    this.vendaForm.controls['valorDescontoNota'].setValue(this.venda.valorDescontoNota);
+    this.vendaForm.controls['valorTotalVenda'].setValue(this.venda.valorTotalVenda);
+
     this.itens.removeAt(0);
-      this.venda.vendaItens.forEach((x: VendaItens, i: number) => {
-        let itensVenda = this.createFormItens();
-        itensVenda.controls.id.setValue(x.id);
-        itensVenda.controls.produto.get('id')?.setValue(x.produto.id);
-        itensVenda.controls.produto.get('codProduto')?.setValue(x.produto.codProduto);
-        itensVenda.controls.produto.get('descricao')?.setValue(x.produto.descricao);
-        itensVenda.controls.tipoUnidade.setValue(x.tipoUnidade);
-        itensVenda.controls.qtd.setValue(x.qtd);
-        itensVenda.controls.valorProduto.setValue(x.valorProduto);
-        itensVenda.controls.valorDesconto.setValue(!x.valorDesconto? 0 : x.valorDesconto);
-        itensVenda.controls.valorVenda.setValue(x.valorVenda);
+    this.venda.vendaItens.forEach((x: VendaItens, i: number) => {
+      let itensVenda = this.createFormItens();
+      itensVenda.controls['id'].setValue(x.id);
+      itensVenda.controls['produto'].get('id')?.setValue(x.produto.id);
+      itensVenda.controls['produto'].get('codProduto')?.setValue(x.produto.codProduto);
+      itensVenda.controls['produto'].get('descricao')?.setValue(x.produto.descricao);
+      itensVenda.controls['tipoUnidade'].setValue(x.tipoUnidade);
+      itensVenda.controls['qtd'].setValue(x.qtd);
+      itensVenda.controls['valorProduto'].setValue(x.valorProduto);
+      itensVenda.controls['valorDesconto'].setValue(!x.valorDesconto ? 0 : x.valorDesconto);
+      itensVenda.controls['valorVenda'].setValue(x.valorVenda);
 
-        this.itens.push(itensVenda);
-      })
+      this.itens.push(itensVenda);
+    })
 
-      this.vendaForm.updateValueAndValidity();
-      this.vendaForm.controls.vendaItens.updateValueAndValidity();
+    this.vendaForm.updateValueAndValidity();
+    this.vendaForm.controls['vendaItens'].updateValueAndValidity();
     console.log(this.venda);
   }
 
   public createForm() {
-    let dateTime = moment(new Date()).format('DD/MM/YYYY HH:mm');
+    let dateTime = "moment(new Date()).format('DD/MM/YYYY HH:mm');"
     this.vendaForm = this.formBuilder.group({
       id: new FormControl(""),
       cliente: new FormGroup({
@@ -222,7 +222,7 @@ export class AddVendaProdutoComponent implements OnInit {
     });
   }
 
-  private findIndexFormArray(idProduto) {
+  private findIndexFormArray(idProduto: number) {
     let arr: [] = this.itens.value;
     let indice: number = arr.findIndex(x => x['produto']?.['id'] == idProduto);
     return indice;
@@ -277,5 +277,9 @@ export class AddVendaProdutoComponent implements OnInit {
           .map(x => x.get('qtd')?.setValue(null));
       }
     })
+  }
+
+  public getVendaForm(campo: string): AbstractControl | any {
+    return !!this.vendaForm.get('cliente') ?? this.vendaForm.get('cliente')?.get(campo)
   }
 }

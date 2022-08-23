@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalService } from 'src/app/common/services/modal.service';
 import { SnakeBarService } from 'src/app/common/snakebar/snakebar.service';
-import { AlertService } from 'src/app/common/_alert';
 import { Produto } from 'src/app/model/entity/Produto';
 
 import { EstoqueService } from '../../estoque.service';
@@ -18,7 +17,7 @@ import { AddProdutoComponent } from '../add-produto/add-produto.component';
 })
 export class ProdutoListComponent implements OnInit {
   public produtoList!: MatTableDataSource<Produto>;
-  
+
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -37,7 +36,6 @@ export class ProdutoListComponent implements OnInit {
   constructor(
     private estoqueService: EstoqueService,
     public dialog: MatDialog,
-    public alertService: AlertService,
     private snakeBarService: SnakeBarService,
     private modalService: ModalService
   ) {
@@ -78,7 +76,7 @@ export class ProdutoListComponent implements OnInit {
       })
   }
 
-  public editar(idProduto) {
+  public editar(idProduto: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.width = '70%';

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TemplateModalDialogComponent } from './template/dialog/template-modal-dialog/template-modal-dialog.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MaterialModule } from '../material.module';
+import { TemplateModalDialogComponent } from './template/dialog/template-modal-dialog/template-modal-dialog.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +13,10 @@ import { MaterialModule } from '../material.module';
   ],
   exports: [
     TemplateModalDialogComponent
-  ]
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
+  ],
 })
 export class ModalDialogModule { }

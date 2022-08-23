@@ -1,24 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy{
-  ngAfterViewInit(): void {
-    //throw new Error('Method not implemented.');
-  }
-  ngOnDestroy(): void {
-    //throw new Error('Method not implemented.');
-  }
-  ngOnInit(): void {
-    //throw new Error('Method not implemented.');
-  }
-  title = 'rightShot';
-
-constructor(
-  private router: Router,
-){}
+export class AppComponent {
+  title = 'right-shot-club';
 }

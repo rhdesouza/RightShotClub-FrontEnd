@@ -28,7 +28,7 @@ export class UserListComponent implements OnInit {
     'acoes'
   ];
 
-  public userList;
+  public userList: any;
 
   constructor(
     private admService: AdmService,
@@ -85,7 +85,7 @@ export class UserListComponent implements OnInit {
       })
   }
 
-  public addRoleUser(idUser) {
+  public addRoleUser(idUser: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.width = '75%';

@@ -2,7 +2,7 @@ import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RestService } from '../httpService/httpService.component';
 import { TipoRequisicaoRestEnum } from 'src/app/model/enum/tipo-requisicao-rest.enum';
-import { identifierModuleUrl } from '@angular/compiler';
+//import { identifierModuleUrl } from '@angular/compiler';
 import { SnakeBarService } from '../snakebar/snakebar.service';
 import { ConfigGaleria } from './galeria-fotos.service';
 
@@ -43,7 +43,7 @@ export class GaleriaFotosComponent implements OnInit {
 
   }
 
-  private formatBytes(bytes, decimals?) {
+  private formatBytes(bytes: any, decimals?: any) {
     if (bytes == 0) return '0 Bytes';
     const k = 1024,
       dm = decimals || 2,

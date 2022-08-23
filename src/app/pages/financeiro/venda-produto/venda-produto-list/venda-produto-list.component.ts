@@ -90,7 +90,7 @@ export class VendaProdutoListComponent implements OnInit {
     if (!this.filterForm.valid)
       return;
 
-    merge(this.filterForm.value)
+    merge(observableOf(this.filterForm.value))
       .pipe(
         take(0),
         startWith({}),

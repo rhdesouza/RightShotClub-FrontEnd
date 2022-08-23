@@ -23,7 +23,7 @@ import { HistoricoPrecificacaoComponent } from '../historico-precificacao/histor
 })
 export class PrecificacaoProdutoListComponent implements OnInit {
 
-  @ViewChild(MatPaginator, { static: true })  paginator!: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   colunas: string[] = [
@@ -46,8 +46,8 @@ export class PrecificacaoProdutoListComponent implements OnInit {
     private financeiroService: FinanceiroService,
     private modalService: ModalService,
     private snakeBarService: SnakeBarService
-  ) { 
-    
+  ) {
+
   }
 
   ngOnInit(): void {
@@ -87,7 +87,7 @@ export class PrecificacaoProdutoListComponent implements OnInit {
     if (!this.filterForm.valid)
       return;
 
-    merge(this.filterForm.controls.descricao.value)
+    merge(observableOf(this.filterForm.controls['descricao'].value))
       .pipe(
         take(0),
         startWith({}),

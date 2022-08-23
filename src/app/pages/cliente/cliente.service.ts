@@ -20,22 +20,22 @@ export class ClienteService {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, 'clientes/all');
   }
 
-/*   public getAllClienteDTOPageable(sort: string, sortDirection: string, pageIndex: number, 
-    pageSize: number, changedQuery: Boolean, filterForm?: any,): Observable<any>{
+  /*   public getAllClienteDTOPageable(sort: string, sortDirection: string, pageIndex: number, 
+      pageSize: number, changedQuery: Boolean, filterForm?: any,): Observable<any>{
+  
+        let PageVO: PageVO = {
+          sort: sort,
+          sortDirection: sortDirection,
+          pageIndex: pageIndex, 
+          pageSize: pageSize,
+          changedQuery: changedQuery,
+          filterForm: filterForm
+        }
+  
+      return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `clientes/getAllClientePageable`, null, PageVO);
+    } */
 
-      let PageVO: PageVO = {
-        sort: sort,
-        sortDirection: sortDirection,
-        pageIndex: pageIndex, 
-        pageSize: pageSize,
-        changedQuery: changedQuery,
-        filterForm: filterForm
-      }
-
-    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `clientes/getAllClientePageable`, null, PageVO);
-  } */
-
-  public getClientePageable(sortActive, sortDirection, pageIndex, pageSize, filter: Cliente): Observable<PageableVO> {
+  public getClientePageable(sortActive: any, sortDirection: any, pageIndex: any, pageSize: any, filter: Cliente): Observable<PageableVO> {
     const httpParams: HttpParams = new HttpParams()
       .set('page', pageIndex)
       .set('size', pageSize)
@@ -43,11 +43,11 @@ export class ClienteService {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `clientes/getAllClientePageable`, httpParams, filter);
   }
 
-  public getClientePorId(idCliente: number): Observable<any>{
+  public getClientePorId(idCliente: number): Observable<any> {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `clientes/one/${idCliente}`);
   }
 
-  public getEnderecoPorCep(cep) {
+  public getEnderecoPorCep(cep: any) {
     return this.rest.getEnderecoPorCep(cep);
   }
 
@@ -56,10 +56,10 @@ export class ClienteService {
   }
 
   public getFotoCliente(idFotoCliente: number): Observable<any> {
-    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `clientes/getFotoCliente/${idFotoCliente}`, undefined, );
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `clientes/getFotoCliente/${idFotoCliente}`, undefined,);
   }
 
   public buscarClientePorCpf(cpf: String): Observable<Cliente> {
-    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `clientes/getClientePorCpf/${cpf}`, undefined, );
+    return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `clientes/getClientePorCpf/${cpf}`, undefined,);
   }
 }

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { DirectivesModule } from 'src/app/common/directives/directives.module';

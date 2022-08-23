@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnakeBarService } from 'src/app/common/snakebar/snakebar.service';
 import { InfoRSC } from 'src/app/model/entity/InfoSRC';
 import { FornecedorService } from 'src/app/pages/fornecedor/fornecedor.service';
@@ -58,7 +58,6 @@ export class InfoRscComponent implements OnInit {
 
   private getInfoSRC() {
     this.admService.getInfoSRC().subscribe((rs: InfoRSC) => {
-      console.log(rs);
       this.infoSRCForm.get('empresa')?.get('id')?.setValue(rs.id);
       this.infoSRCForm.get('empresa')?.get('cnpj')?.setValue(rs.cnpj);
       this.infoSRCForm.get('empresa')?.get('nomeEmpresa')?.setValue(rs.nomeEmpresa);
@@ -121,7 +120,7 @@ export class InfoRscComponent implements OnInit {
   public pesquisaCEP() {
     if ((this.infoSRCForm.get('empresa')?.get('cep')?.value).length == 8)
       this.fornecedorService.getEnderecoPorCep(this.infoSRCForm.get('empresa')?.get('cep')?.value)
-        .subscribe(retorno => {
+        .subscribe((retorno: any) => {
         if (!!retorno) {
 
           this.infoSRCForm.get('empresa')?.get('logradouro')?.setValue(retorno['logradouro']);
@@ -131,4 +130,9 @@ export class InfoRscComponent implements OnInit {
         }
       })
   }
+
+  public getInfoSRCForm(control: string, campo: string): AbstractControl | any {
+    return !!this.infoSRCForm.get(control) ?? this.infoSRCForm.get(control)?.get(campo)
+  }
+
 }

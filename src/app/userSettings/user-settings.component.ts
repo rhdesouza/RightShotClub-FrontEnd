@@ -10,7 +10,7 @@ import { LoginService } from '../login/login.service';
 @Component({
   selector: 'app-user-settings',
   templateUrl: './user-settings.component.html',
-  styleUrls: ['./user-settings.component.css']
+  styleUrls: ['./user-settings.component.css'],
 })
 export class UserSettingsComponent implements OnInit {
   public tituloModal = "Informações do Usuário"

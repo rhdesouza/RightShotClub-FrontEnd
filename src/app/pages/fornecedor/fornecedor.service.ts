@@ -36,7 +36,7 @@ export class FornecedorService {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.POST, `fornecedores/getAllFornecedorPageable`, null, PageVO);
   }
 
-  public getFornecedorPageable(sortActive, sortDirection, pageIndex, pageSize, filter: Fornecedor): Observable<PageableVO> {
+  public getFornecedorPageable(sortActive: any, sortDirection: any, pageIndex: any, pageSize: any, filter: Fornecedor): Observable<PageableVO> {
     const httpParams: HttpParams = new HttpParams()
       .set('page', pageIndex)
       .set('size', pageSize)
@@ -48,7 +48,7 @@ export class FornecedorService {
     return this.rest.gerarSolicitacao(TipoRequisicaoRestEnum.GET, `fornecedores/one/${idFornecedor}`);
   }
 
-  public getEnderecoPorCep(cep) {
+  public getEnderecoPorCep(cep: any) {
     return this.rest.getEnderecoPorCep(cep);
   }
 

@@ -60,9 +60,9 @@ export class AddProdutoComponent implements OnInit {
   }
 
   public validarNcm(): boolean {
-    let valid = !!this.options.find(x => x.ncm == this.produtoForm.controls.ncm.value);
+    let valid = !!this.options.find(x => x.ncm == this.produtoForm.controls['ncm'].value);
     if (!valid) {
-      this.produtoForm.controls.ncm.setValue(null);
+      this.produtoForm.controls['ncm'].setValue(null);
       this.snakeBarService.openSnackBarError('Código NCM inválido');
     }
     return valid;
@@ -79,7 +79,7 @@ export class AddProdutoComponent implements OnInit {
       codProduto: new FormControl('', [Validators.required, Validators.minLength(3)]),
       descricao: new FormControl('', [Validators.required, Validators.minLength(5)]),
       tipoProduto: new FormControl('', Validators.required),
-      estoqueMinimo: new FormControl('',Validators.pattern("[0-9]+$")),
+      estoqueMinimo: new FormControl('', Validators.pattern("[0-9]+$")),
       ncm: new FormControl('', Validators.required),
     });
   }
@@ -101,22 +101,23 @@ export class AddProdutoComponent implements OnInit {
   private editForm(idProduto: number) {
     let tipoProduto: TipoProduto | number;
     let ncm: Ncm | string;
-    this.estoqueService.getProdutoPorId(idProduto).subscribe((produto: Produto) => {
-      this.produtoForm.addControl('id', new FormControl(idProduto, Validators.required),)
-      this.produtoForm.controls.codProduto.setValue(produto.codProduto);
-      this.produtoForm.controls.descricao.setValue(produto.descricao);
-      this.produtoForm.controls.estoqueMinimo.setValue(produto.estoqueMinimo);
+    this.estoqueService.getProdutoPorId(idProduto)
+      .subscribe((produto: Produto) => {
+        this.produtoForm.addControl('id', new FormControl(idProduto, Validators.required),)
+        this.produtoForm.controls['codProduto'].setValue(produto.codProduto);
+        this.produtoForm.controls['descricao'].setValue(produto.descricao);
+        this.produtoForm.controls['estoqueMinimo'].setValue(produto.estoqueMinimo);
 
-      if (!!produto.tipoProduto) {
-        tipoProduto = produto.tipoProduto;
-        this.produtoForm.controls.tipoProduto.setValue(tipoProduto['id']);
-      }
+        if (!!produto.tipoProduto) {
+          tipoProduto = produto.tipoProduto;
+          this.produtoForm.controls['tipoProduto'].setValue(tipoProduto['id']);
+        }
 
-      if (!!produto.ncm){
-        ncm = produto.ncm;
-        this.produtoForm.controls.ncm.setValue(ncm['ncm']);
-      }
-    })
+        if (!!produto.ncm) {
+          ncm = produto.ncm;
+          this.produtoForm.controls['ncm'].setValue(ncm['ncm']);
+        }
+      })
   }
 
   public fechar() {

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 import { MaterialModule } from '../material.module';
 import { FormTitleBreadcrumbsComponent } from './form-title-breadcrumbs.component';
 
@@ -11,7 +12,8 @@ import { FormTitleBreadcrumbsComponent } from './form-title-breadcrumbs.componen
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    BreadcrumbModule
   ],
   exports:[
     FormTitleBreadcrumbsComponent

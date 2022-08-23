@@ -27,7 +27,7 @@ export class LoginService {
     this.usuarioLogado = this.usuarioLogadoSubject.asObservable();
   }
 
-  public login(usuario, senha): Observable<any> {
+  public login(usuario: string, senha: string): Observable<any> {
     return this.rest.login(usuario, senha);
   }
 

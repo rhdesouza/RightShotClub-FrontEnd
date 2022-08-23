@@ -14,8 +14,6 @@ import { LoginService } from 'src/app/login/login.service';
 import { SnakeBarService } from '../snakebar/snakebar.service';
 import { StorageComponent } from './storage.component';
 
-
-
 @Injectable({
     providedIn: 'root'
 })
@@ -53,8 +51,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 return event;
             }),
             catchError((error: HttpErrorResponse) => {
-                let data = {};
-                data = {
+                let data = {
                     reason: error && error.error && error.error.reason ? error.error.reason : '',
                     status: error.status
                 };
@@ -72,9 +69,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     this.snakeBarService.openSnackBarError(message);
                 } else {
                     this.snakeBarService.openSnackBarError("Ocorreu um erro no sistema, entre em contato com o Administrador!")
-                    .afterDismissed().subscribe(() => {
-                      this.loginService.logout();
-                    })
+                        .afterDismissed().subscribe(() => {
+                            this.loginService.logout();
+                        })
                 }
                 return throwError(error);
             }));

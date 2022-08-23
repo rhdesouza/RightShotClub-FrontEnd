@@ -25,9 +25,9 @@ export class SearchProdutoComponent implements OnInit {
     'unidVenda'
   ];
 
-  public produtosList;
-  public linhaSelecionada;
-  public produtoSelecionado;
+  public produtosList: any;
+  public linhaSelecionada: any;
+  public produtoSelecionado: any;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;

@@ -25,7 +25,7 @@ export class RoleListComponent implements OnInit {
     'name',
   ];
 
-  public roleList;
+  public roleList: any;
 
   constructor(
     private admService: AdmService,

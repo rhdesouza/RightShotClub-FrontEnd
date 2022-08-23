@@ -3,25 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './common/AuthGuard/AuthGuard.component';
 import { securityRoles } from './common/constantes/security-roles';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
-import { TrocaSenhaComponent } from './externo/troca-senha/troca-senha.component';
 import { LoginComponent } from './login/login.component';
 import { ClienteListComponent } from './pages/cliente/cliente-list/cliente-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FornecedorListComponent } from './pages/fornecedor/fornecedor-list/fornecedor-list.component';
 
-export const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+const routes: Routes = [
   {
     path: '',
     component: LoginComponent
   },
   {
-    path: 'acesso-externo',
-    loadChildren: () => import('./externo/troca-senha/troca-senha.module').then(m => m.TrocaSenhaModule),
-    component: TrocaSenhaComponent,
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'dashboard',
@@ -103,6 +97,7 @@ export const routes: Routes = [
     component: PageNotFoundComponent
   }
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]

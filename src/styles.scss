@@ -1,12 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@charset "UTF-8";
 
-html, body { height: 100%; }
-body { margin: 0; 
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
     /* font-family: Roboto, "Helvetica Neue", sans-serif; */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
 }
 
-.fullSizeInput{
+.fullSizeInput {
     width: 100%;
 }
 
@@ -24,37 +29,36 @@ body { margin: 0;
     background-color: #1d3448 !important;
 }
 
-
 @font-face {
     font-family: Azonix;
-    src: url('src/assets/fonts/Azonix.otf');
-  }
+    src: url('assets/fonts/Azonix.otf');
+}
 
 @font-face {
     font-family: Junction-regular;
-    src: url('src/assets/fonts/Junction-regular.otf');
-}  
+    src: url('assets/fonts/Junction-regular.otf');
+}
 
 @font-face {
     font-family: Junction-bold;
-    src: url('src/assets/fonts/Junction-bold.otf');
-}  
+    src: url('assets/fonts/Junction-bold.otf');
+}
 
 @font-face {
     font-family: Junction-light;
-    src: url('src/assets/fonts/Junction-light.otf');
-}  
+    src: url('assets/fonts/Junction-light.otf');
+}
 
 
 @font-face {
     font-family: OneDay;
-    src: url('src/assets/fonts/ONEDAY.otf');
+    src: url('assets/fonts/ONEDAY.otf');
 }
 
 
 @font-face {
     font-family: Rotobo-Regular;
-    src: url("src/assets/fonts/Roboto/Roboto-Regular.ttf");
+    src: url("assets/fonts/Roboto/Roboto-Regular.ttf");
 }
 
 
@@ -63,10 +67,10 @@ body { margin: 0;
     font-style: normal;
     font-weight: 400;
     font-display: block;
-    src: url("src\assets\icons\material-icons.woff2") format('woff2');
-  }
-  
-  .material-icons {
+    src: url("src/assets/icons/material-icons.woff2") format('woff2');
+}
+
+.material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
@@ -79,34 +83,34 @@ body { margin: 0;
     word-wrap: normal;
     direction: ltr;
     -webkit-font-smoothing: antialiased;
-  }
+}
 
 /**
 * Retira o efeito ao clicar no botão bootstrap
 */
-.button:active, 
- button:active,
-.button:focus, 
- button:focus,
-.button:hover, 
- button:hover{
-    border:none !important;
-    outline:none !important;
+.button:active,
+button:active,
+.button:focus,
+button:focus,
+.button:hover,
+button:hover {
+    border: none !important;
+    outline: none !important;
 }
 
 
 /**
 * Botão aplicação
 */
-.custom-width-buttom{
+.custom-width-buttom {
     min-width: 15px !important;
 }
 
-.mat-raised-button{
+.mat-raised-button {
     min-width: 150px !important;
 }
 
-.mat-mini-fab.mat-raised-button{
+.mat-mini-fab.mat-raised-button {
     min-width: 0px !important;
 }
 
@@ -122,18 +126,29 @@ body { margin: 0;
 /**
 * Input Disabled
 */
-.mat-input-element:disabled, .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after{
-    color: rgba(0,0,0,0.8) !important;
+.mat-input-element:disabled,
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+    color: rgba(0, 0, 0, 0.8) !important;
 }
 
 .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline::after {
-    color: rgba(0,0,0,.15) !important;
+    color: rgba(0, 0, 0, .15) !important;
 }
 
-.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline{
-    color: rgba(0,0,0,.15) !important;
+.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+    color: rgba(0, 0, 0, .15) !important;
 }
 
 .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-label {
-    color: rgba(0,0,0,.6) !important;
+    color: rgba(0, 0, 0, .6) !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }

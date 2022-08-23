@@ -46,7 +46,7 @@ export class AddTipoProdutoComponent implements OnInit {
   public salvar() {
     if (this.tipoProdutoForms.invalid)
       return
-      
+
     this.estoqueService.saveTipoProduto(this.tipoProdutoForms.value).subscribe((retorno: TipoProduto) => {
       if (!!retorno.id)
         this.dialogRef.close(retorno);
@@ -55,13 +55,14 @@ export class AddTipoProdutoComponent implements OnInit {
     })
   }
 
-  public editForm(idTipoProd) {
-    this.estoqueService.getTipoProdutoId(idTipoProd).subscribe((tipoProduto: TipoProduto) => {
-      this.tipoProdutoForms.addControl('id', new FormControl(idTipoProd, Validators.required),)
-      this.tipoProdutoForms.controls.tipo.setValue(tipoProduto.tipo);
-      this.tipoProdutoForms.controls.unidCompra.setValue(tipoProduto.unidCompra);
-      this.tipoProdutoForms.controls.unidVenda.setValue(tipoProduto.unidVenda);
-    })
+  public editForm(idTipoProd: number) {
+    this.estoqueService.getTipoProdutoId(idTipoProd)
+      .subscribe((tipoProduto: TipoProduto) => {
+        this.tipoProdutoForms.addControl('id', new FormControl(idTipoProd, Validators.required),)
+        this.tipoProdutoForms.controls['tipo'].setValue(tipoProduto.tipo);
+        this.tipoProdutoForms.controls['unidCompra'].setValue(tipoProduto.unidCompra);
+        this.tipoProdutoForms.controls['unidVenda'].setValue(tipoProduto.unidVenda);
+      })
   }
 
   public fechar() {

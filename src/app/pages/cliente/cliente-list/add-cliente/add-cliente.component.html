@@ -125,11 +125,11 @@
         </div>
         <div class="col-4 ">
             <button type="button" mat-mini-fab style="background-color: darkgreen;" (click)="uploadArquivo()"
-                matTooltip="Adicionar imagens" *ngIf="!!clienteForms.controls.id">
+                matTooltip="Adicionar imagens" *ngIf="!!clienteForms.controls['id']">
                 <mat-icon style='position: relative;top: -3px;'>add_a_photo</mat-icon>
             </button>
             <button  type="button" mat-mini-fab (click)="visualizarImagem()" color="primary" style="left:8px;"
-                matTooltip="Visualizar imagens" *ngIf="!!clienteForms.controls.id">
+                matTooltip="Visualizar imagens" *ngIf="!!clienteForms.controls['id']">
                 <mat-icon style='position: relative;top: -3px;'>image</mat-icon>
             </button>
         </div>

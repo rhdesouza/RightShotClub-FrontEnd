@@ -89,7 +89,7 @@ export class Ng2FileUploaderComponent implements OnInit {
         }; */
 
   }
-  private formatBytes(bytes, decimals?) {
+  private formatBytes(bytes: any, decimals?: any) {
     if (bytes == 0) return '0 Bytes';
     const k = 1024,
       dm = decimals || 2,

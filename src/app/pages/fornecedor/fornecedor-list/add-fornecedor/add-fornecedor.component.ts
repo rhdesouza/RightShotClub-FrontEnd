@@ -93,15 +93,16 @@ export class AddFornecedorComponent implements OnInit {
   }
 
   public pesquisaCEP() {
-    if ((this.fornecedorForms.controls.cep.value).length == 8)
-      this.fornecedorService.getEnderecoPorCep(this.fornecedorForms.controls.cep.value).subscribe(retorno => {
-        if (!!retorno) {
-          this.fornecedorForms.controls.logradouro.setValue(retorno['logradouro']);
-          this.fornecedorForms.controls.cidade.setValue(retorno['localidade']);
-          this.fornecedorForms.controls.estado.setValue(retorno['uf']);
-          this.fornecedorForms.controls.pais.setValue("Brasil");
-        }
-      })
+    if ((this.fornecedorForms.controls['cep'].value).length == 8)
+      this.fornecedorService.getEnderecoPorCep(this.fornecedorForms.controls['cep'].value)
+        .subscribe((retorno: any) => {
+          if (!!retorno) {
+            this.fornecedorForms.controls['logradouro'].setValue(retorno['logradouro']);
+            this.fornecedorForms.controls['cidade'].setValue(retorno['localidade']);
+            this.fornecedorForms.controls['estado'].setValue(retorno['uf']);
+            this.fornecedorForms.controls['pais'].setValue("Brasil");
+          }
+        })
   }
 
   public isEditar(): boolean {

@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit {
         ) 
       },
       err => {
-        this.form.controls.username.setValue(null);
-        this.form.controls.password.setValue(null);
+        this.form.controls['username'].setValue(null);
+        this.form.controls['password'].setValue(null);
         this.snakeBarService.openSnackBarError("Usuário ou senha incorretos, tente novamente.")
         this.sessionStorage.removeSession();
       },

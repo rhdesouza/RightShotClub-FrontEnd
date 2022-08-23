@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-title-breadcrumbs',
@@ -11,11 +10,9 @@ export class FormTitleBreadcrumbsComponent implements OnInit {
   @Input() title: string | null = null;
 
   constructor(
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
-
   }
 
 }

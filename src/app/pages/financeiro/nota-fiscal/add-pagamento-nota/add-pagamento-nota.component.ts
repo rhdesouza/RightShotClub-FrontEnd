@@ -89,10 +89,10 @@ export class AddPagamentoNotaComponent implements OnInit {
     this.pagamentos.removeAt(0);
     pagamentos.forEach((p: NotaFiscalPagamento) => {
       let itensNota = this.createFormPagamentos();
-      itensNota.controls.id.setValue(p.id);
-      itensNota.controls.parcela.setValue(p.parcela);
-      itensNota.controls.valorTotal.setValue(p.valorTotal);
-      itensNota.controls.dataPagamento.setValue(p.dataPagamento);
+      itensNota.controls['id'].setValue(p.id);
+      itensNota.controls['parcela'].setValue(p.parcela);
+      itensNota.controls['valorTotal'].setValue(p.valorTotal);
+      itensNota.controls['dataPagamento'].setValue(p.dataPagamento);
 
       this.pagamentos.push(itensNota);
     })

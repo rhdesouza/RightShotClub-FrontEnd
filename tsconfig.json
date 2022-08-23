@@ -3,10 +3,17 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "crypto": [
+        "../../node_modules/crypto-js"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitReturns": true,
+    "noImplicitOverride": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -14,15 +21,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2020",
     "module": "es2020",
-    //
-    //"strictPropertyInitialization": false,
-    //"strictNullChecks": false,
-    "noImplicitAny": false,
-    "resolveJsonModule": true,
     "lib": [
-      "es2018",
+      "es2020",
       "dom"
     ]
   },
@@ -31,6 +33,6 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": false,
-    "noImplicitReturns": false,
+    //"noImplicitReturns": false
   }
 }

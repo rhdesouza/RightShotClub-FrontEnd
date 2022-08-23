@@ -12,30 +12,28 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     constructor(
         private loginService: LoginService,
         private router: Router,
-        private storage: StorageComponent,
         private snakeBar: SnakeBarService,
     ) {
     }
 
-
     canActivate(activatedRouter: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): boolean {
-        if (this.loginService.getUsuatioLogado() && this.hasRole(activatedRouter.routeConfig?.data?.roles)) {
+        if (this.loginService.getUsuatioLogado() && this.hasRole(activatedRouter.routeConfig?.data?.['roles'])) {
             return true;
         }
-        this.router.navigate['/login'];
+        this.returToLogin();
         return false;
     }
 
     canActivateChild(activatedRouter: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): boolean {
-        if (this.loginService.getUsuatioLogado() && this.hasRole(activatedRouter.routeConfig?.data?.roles)) {
+        if (this.loginService.getUsuatioLogado() && this.hasRole(activatedRouter.routeConfig?.data?.['roles'])) {
             return true;
         }
-        this.router.navigate['/login'];
+        this.returToLogin();
         return false;
     }
 
     canLoad(route: Route): boolean {
-        let rolePremissa: [] = route?.data?.roles;
+        let rolePremissa: [] = route?.data?.['roles'];
         if (!rolePremissa)
             return true;
         return this.hasRole(rolePremissa);
@@ -53,6 +51,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
             this.snakeBar.openSnackBarWarn("Usuário sem permissão de acesso.");
             return false
         }
+    }
+
+    private returToLogin() {
+        this.router.navigateByUrl('/login');
     }
 
 }

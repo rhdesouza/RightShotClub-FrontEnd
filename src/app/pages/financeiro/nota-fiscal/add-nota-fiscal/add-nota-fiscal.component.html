@@ -13,7 +13,9 @@
                     onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 
                 <mat-error>
-                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['numero']">
+<!--                     <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['numero']">
+                    </mat-error-message> -->
+                    <mat-error-message [control]="getCabecalho('numero')">
                     </mat-error-message>
                 </mat-error>
             </mat-form-field>
@@ -53,7 +55,10 @@
 
 
                 <mat-error>
-                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['fornecedor']">
+<!--                     <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['fornecedor']">
+                    </mat-error-message> -->
+
+                    <mat-error-message [control]="getCabecalho('fornecedor')">
                     </mat-error-message>
                 </mat-error>
             </mat-form-field>
@@ -66,7 +71,10 @@
                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
 
                 <mat-error>
-                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['valorTotal']">
+<!--                     <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['valorTotal']">
+                    </mat-error-message> -->
+
+                    <mat-error-message [control]="getCabecalho('valorTotal')">
                     </mat-error-message>
                 </mat-error>
             </mat-form-field>
@@ -81,7 +89,10 @@
                     </mat-option>
                 </mat-select>
                 <mat-error>
-                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['formaPagamento']">
+<!--                     <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['formaPagamento']">
+                    </mat-error-message> -->
+
+                    <mat-error-message [control]="getCabecalho('formaPagamento')">
                     </mat-error-message>
                 </mat-error>
             </mat-form-field>
@@ -105,7 +116,10 @@
                 </mat-icon> -->
 
                 <mat-error>
-                    <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['parcelas']">
+<!--                     <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['parcelas']">
+                    </mat-error-message> -->
+
+                    <mat-error-message [control]="getCabecalho('parcelas')">
                     </mat-error-message>
                 </mat-error>
 
@@ -118,7 +132,10 @@
                 <input matInput class="inputField" type="text" formControlName="situacao" readonly>
             </mat-form-field>
             <mat-error>
-                <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['situacao']">
+<!--                 <mat-error-message [control]="notaFiscalForm.controls.cabecalho['controls']['situacao']">
+                </mat-error-message> -->
+
+                <mat-error-message [control]="getCabecalho('situacao')">
                 </mat-error-message>
             </mat-error>
         </div>
@@ -140,7 +157,7 @@
         <div class="col-1 verticalAlignCenter">IPI</div>
         <div class="col-1 verticalAlignCenter"></div>
     </div>
-    <div style="display: flex; flex-wrap: wrap;" *ngFor="let item of itens.controls; let i = index;">
+    <div style="display: flex; flex-wrap: wrap;" *ngFor="let item of itens?.controls; let i = index;">
         <!-- <div [formGroup]="item" class="col-1 ">
             <mat-form-field class="fullSizeInput">
                 <input matInput class="inputField" type="text" formControlName="id">
@@ -151,7 +168,7 @@
                 <input matInput class="inputField" type="text" formControlName="codigoProduto" readonly>
             </mat-form-field>
         </div> -->
-        <div [formGroup]="item" class="col-2">
+        <form [formGroup]="item" class="col-2">
             <mat-form-field class="">
                 <input matInput class="inputField" type="text" formControlName="descricaoProduto" readonly>
 
@@ -176,7 +193,7 @@
                     </button>
                 </mat-icon> -->
             </mat-form-field>
-        </div>
+        </form>
         <div [formGroup]="item" class="col-1 ">
             <mat-form-field class="fullSizeInput">
                 <input matInput class="inputField" type="text" style="text-align: center;" formControlName="ncmSh" readonly>

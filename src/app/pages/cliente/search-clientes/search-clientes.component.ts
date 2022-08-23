@@ -24,9 +24,9 @@ export class SearchClientesComponent implements OnInit {
     'acoes'
   ];
 
-  public clienteList;
-  public linhaSelecionada;
-  public clienteSelecionado;
+  public clienteList: any;
+  public linhaSelecionada: any;
+  public clienteSelecionado: any;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;

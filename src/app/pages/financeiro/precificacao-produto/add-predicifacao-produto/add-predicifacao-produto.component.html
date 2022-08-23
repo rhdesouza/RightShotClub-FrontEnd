@@ -9,8 +9,10 @@
                     <mat-label>Código Produto</mat-label>
                     <input matInput class="inputField" type="text" formControlName="codProduto" readonly>
                     <mat-error>
-                        <mat-error-message [control]="precificacaoForm.controls.produto['controls']['codProduto']">
+                        <mat-error-message [control]="getPrecificacaoForm('produto','codProduto')">
                         </mat-error-message>
+                        <!-- <mat-error-message [control]="precificacaoForm.controls.produto['controls']['codProduto']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -19,8 +21,10 @@
                     <mat-label>Produto</mat-label>
                     <input matInput class="inputField" type="text" formControlName="descricao" readonly>
                     <mat-error>
-                        <mat-error-message [control]="precificacaoForm.controls.produto['controls']['descricao']">
+                        <mat-error-message [control]="getPrecificacaoForm('produto','descricao')">
                         </mat-error-message>
+                        <!-- <mat-error-message [control]="precificacaoForm.controls.produto['controls']['descricao']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -29,8 +33,10 @@
                     <mat-label>Unid. Compra</mat-label>
                     <input matInput class="inputField" type="text" formControlName="unidCompra" readonly>
                     <mat-error>
-                        <mat-error-message [control]="precificacaoForm.controls.produto['controls']['unidCompra']">
+                        <mat-error-message [control]="getPrecificacaoForm('produto','unidCompra')">
                         </mat-error-message>
+                        <!-- <mat-error-message [control]="precificacaoForm.controls.produto['controls']['unidCompra']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -39,8 +45,11 @@
                     <mat-label>Unid. Venda</mat-label>
                     <input matInput class="inputField" type="text" formControlName="unidVenda" readonly>
                     <mat-error>
-                        <mat-error-message [control]="precificacaoForm.controls.produto['controls']['unidVenda']">
+                        <mat-error-message [control]="getPrecificacaoForm('produto','unidVenda')">
                         </mat-error-message>
+
+                        <!-- <mat-error-message [control]="precificacaoForm.controls.produto['controls']['unidVenda']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -54,9 +63,12 @@
                     <mat-label>Qtd. Produtos em Nota (A)</mat-label>
                     <input matInput class="inputField" type="text" formControlName="totalQtd" readonly>
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['totalQtd']">
+                        <mat-error-message [control]="getPrecificacaoForm('valorMedioPorProdutoVO','totalQtd')">
                         </mat-error-message>
+
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['totalQtd']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -67,9 +79,12 @@
                     <input matInput class="inputField" type="text" formControlName="sumValorTotal" currencyMask
                         [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly>
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['sumValorTotal']">
+                        <mat-error-message [control]="getPrecificacaoForm('valorMedioPorProdutoVO','sumValorTotal')">
                         </mat-error-message>
+
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['sumValorTotal']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -80,9 +95,12 @@
                     <input matInput class="inputField" type="text" formControlName="valorMedio" currencyMask
                         [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly>
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['valorMedio']">
+
+                        <mat-error-message [control]="getPrecificacaoForm('valorMedioPorProdutoVO','valorMedio')">
                         </mat-error-message>
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['valorMedio']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -93,9 +111,11 @@
                     <input matInput class="inputField" type="text" formControlName="markupRSC" mask="percent" suffix="%"
                         [dropSpecialCharacters]="false" readonly>
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['markupRSC']">
+                        <mat-error-message [control]="getPrecificacaoForm('valorMedioPorProdutoVO','markupRSC')">
                         </mat-error-message>
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['markupRSC']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -106,9 +126,11 @@
                     <input matInput class="inputField" type="text" formControlName="valorSugerido" currencyMask
                         [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" readonly> 
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['valorSugerido']">
+                        <mat-error-message [control]="getPrecificacaoForm('valorMedioPorProdutoVO','valorSugerido')">
                         </mat-error-message>
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.valorMedioPorProdutoVO['controls']['valorSugerido']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -123,9 +145,11 @@
                     <input matInput class="inputField" type="text" formControlName="markupReferncia" readonly mask="percent" suffix="%"
                     [dropSpecialCharacters]="false">
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.precificacaoProduto['controls']['markupReferncia']">
+                        <mat-error-message [control]="getPrecificacaoForm('precificacaoProduto','markupReferncia')">
                         </mat-error-message>
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.precificacaoProduto['controls']['markupReferncia']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -136,9 +160,11 @@
                     <input matInput class="inputField" type="text" formControlName="valorMedioNF" readonly currencyMask
                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.precificacaoProduto['controls']['valorMedioNF']">
+                        <mat-error-message [control]="getPrecificacaoForm('precificacaoProduto','valorMedioNF')">
                         </mat-error-message>
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.precificacaoProduto['controls']['valorMedioNF']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -149,9 +175,11 @@
                     <input matInput class="inputField" type="text" formControlName="valorProdutoSugerido" readonly currencyMask
                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.precificacaoProduto['controls']['valorProdutoSugerido']">
+                        <mat-error-message [control]="getPrecificacaoForm('precificacaoProduto','valorProdutoSugerido')">
                         </mat-error-message>
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.precificacaoProduto['controls']['valorProdutoSugerido']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -162,9 +190,11 @@
                     <input matInput class="inputField" type="text" formControlName="valorProduto" currencyMask
                         [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
                     <mat-error>
-                        <mat-error-message
-                            [control]="precificacaoForm.controls.precificacaoProduto['controls']['valorProduto']">
+                        <mat-error-message [control]="getPrecificacaoForm('precificacaoProduto','valorProduto')">
                         </mat-error-message>
+<!--                         <mat-error-message
+                            [control]="precificacaoForm.controls.precificacaoProduto['controls']['valorProduto']">
+                        </mat-error-message> -->
                     </mat-error>
                 </mat-form-field>
             </div>

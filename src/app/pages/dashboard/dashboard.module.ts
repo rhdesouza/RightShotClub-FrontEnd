@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { FormTitleBreadcrumbsModule } from 'src/app/common/form-title-breadcrumbs/form-title-breadcrumbs.module';
@@ -32,7 +32,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
         NgxMaskModule.forRoot(maskConfigFunction),
         CustomPipeModule,
         MaterialModule,
-        ChartsModule,
+        NgChartsModule,
         RouterModule,
         FormTitleBreadcrumbsModule,
     ],

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { merge, of as observableOf } from 'rxjs';
+import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap, take } from 'rxjs/operators';
 import { ModalService } from 'src/app/common/services/modal.service';
 import { SnakeBarService } from 'src/app/common/snakebar/snakebar.service';
@@ -77,7 +77,9 @@ export class ClienteListComponent implements OnInit {
     if (!this.filterForm.valid)
       return;
 
-    merge(this.filterForm.value)
+    //let obs: Observable<any> = observableOf(this.filterForm.value)
+
+    merge(observableOf(this.filterForm.value))
       .pipe(
         take(0),
         startWith({}),
@@ -101,8 +103,8 @@ export class ClienteListComponent implements OnInit {
   }
 
   public limparFiltro() {
-    this.filterForm.controls.nome.setValue(null);
-    this.filterForm.controls.email.setValue(null);
+    this.filterForm.controls?.['nome'].setValue(null);
+    this.filterForm.controls?.['email'].setValue(null);
     this.filtrar();
   }
 

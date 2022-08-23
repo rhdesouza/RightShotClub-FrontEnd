@@ -1,10 +1,9 @@
-import { AbstractControl, FormControl, ValidatorFn, Validators } from "@angular/forms";
-import { ignoreElements } from "rxjs/operators";
+import { AbstractControl, FormControl, Validators } from "@angular/forms";
 
 export class GenericValidator {
   constructor() { }
 
-  static validaCpfCnpj(control) {
+  static validaCpfCnpj(control: any) {
     if (control.value == null)
       return null;
 
@@ -121,7 +120,7 @@ export class GenericValidator {
   /**
    * Valida se o CPF é valido. Deve-se ser informado o cpf sem máscara.
   */
-  static cpfValidator(control) {
+  static cpfValidator(control: any) {
     if (!control.value)
       return null;
 
@@ -184,7 +183,7 @@ export class GenericValidator {
     return null;
   }
 
-  static dateValidValidator(control) {
+  static dateValidValidator(control: any) {
     try {
       if (!control.value)
         return null;
@@ -214,7 +213,7 @@ export class GenericValidator {
   }
 
 
-  static valMinFinanceiro(prms): any {
+  static valMinFinanceiro(prms: any): any {
     return (control: FormControl): { [key: string]: any } | any => {
       if (Validators.required(control)) {
         return null;

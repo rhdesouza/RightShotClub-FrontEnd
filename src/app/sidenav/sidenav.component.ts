@@ -4,6 +4,7 @@ import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@an
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router, RouterOutlet } from '@angular/router';
 import { rightshot } from '../common/constantes/RightShotClub';
+import { ModalService } from '../common/services/modal.service';
 import { LoginService } from '../login/login.service';
 import { Menu } from '../model/entity/Menu';
 import { UserSettingsComponent } from '../userSettings/user-settings.component';
@@ -138,7 +139,7 @@ export class SidenavComponent implements OnInit {
     public router: Router,
     public loginService: LoginService,
     public navService: SidenavService,
-    public dialog: MatDialog,
+    private modalService: ModalService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -273,8 +274,7 @@ export class SidenavComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.width = '50%';
 
-    const modal = this.dialog.open(UserSettingsComponent, dialogConfig)
-      .afterClosed().subscribe(data => { })
+    this.modalService.openModal(UserSettingsComponent, dialogConfig).afterClosed().subscribe(data => { })
   }
 
   prepareRoute(outlet: RouterOutlet) {

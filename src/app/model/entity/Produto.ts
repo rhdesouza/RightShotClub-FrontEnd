@@ -6,8 +6,8 @@ export interface Produto extends Auditable {
     id: number;
     codProduto: string;
     descricao: string;
-    tipoProduto: TipoProduto | number;
+    tipoProduto: TipoProduto;
     estoqueMinimo: number;
-    ncm: Ncm | string;
+    ncm: Ncm;
     dataDesativacao: string;
 }

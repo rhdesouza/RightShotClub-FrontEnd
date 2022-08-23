@@ -69,7 +69,7 @@ export class FornecedorListComponent implements OnInit {
           );
         }),
         map((pageableVO: PageableVO) => {
-            this.resultsLength = pageableVO.totalElements || 0;
+          this.resultsLength = pageableVO.totalElements || 0;
 
           return pageableVO.content;
         }),
@@ -85,7 +85,7 @@ export class FornecedorListComponent implements OnInit {
     if (!this.filterForm.valid)
       return;
 
-    merge(this.filterForm.value)
+    merge(observableOf(this.filterForm.value))
       .pipe(
         take(0),
         startWith({}),
@@ -109,9 +109,9 @@ export class FornecedorListComponent implements OnInit {
   }
 
   public limparFiltro() {
-    this.filterForm.controls.razaoSocial.setValue(null);
-    this.filterForm.controls.nomeFantasia.setValue(null);
-    this.filterForm.controls.cpfCnpj.setValue(null);
+    this.filterForm.controls['razaoSocial'].setValue(null);
+    this.filterForm.controls['nomeFantasia'].setValue(null);
+    this.filterForm.controls['cpfCnpj'].setValue(null);
     this.filtrar();
   }
 

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UtilService } from 'src/app/common/services/util.service';
 import { GenericValidator } from 'src/app/common/validatorsForm/genericValitadors';
@@ -62,35 +62,35 @@ export class AddPredicifacaoProdutoComponent implements OnInit {
   private getPrecificacaoProduto() {
     this.financeiroService.getPrecificacaoProduto(this.idProduto)
       .subscribe((rs: PrecificacaoProdutoDTO) => {
-        this.precificacaoForm.controls.produto.get('id')?.setValue(rs.produto.id);
-        this.precificacaoForm.controls.produto.get('codProduto')?.setValue(rs.produto?.codProduto);
-        this.precificacaoForm.controls.produto.get('descricao')?.setValue(rs.produto?.descricao);
-        this.precificacaoForm.controls.produto.get('unidCompra')?.setValue(rs.produto?.tipoProduto['unidCompra']);
-        this.precificacaoForm.controls.produto.get('unidVenda')?.setValue(rs.produto?.tipoProduto['unidVenda']);
+        this.precificacaoForm.controls['produto'].get('id')?.setValue(rs.produto.id);
+        this.precificacaoForm.controls['produto'].get('codProduto')?.setValue(rs.produto?.codProduto);
+        this.precificacaoForm.controls['produto'].get('descricao')?.setValue(rs.produto?.descricao);
+        this.precificacaoForm.controls['produto'].get('unidCompra')?.setValue(rs.produto?.tipoProduto['unidCompra']);
+        this.precificacaoForm.controls['produto'].get('unidVenda')?.setValue(rs.produto?.tipoProduto['unidVenda']);
 
         if (!!rs.valorMedioPorProdutoVO) {
-          this.precificacaoForm.controls.valorMedioPorProdutoVO.get('idProduto')?.setValue(rs.valorMedioPorProdutoVO?.idProduto);
-          this.precificacaoForm.controls.valorMedioPorProdutoVO.get('totalQtd')?.setValue(rs.valorMedioPorProdutoVO?.totalQtd);
-          this.precificacaoForm.controls.valorMedioPorProdutoVO.get('sumValorTotal')?.setValue(rs.valorMedioPorProdutoVO?.sumValorTotal);
-          this.precificacaoForm.controls.valorMedioPorProdutoVO.get('valorMedio')?.setValue(rs.valorMedioPorProdutoVO?.valorMedio);
+          this.precificacaoForm.controls['valorMedioPorProdutoVO'].get('idProduto')?.setValue(rs.valorMedioPorProdutoVO?.idProduto);
+          this.precificacaoForm.controls['valorMedioPorProdutoVO'].get('totalQtd')?.setValue(rs.valorMedioPorProdutoVO?.totalQtd);
+          this.precificacaoForm.controls['valorMedioPorProdutoVO'].get('sumValorTotal')?.setValue(rs.valorMedioPorProdutoVO?.sumValorTotal);
+          this.precificacaoForm.controls['valorMedioPorProdutoVO'].get('valorMedio')?.setValue(rs.valorMedioPorProdutoVO?.valorMedio);
 
-          this.precificacaoForm.controls.precificacaoProduto.get('valorProduto')?.setValidators(
+          this.precificacaoForm.controls['precificacaoProduto'].get('valorProduto')?.setValidators(
             GenericValidator.valMinFinanceiro(rs.valorMedioPorProdutoVO?.valorMedio)
           )
 
-          this.precificacaoForm.controls.valorMedioPorProdutoVO.get('markupRSC')?.setValue(rs.valorMedioPorProdutoVO?.markupRSC);
-          this.precificacaoForm.controls.valorMedioPorProdutoVO.get('valorSugerido')?.setValue(rs.valorMedioPorProdutoVO?.valorSugerido);
+          this.precificacaoForm.controls['valorMedioPorProdutoVO'].get('markupRSC')?.setValue(rs.valorMedioPorProdutoVO?.markupRSC);
+          this.precificacaoForm.controls['valorMedioPorProdutoVO'].get('valorSugerido')?.setValue(rs.valorMedioPorProdutoVO?.valorSugerido);
         }
 
         if (!!rs.precificacaoProduto) {
-          this.precificacaoForm.controls.precificacaoProduto.get('id')?.setValue(rs.precificacaoProduto.id);
-          this.precificacaoForm.controls.precificacaoProduto.get('produto')?.setValue(rs.precificacaoProduto.produto.id);
-          this.precificacaoForm.controls.precificacaoProduto.get('markupReferncia')?.setValue(rs.precificacaoProduto?.markupReferncia);
-          this.precificacaoForm.controls.precificacaoProduto.get('valorMedioNF')?.setValue(rs.precificacaoProduto?.valorMedioNF);
-          this.precificacaoForm.controls.precificacaoProduto.get('valorProdutoSugerido')?.setValue(rs.precificacaoProduto?.valorProdutoSugerido);
-          this.precificacaoForm.controls.precificacaoProduto.get('valorProduto')?.setValue(rs.precificacaoProduto?.valorProduto);
+          this.precificacaoForm.controls['precificacaoProduto'].get('id')?.setValue(rs.precificacaoProduto.id);
+          this.precificacaoForm.controls['precificacaoProduto'].get('produto')?.setValue(rs.precificacaoProduto.produto.id);
+          this.precificacaoForm.controls['precificacaoProduto'].get('markupReferncia')?.setValue(rs.precificacaoProduto?.markupReferncia);
+          this.precificacaoForm.controls['precificacaoProduto'].get('valorMedioNF')?.setValue(rs.precificacaoProduto?.valorMedioNF);
+          this.precificacaoForm.controls['precificacaoProduto'].get('valorProdutoSugerido')?.setValue(rs.precificacaoProduto?.valorProdutoSugerido);
+          this.precificacaoForm.controls['precificacaoProduto'].get('valorProduto')?.setValue(rs.precificacaoProduto?.valorProduto);
         } else {
-          this.precificacaoForm.controls.precificacaoProduto.get('produto')?.setValue(rs.produto.id);
+          this.precificacaoForm.controls['precificacaoProduto'].get('produto')?.setValue(rs.produto.id);
         }
       })
   }
@@ -109,5 +109,9 @@ export class AddPredicifacaoProdutoComponent implements OnInit {
           this.dialogRef.close(rs);
         }
       })
+  }
+
+  public getPrecificacaoForm(control: string, campo: string): AbstractControl | any {
+    return !!this.precificacaoForm.get(control) ?? this.precificacaoForm.get(control)?.get(campo)
   }
 }
