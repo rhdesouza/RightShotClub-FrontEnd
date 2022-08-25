@@ -8,6 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "engines": {
+    "node": "16.13.1",
+    "npm": "8.18.0"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.3.0",
@@ -23,6 +27,7 @@
     "bootstrap": "^5.2.0",
     "chart.js": "^3.8.0",
     "crypto-js": "^4.1.1",
+    "express": "^4.18.1",
     "font-awesome": "^4.7.0",
     "ng2-charts": "^3.0.11",
     "ng2-currency-mask": "^13.0.3",
@@ -30,6 +35,7 @@
     "ngx-mask": "^13.1.15",
     "ngx-scrollbar": "^9.0.2",
     "ngx-spinner": "^13.1.1",
+    "path": "^0.12.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "xng-breadcrumb": "^7.2.0",
